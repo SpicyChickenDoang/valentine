@@ -1,4 +1,5 @@
 // server.js
+require('dotenv').config();
 const app = require('./app');
 const port = 3000;
 
@@ -13,7 +14,9 @@ async function startServer() {
   app.listen(port, () => {
     console.log(`[SERVER] USE Engine Agent listening on port ${port}`);
   });
-  // require('./workers/chatWorker');
+
+  // Start the message worker
+  require('./workers/messageWorker');
 }
 
 startServer();
