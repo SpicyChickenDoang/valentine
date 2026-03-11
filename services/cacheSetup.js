@@ -82,11 +82,13 @@ async function ensurePlatformCache(redis) {
     console.log('[CACHE] Hash changed — rebuilding');
     const displayName = `agent_platform_cache_${newHash.slice(0, 12)}`;
     // BUG-G8 FIX: timeout added — missing timeout = worker hangs indefinitely on TCP hang
+    console.log("REQUEST", displayName)
     const cache = await ai.caches.create({
       model: 'gemini-2.5-flash',
-      displayName: displayName,
-      systemInstruction: staticContent,
-      ttl: '86400s'
+      config: {
+        contents: staticContent,
+        systemInstruction: "You are an expert analyzing transcripts.",
+      },
     });
     const cacheName = cache.name;
 
