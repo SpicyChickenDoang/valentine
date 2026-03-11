@@ -1,7 +1,7 @@
 // workers/chatWorker.js
 const { Worker } = require('bullmq');
 const crypto = require('crypto');                         // C1 — needed for msisdnHash
-const { GoogleGenerativeAI } = require('@google/generative-ai'); // C2 — geminiClient for classifyDepth
+const { GoogleGenAI } = require('@google/genai'); // C2 — using new SDK
 const { classifyDepth } = require('../services/depthClassifier');
 const { geminiChatWithTools } = require('../services/geminiChat');  // agentChat removed (dead code) — only geminiChatWithTools is used in worker flow
 const { resolveKBIds, runPrefilter } = require('../services/kbRouter');    // L1 — runPrefilter exported for DEPTH_0_1 hard-stops
@@ -21,7 +21,7 @@ const redis = require('../config/redis2');
 if (!process.env.GEMINI_API_KEY) {
     throw new Error('[chatWorker] GEMINI_API_KEY env var missing');
 }
-const geminiClient = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const geminiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const SAFE_MODE_MESSAGE = 'Our AI assistant is momentarily unavailable. Please try again in a few minutes.';
 

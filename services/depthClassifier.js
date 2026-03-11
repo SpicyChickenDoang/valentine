@@ -62,20 +62,20 @@ const buildClassifierPrompt = (domain, history, message) => {
 };
 
 async function classifyDepth({ domain, history, message, geminiClient }) {
-    const model = geminiClient.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
     const prompt = buildClassifierPrompt(domain, history, message);
 
     // FIX: 3s timeout — classifier must never block worker indefinitely
     const result = await Promise.race([
-        model.generateContent({
+        geminiClient.models.generateContent({
+            model: 'gemini-2.5-flash-lite',
             contents: [{ role: 'user', parts: [{ text: prompt }] }],
-            generationConfig: { maxOutputTokens: 10, temperature: 0 }
+            config: { maxOutputTokens: 10, temperature: 0 }
         }),
         new Promise((_, reject) =>
             setTimeout(() => reject(new Error('CLASSIFIER_TIMEOUT')), 3000))
     ]);
 
-    const raw = result.response.text().trim().toUpperCase();
+    const raw = result.text.trim().toUpperCase();
     return raw.includes('DEPTH_2') ? 'pro' : 'flash';
 }
 

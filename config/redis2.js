@@ -5,7 +5,7 @@
 const Redis = require('ioredis');
 
 // Parse REDIS_URL or use defaults
-const redisUrl = 'redis://localhost:6379' ||  process.env.REDIS_URL;
+const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
 const redis = new Redis(redisUrl, {
   // Connection settings

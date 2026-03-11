@@ -1,0 +1,43 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:alpine3.18
+    ports:
+      - "5432:5432"
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: AIProjectB4L1
+      POSTGRES_DB: postgres
+      POSTGRES_TZ: 'Asia/Jakarta'
+      TZ: Asia/Jakarta
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - backend
+
+  redis:
+    container_name: redis
+    image: redis:alpine3.18
+    ports:
+      - "6379:6379"
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  backend:

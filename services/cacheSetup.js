@@ -36,7 +36,7 @@ function buildStaticContent() {
   console.log(`[cacheSetup] Domain: ${domainKey}, PII fields: ${domainConfig.piiFields.join(', ')}`);
 
   if (!domainConfig) throw new Error('[cacheSetup] TENANT_DOMAIN env var missing');
-  const required = [`./prompts/${domainConfig}_prompt.txt`, `./kb/${domainConfig}/00_KB_ROUTER.txt`];
+  const required = [`./prompts/${domainConfig.kbFolder}_prompt.txt`, `./kb/${domainConfig.kbFolder}/00_KB_ROUTER.txt`];
 
   for (const f of required)
     if (!fs.existsSync(f)) throw new Error(`[cacheSetup] MISSING required file: ${f}`);
