@@ -9,7 +9,7 @@ const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
 const redis = new Redis(redisUrl, {
   // Connection settings
-  maxRetriesPerRequest: 3,       // Retry failed commands
+  maxRetriesPerRequest: null,       // Retry failed commands
   retryDelayOnFailover: 100,     // Wait 100ms between retries
   enableReadyCheck: true,        // Verify connection before use
   
