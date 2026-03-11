@@ -8,8 +8,8 @@ const port = 3000;
 
 async function startServer() {
   // Hash gate + distributed lock handled inside ensurePlatformCache
-  // const cacheName = await ensurePlatformCache(redis);
-  // process.env.AGENT_CACHE_NAME = cacheName;
+  const cacheName = await ensurePlatformCache(redis);
+  process.env.AGENT_CACHE_NAME = cacheName;
 
   app.listen(port, () => {
     console.log(`[SERVER] USE Engine Agent listening on port ${port}`);
