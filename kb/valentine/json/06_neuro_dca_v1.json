@@ -1,0 +1,41 @@
+{
+  "id": "06_neuro_dca_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "DCA",
+      "DICHLOROACETATE",
+      "PDK_INHIBITION",
+      "PYRUVATE_DEHYDROGENASE",
+      "WARBURG_EFFECT",
+      "METABOLIC_THERAPY",
+      "NEUROPATHY",
+      "MITOCHONDRIAL_APOPTOSIS"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH (Metabolic Reprogramming)",
+    "use_for": "Hypothesis-driven metabolic modulation aimed at inhibiting PDK to shift cellular energy production away from glycolysis and back toward mitochondrial respiration.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "07_MITOCHONDRIA",
+      "06_NEUROLOGY (Toxicity management)"
+    ],
+    "red_flags": "Pre-existing severe peripheral neuropathy (CTCAE Grade ≥2), Concurrent use of highly neurotoxic chemotherapy (Platinum agents, Taxanes), Severe hepatic/renal impairment, Pregnancy/Breastfeeding (Policy NO-GO).",
+    "triage_questions": "Do you have a history of diabetes or pre-existing nerve pain/neuropathy? Are you receiving chemotherapy drugs like Oxaliplatin, Cisplatin, or Paclitaxel? Do you have any known liver or kidney disease? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of severe neurotoxicity, encephalopathy, or hepatotoxicity. New-onset severe numbness, weakness, ataxia, or cognitive changes require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** A small molecule that inhibits Pyruvate Dehydrogenase Kinase (PDK), potentially unblocking the PDH enzyme to force cancer cells out of anaerobic glycolysis.\n- **Administration:** Can be IV or Oral. Highly dependent on weight and hepatic clearance (GSTZ1 enzyme).\n- **Hard NO-GOs:** Baseline peripheral neuropathy (Grade ≥2); Overlapping neurotoxic chemotherapy (without explicit MD override); Liver failure.\n- **Mandatory Cofactors (Policy):** MUST be co-administered with neuro-protective agents (e.g., Alpha Lipoic Acid, Benfotiamine/B1) to mitigate cumulative neurotoxicity.\n- **Monitoring:** Neurological exams (gait, sensory changes in extremities); Cognitive status (watch for confusion/ataxia); LFTs (transaminitis risk).",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** DCA may alter cellular metabolism by shifting energy production from fermentation (glycolysis) back to the mitochondria. This \"metabolic switch\" may expose certain cancer cells to natural apoptotic (cell death) signals that they normally evade.\n- **WHAT WE CANNOT CLAIM:** We cannot claim DCA cures cancer or that it works uniformly across all tumor types. We cannot claim it is free of side effects; dose-dependent, potentially irreversible peripheral neuropathy and reversible encephalopathy are well-documented risks.",
+    "s2_patient_communication_public": "## THE METABOLIC SWITCH (DCA THERAPY)\nDCA (Dichloroacetate) is a targeted metabolic therapy designed to exploit how cancer cells produce energy differently than healthy cells.\n\n1) **The Warburg Effect:** Most cancer cells rely on a primitive form of energy production—fermentation (glycolysis)—even when oxygen is present. This allows them to grow quickly and hide from the body's natural cell-death signals.\n2) **The Switch:** Cancer cells keep this fermentation pathway active by using an enzyme that acts like a \"lock.\" DCA is designed to block this lock, theoretically forcing the cancer cells to switch their power source back to the mitochondria (the cell's normal engine).\n3) **The Goal:** By forcing the tumor to \"breathe\" normally again through the mitochondria, it may become more prone to the body's natural self-destruct mechanisms (apoptosis). Because it works on a core metabolic level, we strictly monitor for nerve irritation, which is the most common side effect.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 PDK INHIBITION & MITOCHONDRIAL REACTIVATION\n- **Enzymatic Blockade:** DCA acts as a structural analog of pyruvate, directly inhibiting Pyruvate Dehydrogenase Kinase (PDK). This inhibition maintains Pyruvate Dehydrogenase (PDH) in its active, unphosphorylated state.\n- **Apoptotic Sensitization:** Reactivating PDH forces pyruvate into the mitochondria for oxidative phosphorylation. This increases mitochondrial reactive oxygen species (ROS) and facilitates the efflux of cytochrome c, potentially triggering mitochondria-dependent apoptosis in metabolically inflexible malignant cells.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Primarily metabolized in the liver by the enzyme Glutathione S-transferase zeta 1 (GSTZ1).\n- **Genetic Variability:** GSTZ1 exhibits significant genetic polymorphism. Slow metabolizers accumulate DCA rapidly, markedly increasing the risk of severe neurotoxicity. Furthermore, DCA is a suicide inhibitor of its own metabolizing enzyme (GSTZ1), meaning clearance slows down over time with chronic dosing.\n- **Excretion:** Renal clearance of metabolites.",
+    "s4_limitations_failure_modes_internal": "- **Hypoxic Override:** In severely hypoxic tumor microenvironments, HIF-1α signaling may strongly upregulate PDK, potentially overwhelming DCA's inhibitory capacity.\n- **Metabolic Flexibility:** Some tumors are not highly glycolytic or possess extreme metabolic plasticity (e.g., relying on glutamine/fatty acid oxidation), rendering PDK inhibition therapeutically irrelevant.\n- **Toxicity Ceiling:** Efficacy is frequently limited by the onset of peripheral neuropathy, forcing dose reduction or cessation before an optimal oncologic response is achieved.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: NEUROPATHY & CHEMOTHERAPY RECONCILIATION\n- **IF concurrent neurotoxic chemotherapy (e.g., Paclitaxel, Oxaliplatin):** THEN NO-GO unless explicitly authorized by the medical director with an adapted schedule.\n- **THE NEUROPATHY STOP LADDER:**\n  - **Grade 1 (Mild symptoms, no interference with function):** THEN Reduce dose OR alter schedule (e.g., 2 weeks on / 1 week off) AND maximize neuro-supportive cofactors.\n  - **Grade 2 (Moderate symptoms, limits instrumental ADLs):** THEN STOP therapy. Requires in-person MD review before any resumption.\n  - **Grade ≥3 (Severe symptoms, limits self-care ADLs):** THEN PERMANENT STOP.\n\n## ALGORITHM 2: COGNITIVE & CENTRAL NEUROLOGICAL RED FLAGS\n- **IF patient develops confusion, ataxia, or new profound weakness:** \n  - THEN STOP therapy immediately.\n  - THEN Initiate immediate in-person ER evaluation (rule out DCA-induced encephalopathy or stroke).\n\n## ALGORITHM 3: THE NEURO-PROTECTION PROTOCOL (POLICY)\n- **Cofactor Mandate:** DCA must never be administered as a monotherapy. \n- **SOP:** Initiate Vitamin B1 (Benfotiamine) and Alpha Lipoic Acid (ALA) supplementation concurrently (or pre-loaded) to support nerve resilience. Do not claim these cofactors enhance GSTZ1 metabolism.\n\n## ALGORITHM 4: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** Comprehensive Neurological Exam (documented) + LFTs (AST/ALT) + Renal Panel (eGFR) + CBC.\n- **Hepatic Policy:** IF AST/ALT > 3x ULN, THEN NO-GO. DCA metabolism will be severely impaired, guaranteeing rapid toxicity.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation (Policy NO-GO unless specialist-approved)."
+  },
+  "display_name": "Neuro DCA",
+  "domain": "Neuro",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "00_triage_red_flags_universal_monograph_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "TRIAGE",
+      "RED_FLAGS",
+      "ER",
+      "SAFETY",
+      "CHEST_PAIN",
+      "NEURO_DEFICIT",
+      "BLEEDING",
+      "ANAPHYLAXIS",
+      "SEPSIS"
+    ],
+    "category": "Triage — Universal Red Flags",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Universal red-flag triage for any message prior to protocols.",
+    "coupled_systems": [
+      "00_policy_teleconsult_er",
+      "00_policy_pregnancy_breastfeeding"
+    ],
+    "red_flags": "Chest pain, severe dyspnea, neuro deficit, severe bleeding, anaphylaxis, sepsis signs.",
+    "triage_questions": "Chest pain? dyspnea? fainting? one-sided weakness? seizure? black stools? vomiting blood? high fever? pregnancy?"
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Run first when acute/uncertain.\n- If any red flag: stop protocolization and route to urgent care/ER.\n- Always ask pregnancy + high-risk meds (opioids, anticoagulants, serotonergics).",
+    "s1_claims_discipline_internal": "- Triage is not diagnosis.\n- Do not delay emergency care if red flags present.",
+    "s2_patient_communication_public": "If warning signs suggest an emergency, the safest step is immediate in-person evaluation. I’ll ask a few quick questions to confirm urgency.",
+    "s3_pharmacokinetics_adme_internal": "Universal red flag buckets: cardiac (chest pain+syncope), respiratory (severe SOB/cyanosis), neuro (new weakness/seizure/ataxia/confusion), bleeding (melena/hematemesis), sepsis (high fever+collapse), anaphylaxis (wheeze/facial swelling/hypotension).",
+    "s4_limitations_failure_modes_internal": "- Under-triage risk if info missing → ask minimal decisive questions.\n- Over-triage anxiety → keep thresholds; when in doubt err on safety.",
+    "s5_clinical_decision_trees_internal": "IF chest pain + SOB/syncope OR new neuro deficit/seizure/confusion OR melena/hematemesis OR anaphylaxis signs OR fever>39 with systemic instability THEN ER now.\nELSE proceed to domain routing."
+  },
+  "display_name": "Universal Red Flags — Triage",
+  "domain": "Triage",
+  "kind": "broad",
+  "purpose": "triage"
+}

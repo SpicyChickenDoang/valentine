@@ -1,0 +1,41 @@
+{
+  "id": "32_iv_b17_amygdalin_cyanide_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "AMYGDALIN",
+      "VITAMIN_B17",
+      "LAETRILE",
+      "CYANOGENIC_GLYCOSIDE",
+      "BETA_GLUCOSIDASE",
+      "RHODANESE",
+      "CYANIDE_TOXICITY",
+      "TARGETED_CYTOTOXICITY"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH (Toxicity Risk Management)",
+    "use_for": "Hypothesis-driven targeted cytotoxicity via localized intracellular release of cyanide and benzaldehyde in beta-glucosidase-rich microenvironments.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "05_DETOX_LIVER",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Oral Amygdalin/Apricot Kernel supplementation (ABSOLUTE/Cyanide toxicity), Severe Hepatic Impairment (Rhodanese deficiency), Renal Impairment (Thiocyanate accumulation), Concurrent High-Dose IV Vitamin C (overlap risk), Pregnancy/Breastfeeding (ABSOLUTE/Teratogenic).",
+    "triage_questions": "Are you currently eating apricot kernels or taking oral Vitamin B17/Laetrile pills? Do you have any severe liver or kidney problems? Are you scheduled for high-dose Vitamin C today? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of suspected cyanide toxicity, severe metabolic acidosis, or acute neurological changes. Symptoms of confusion, shortness of breath, or palpitations require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** A cyanogenic glycoside hypothesized to be cleaved by the enzyme beta-glucosidase (potentially enriched in some tumors) to release hydrogen cyanide (HCN) and benzaldehyde.\n- **Administration Policy:** Intravenous (IV) ONLY. Policy: No oral B17 / no at-home dosing.\n- **Hard NO-GOs:** Concurrent oral B17/apricot seeds; Severe liver or kidney failure; Same-day high-dose IV Vitamin C overlap.\n- **Emergency Prep:** Cyanide antidote kit (e.g., Hydroxocobalamin / Cyanokit or Sodium Thiosulfate) MUST be available on-site.\n- **Monitoring:** Continuous pulse oximetry + BP/HR/RR; have IV access ready for antidote. Watch for signs of cyanide toxicity (confusion, tachypnea, cherry-red skin, almond breath odor).",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** Amygdalin is a compound that contains a locked cyanide molecule. It is hypothesized that certain cells with high levels of specific enzymes may unlock it, potentially exposing them to localized toxicity. Healthy cells may protect themselves using a neutralizing enzyme (rhodanese).\n- **WHAT WE CANNOT CLAIM:** We cannot claim B17 is a proven, safe, or universal cancer cure. We cannot claim it is a \"vitamin\" necessary for human nutrition. We cannot endorse oral or at-home dosing of B17, and we cannot guarantee that systemic cyanide toxicity will not occur.",
+    "s2_patient_communication_public": "## THE ENZYME-LOCKED TARGETING (AMYGDALIN/B17)\nAmygdalin is a compound found naturally in the seeds of apricots and bitter almonds. In a clinical IV setting, it is used as an experimental approach to target specific enzyme imbalances in certain cells.\n\n1) **The Locked Payload:** Amygdalin molecules contain a tightly bound component that is highly toxic (cyanide). As long as it remains locked, it circulates until cleaved; safety requires strict control and monitoring.\n2) **The Unlocking Enzyme:** It is hypothesized that some cancer cells contain abnormally high amounts of an enzyme called beta-glucosidase. This enzyme acts like a \"key\" that breaks the lock, potentially releasing the toxic payload directly inside the cell.\n3) **The Liver's Shield:** Healthy cells, particularly in the liver, contain a different enzyme called rhodanese, which acts as a shield to neutralize any free cyanide. This therapy attempts to exploit the difference between the \"unlocking\" tumor cells and the \"shielded\" healthy cells.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 ENZYMATIC CLEAVAGE & DETOXIFICATION\n- **Cytotoxic Cleavage:** Beta-glucosidase hydrolyzes amygdalin into two molecules of glucose, one molecule of benzaldehyde (bioactive; proposed contributor), and one molecule of hydrogen cyanide (HCN). HCN inhibits cytochrome c oxidase (Complex IV), halting mitochondrial ATP production and potentially inducing apoptosis/necrosis.\n- **Hepatic Neutralization:** The mitochondrial enzyme rhodanese (thiosulfate sulfurtransferase) converts toxic HCN into thiocyanate, a relatively harmless compound that is excreted by the kidneys.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Dependent on tissue enzyme distribution. IV administration avoids the highly efficient cleavage by intestinal microbiome beta-glucosidase, which causes massive systemic cyanide release.\n- **Excretion:** Primarily renal excretion of both unchanged amygdalin and the detoxified thiocyanate metabolite.",
+    "s4_limitations_failure_modes_internal": "- **Enzymatic Mismatch:** Tumors with low beta-glucosidase expression will not cleave the molecule, rendering the therapy completely inert.\n- **Tumor Rhodanese Expression:** Some advanced malignancies upregulate rhodanese to protect against oxidative stress and hypoxia, effectively shielding themselves from the released cyanide.\n- **Hepatic/Renal Exhaustion:** If the liver's rhodanese capacity is overwhelmed, or if the kidneys cannot clear thiocyanate, systemic toxicity will rapidly ensue.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: ORAL & ANTIOXIDANT RECONCILIATION\n- **IF consuming oral B17/apricot kernels:** THEN ABSOLUTE NO-GO. Discontinue oral intake immediately due to extreme risk of lethal gut-mediated cyanide release.\n- **IF scheduled for high-dose IV Vitamin C:** THEN avoid same-day overlap; separate by ≥24h unless MD overrides. Overlap may increase oxidative/toxicity risk; avoid overlap by policy.\n\n## ALGORITHM 2: CYANIDE TOXICITY (EMERGENCY RED FLAGS)\n- **The Risk:** Systemic cytochrome c oxidase inhibition leading to histotoxic hypoxia.\n- **IF Symptoms (Tachypnea, confusion, dizziness, palpitations, cherry-red skin color, severe metabolic acidosis) occur:**\n  - THEN STOP infusion immediately.\n  - THEN Administer 100% Oxygen.\n  - THEN Deploy Cyanide Antidote Kit (Hydroxocobalamin IV or Sodium Thiosulfate) per clinic protocol.\n  - THEN Consider lactate/ABG testing if symptoms persist.\n  - THEN Initiate immediate in-person ER transfer.\n\n## ALGORITHM 3: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** LFTs (Hepatic function is critical for rhodanese activity) + Renal Panel (eGFR) + CBC.\n- **Hepatic/Renal Protocol:** IF AST/ALT > 3x ULN OR eGFR < 60 mL/min/1.73m² (or clinic-defined threshold), THEN NO-GO. Detoxification pathways are compromised and risk of thiocyanate accumulation is high.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation (Absolute NO-GO due to cyanide teratogenicity)."
+  },
+  "display_name": "B17 — Amygdalin (Cyanide Risk)",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

@@ -49,9 +49,18 @@ const worker = new Worker(
             try {
                 history = JSON.parse(sessionRaw);
             } catch (e) {
-                console.warn('[chatWorker] Corrupt session, resetting:', e.message);
-                history = [];
-                await redis.del(sessionKey);
+                // Redis expired — attempt PostgreSQL rebuild
+                const ctx = await loadPatientContext(tenantId, msisdnHash);  // C4 — tenant-scoped
+
+                if (ctx) {
+                    // Known patient — silent rebuild, patient sees no gap
+                    history = [{
+                        role: 'system',
+                        content: formatPatientContext(ctx)
+                    }];
+                    await redis.set(sessionKey, JSON.stringify(history), 'EX', 3600);
+                }
+                // ctx = null → new patient → empty history → normal onboarding
             }
             // C6 — extract dossier from persisted system slot (was missing → dossier='' on all active sessions)
             dossier = history.find(h => h.role === 'system')?.content || '';

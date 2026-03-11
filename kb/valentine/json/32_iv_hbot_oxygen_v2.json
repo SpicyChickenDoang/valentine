@@ -1,0 +1,43 @@
+{
+  "id": "32_iv_hbot_oxygen_v2",
+  "version": "2.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "HBOT",
+      "HYPERBARIC_OXYGEN",
+      "HENRY_LAW",
+      "HIF1_ALPHA",
+      "VEGF_INHIBITION",
+      "RADIOSENSITIZATION",
+      "OXYGEN_TOXICITY",
+      "PAUL_BERT_EFFECT",
+      "PASTEUR_EFFECT",
+      "PULMONARY_BAROTRAUMA"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH",
+    "use_for": "Increasing oxygen availability and potentially reducing hypoxia transiently to support the efficacy of pro-oxidant therapies.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "07_MITOCHONDRIA",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Untreated pneumothorax (ABSOLUTE), history of Bleomycin use (ABSOLUTE/Fatal risk), recent Doxorubicin, severe COPD with air trapping, active febrile illness / URI, pregnancy (policy NO-GO unless specialist-approved).",
+    "triage_questions": "Have you ever had a collapsed lung (pneumothorax)? Have you ever been treated with the chemotherapy drug Bleomycin? Are you currently taking Doxorubicin (Adriamycin)? Any history of severe claustrophobia, seizures, or uncontrolled asthma? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote clearance for diving with pulmonary bullae or history of collapsed lung. Symptoms of chest pain, ear barotrauma, or post-dive seizure require immediate in-person clinical evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism:** Forces oxygen into blood plasma via Henry's Law (pressure-dependent dissolution).\n- **Hard NO-GO:** Untreated pneumothorax; ANY lifetime history of Bleomycin (fatal pulmonary fibrosis risk); active febrile illness / URI.\n- **Sequencing:** Optimal when performed immediately prior to pro-oxidant IVs (IVC/B17) or PDT to saturate the microenvironment with substrate oxygen.\n- **Monitor:** Ear/sinus barotrauma; CNS oxygen toxicity (seizure risk); visual changes (myopic shift).",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** HBOT increases the partial pressure of oxygen in arterial blood, forcing oxygen dissolution directly into plasma. This can increase oxygen availability and may reduce hypoxia transiently, potentially downregulating HIF-1α signaling in oxygenated contexts.\n- **WHAT WE CANNOT CLAIM:** We cannot claim HBOT alone is cytotoxic to tumor masses. We cannot claim \"cure\" or \"eradication.\" It is an adjunct tool that modifies the microenvironment to support the efficacy of other interventions.",
+    "s2_patient_communication_public": "## BREACHING THE HYPOXIC SHIELD (PRESSURIZED OXYGEN)\nSolid tumors often grow so aggressively that they outpace their blood supply, creating zones of low oxygen signaling that can protect the cancer from many treatments.\n\n1) **The Physics:** Under normal pressure, your red blood cells carry most of your oxygen. Inside the hyperbaric chamber, we use pressure to dissolve pure oxygen directly into the liquid part of your blood (plasma).\n2) **The Penetration:** This pressurized oxygen may improve diffusion into some hypoxic regions that normal blood flow struggles to access, potentially reducing the tumor's metabolic defenses.\n3) **The Goal:** We use this as a timing tool. By flooding the area with oxygen, we aim to make the environment more receptive to follow-up treatments (like Vitamin C or Laser therapy) which require oxygen to work effectively.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 GAS PHYSICS & HIF-1α MODULATION\n- **Henry’s Law Application:** Plasma oxygen concentration increases from ~0.3 mL/dL at 1 ATA to ~6.0 mL/dL at 3 ATA (100% O2), bypassing hemoglobin saturation limits.\n- **HIF-1α Downregulation Concept:** Oxygen saturation may activate Prolyl Hydroxylase Domain (PHD) enzymes. PHDs hydroxylate HIF-1α, marking it for proteasomal degradation via the pVHL complex, potentially inhibiting VEGF-driven angiogenesis.\n\n## 3.2 ADME PROFILE (GAS KINETICS)\n- **Distribution:** Broad systemic distribution via plasma. Half-life of the elevated partial pressure of oxygen (pO2) in tissues is brief (minutes) once decompression is complete.\n- **Elimination:** Exhalation via the lungs; return to baseline pO2 occurs rapidly post-treatment.",
+    "s4_limitations_failure_modes_internal": "1) **Vascular Collapse:** In completely necrotic/avascular cores, even pressurized plasma may fail to diffuse into the absolute center.\n2) **Antioxidant Upregulation:** Chronic HBOT may induce adaptive upregulation of host antioxidant enzymes, which could theoretically blunt future pro-oxidant strikes if timing is not varied.\n3) **Barotrauma limits:** Patient inability to equalize pressure stops the intervention regardless of oncologic need.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: THE BLEOMYCIN FATAL RULE (POLICY)\n- **IF ANY lifetime history of Bleomycin use:** THEN ABSOLUTE CONTRAINDICATION. Diving triggers massive oxidative lung injury and fatal pulmonary fibrosis.\n- **SOP:** This is a hard-stop policy. No exceptions.\n\n## ALGORITHM 2: CHEMOTHERAPY WASHOUTS (INTERNAL POLICY)\n- **IF Doxorubicin (Adriamycin) use:** THEN Require 72-hour washout before and after diving per medical director approval to prevent increased cardiotoxicity.\n- **IF Cisplatin use:** THEN Monitor for enhanced ototoxicity (hearing loss).\n\n## ALGORITHM 3: CNS OXYGEN TOXICITY (SEIZURE)\n- **Red Flags:** Muscle twitching (lip/face), tinnitus, nausea, visual \"tunneling,\" irritability.\n- **IF seizure occurs:** \n  - THEN STOP oxygen flow; switch to chamber air immediately.\n  - THEN Maintain continuous pulse oximetry (O2 Sat) and monitor for post-ictal hypoxia.\n  - THEN DO NOT decompress while patient is in the tonic phase (risk of pulmonary barotrauma).\n  - THEN Wait for end of seizure activity, ensure airway, and initiate slow decompression.\n\n## ALGORITHM 4: BASELINE MONITORING & LABS\n- **Mandatory Baseline:** Recent Chest X-ray or CT (to rule out bullae); Physical exam of tympanic membranes.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of the first dive is mandatory for females of childbearing age before diving unless specialist-approved and documented.\n- **IF history of seizures or uncontrolled asthma:** THEN require specialist clearance before authorizing the first dive.\n\n# END OF FILE"
+  },
+  "display_name": "HBOT — Hyperbaric Oxygen",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

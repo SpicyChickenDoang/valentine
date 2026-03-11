@@ -1,0 +1,37 @@
+{
+  "id": "00_pathway_fatigue_burnout_monograph_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "PATHWAY",
+      "FATIGUE",
+      "BURNOUT",
+      "HPA",
+      "SLEEP",
+      "MITOCHONDRIA"
+    ],
+    "category": "Care Pathway — Fatigue / Burnout",
+    "intervention_priority": "HIGH (360 Core)",
+    "use_for": "Phase-based plan for fatigue, low energy, burnout patterns.",
+    "coupled_systems": [
+      "00_systems_link_atlas_monograph_v1",
+      "00_triage_red_flags_universal_monograph_v1"
+    ],
+    "red_flags": "Pathway is for stable patients; if red flags use universal triage.",
+    "triage_questions": "Duration? sleep? mood? infection history? labs?"
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Phase-based plan: TRIAGE → STABILIZE → TREAT → RECOVER → MONITOR.\n- Load 1–3 monographs depending on snapshot.\n- Keep it minimal (avoid stacking).",
+    "s1_claims_discipline_internal": "- Pathway is structured next steps, not diagnosis.\n- Never bypass red-flag triage.",
+    "s2_patient_communication_public": "We’ll follow a step-by-step plan: confirm safety, stabilize symptoms, address key drivers, then set follow-up triggers.",
+    "s3_pharmacokinetics_adme_internal": "Internal method:\n- Build top-3 problem list.\n- Identify primary driver layer (metabolic / inflammatory / hormonal / infection / iatrogenic).\n- Pick 1–2 measurable targets (labs or symptom score).\n- Select minimal interventions first.",
+    "s4_limitations_failure_modes_internal": "- Failure mode: too many interventions at once.\n- Failure mode: chasing interesting details vs urgent needs.",
+    "s5_clinical_decision_trees_internal": "IF red flags → urgent care.\nELSE: collect meds/timeline/labs → choose phase → fetch 2–6 relevant monographs → output plan (today / 48h / 2 weeks) + follow-up triggers."
+  },
+  "display_name": "Care Pathway — Fatigue Burnout",
+  "domain": "Pathway",
+  "kind": "broad",
+  "purpose": "pathway"
+}

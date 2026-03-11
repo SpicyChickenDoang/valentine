@@ -1,0 +1,47 @@
+{
+  "id": "32_iv_pdt_methylene_blue_laser_v2",
+  "version": "2.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "PDT",
+      "PHOTODYNAMIC_THERAPY",
+      "INTRAVENOUS_LASER",
+      "METHYLENE_BLUE",
+      "SINGLET_OXYGEN",
+      "MAO_INHIBITOR",
+      "SEROTONIN_SYNDROME",
+      "CYTOCHROME_C_OXIDASE",
+      "ROS_BURST",
+      "G6PD_DEFICIENCY",
+      "METHEMOGLOBINEMIA",
+      "PHOTOTOXICITY",
+      "PORPHYRIA"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH",
+    "use_for": "Supportive/adjunct, blood-compartment focused PDT activation (singlet oxygen) with Methylene Blue to target circulating vulnerabilities (CTCs/pathogens when detectable) and provide context-dependent mitochondrial redox support.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "07_MITOCHONDRIA",
+      "32_IV_THERAPIES",
+      "11_IMMUNE"
+    ],
+    "red_flags": "Serotonergic agents (NO-GO until MD med review + defined washout), Severe G6PD deficiency, Pregnancy/Breastfeeding (policy NO-GO unless specialist-approved), Phototoxicity/porphyria, severe renal impairment, prior severe reaction to Methylene Blue.",
+    "triage_questions": "Are you taking any psychiatric meds/antidepressants, Linezolid, pain meds (Tramadol), or cough suppressants (Dextromethorphan)? Do you have G6PD deficiency? Are you pregnant or breastfeeding? Any known porphyria/light sensitivity? Any significant kidney disease? Any prior reaction to Methylene Blue?",
+    "teleconsult_limits": "No remote management of psychiatric medication washout or serotonin toxicity. Any signs of serotonin syndrome (clonus, hyperthermia, agitation) or hemolysis/methemoglobinemia (jaundice, dark urine, cyanosis) require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Compartment reality:** IV PDT is primarily a **blood-compartment** intervention (light + sensitizer overlap). Not a deep solid-tumor ablation tool.\n- **Hard NO-GO:** serotonergic meds until MD review/washout; G6PD deficiency; porphyria/major phototoxicity; pregnancy/breastfeeding unless specialist-approved.\n- **Monitor:** continuous O2 sat + vitals; watch for serotonin toxicity, hemolysis, methemoglobinemia.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** IV PDT uses defined light wavelengths to excite Methylene Blue (MB), which can act as a pro-oxidant system via localized singlet oxygen/ROS generation (context-dependent) within the blood compartment. MB at low doses may also act as a redox mediator that can support mitochondrial electron flow under selected stress contexts.\n- **WHAT WE CANNOT CLAIM:** We cannot claim IV PDT penetrates deep solid tumor masses or has meaningful direct effect on bulky deep tissue disease due to optical penetration limits. We cannot claim universal clearance of CTCs/pathogens. We cannot claim safety without strict medication screening and confirmed G6PD status.",
+    "s2_patient_communication_public": "## THE LIGHT-ACTIVATED SUPPORTIVE STRIKE (BLOOD-COMPARTMENT THERAPY)\nThis therapy is a supportive, blood-compartment focused adjunct that uses light to activate Methylene Blue in the bloodstream.\n\n1) **The Sensitizer:** We infuse a small dose of Methylene Blue, a redox-active medical compound. It can localize in mitochondria and may interact with circulating targets in the blood.\n2) **The Light Activation:** A thin IV fiber delivers red/near-red light. When light meets Methylene Blue in blood, it triggers a controlled photochemical reaction.\n3) **The Intended Effect:** This can create a short-lived oxidative pulse in the blood compartment and may support cellular energy chemistry in healthy tissues. It is supportive and does not replace core oncologic management of bulky tumors.\n\n*Safety note: we must review your medication list first (especially antidepressants) and confirm G6PD status before doing this therapy.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 BIOENERGETIC & PHOTODYNAMIC MECHANISMS (CONTEXT-DEPENDENT)\n- **Mito redox support concept:** MB can participate in redox cycling and may facilitate downstream electron flow toward Complex IV in selected contexts (dose-dependent; avoid overpromising “bypass” as universal).\n- **Type II reaction (PDT):** Irradiating MB at ~660 nm can generate singlet oxygen (1O2) and related ROS. These are short-lived and localized to the illuminated blood segment, potentially stressing circulating cell membranes.\n\n## 3.2 ADME PROFILE (HIGH-LEVEL)\n- **Distribution:** Extensive distribution (large Vd); clinical PK varies by dose and renal/hepatic function.\n- **Clearance:** Terminal half-life is on the order of hours (~5–24 h reported; dose/renal function dependent). Primarily renal excretion; blue/green urine discoloration is expected and benign.",
+    "s4_limitations_failure_modes_internal": "1) **Physical/optical limits:** Red light penetration is limited (mm-scale). IV PDT is therefore blood-compartment focused.\n2) **Oxygen dependence:** Singlet oxygen generation depends on dissolved oxygen; hypoxemia/hypoxia can reduce the PDT component.\n3) **Quenching / competing antioxidants:** High antioxidant milieu or poor sequencing may reduce ROS impact.\n4) **End-organ constraints:** Renal impairment increases risk; strict screening and dose discipline required.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: MEDICATION RECONCILIATION & WASHOUT (POLICY)\n- **NO-GO until MD review if on:** SSRIs, SNRIs, TCAs, MAOIs, Linezolid, Tramadol, Dextromethorphan (and any unclear medication list).\n- **SOP:** A drug-dependent washout plan must be verified by the prescribing clinician/MD before MB administration. Do not advise med discontinuation remotely.\n\n## ALGORITHM 2: G6PD / PREGNANCY POLICY\n- **IF G6PD deficient:** THEN ABSOLUTE CONTRAINDICATION (hemolysis risk).\n- **IF pregnant/breastfeeding:** THEN NO-GO by policy unless specialist-approved and documented.\n\n## ALGORITHM 3: HEMOLYSIS & METHEMOGLOBINEMIA (RED FLAGS)\n- **Red flags:** cyanosis (blue/grey skin), “chocolate-colored” blood, dyspnea, jaundice, dark urine, severe headache/confusion.\n- **IF suspected:** stop infusion immediately; high-flow O2; continuous O2 sat + vitals; urgent ER evaluation.\n\n## ALGORITHM 4: SEROTONIN TOXICITY (EMERGENCY)\n- **Red flags:** clonus, hyperthermia, agitation, autonomic instability, diaphoresis, altered mental status.\n- **IF suspected:** stop infusion; active cooling if hyperthermic; continuous vitals monitoring; urgent ER transfer.\n\n## ALGORITHM 5: BASELINE MONITORING & LABS\n- **Mandatory baseline (≤72h):** CBC + CMP (eGFR/LFTs) + quantitative G6PD assay.\n- **Intra-procedure:** continuous pulse oximetry + baseline/post vitals.\n\n# END OF FILE"
+  },
+  "display_name": "PDT — Methylene Blue + IV Laser",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

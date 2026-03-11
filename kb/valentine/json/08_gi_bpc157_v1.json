@@ -1,0 +1,42 @@
+{
+  "id": "08_gi_bpc157_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "BPC_157",
+      "PEPTIDES",
+      "ANGIOGENESIS",
+      "VEGF_MODULATION",
+      "WOUND_HEALING",
+      "MUCOSITIS",
+      "LEAKY_GUT",
+      "ONCOLOGIC_PARADOX",
+      "COLD_CHAIN"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH RISK IN ONCOLOGY (Angiogenesis Management)",
+    "use_for": "Targeted tissue repair, resolution of severe chemo/radiation-induced GI mucositis, and accelerated post-surgical healing in patients WITHOUT active, vascularized solid tumors.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "08_GASTROINTESTINAL",
+      "09_MUSCULOSKELETAL"
+    ],
+    "red_flags": "Active, highly vascularized solid tumors (ABSOLUTE NO-GO/Angiogenesis risk), Unknown Tumor Status / Suspected Progression (NO-GO until MD clears), Active proliferative retinopathies, Pregnancy (Policy NO-GO).",
+    "triage_questions": "Do you currently have an actively growing tumor, or are you in remission? When was your last scan? Are you using this specifically for recovery after a tumor has been surgically removed? Are you experiencing severe gut issues (mucositis) from recent chemotherapy? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of acute post-surgical infections or unexplained tumor marker spikes."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** A 15-amino acid partial sequence of a naturally occurring gastric peptide. Strongly promotes tissue healing; may modulate angiogenic signaling (VEGF pathways reported in some models) and endothelial/NO pathways.\n- **The Angiogenesis Paradox:** Because it may stimulate new blood vessel formation, it carries a theoretical risk of feeding active, vascularized solid tumors. \n- **Administration & Route:** Subcutaneous (SC) for systemic/musculoskeletal repair; Oral formulations are used for GI targeting.\n- **Hard NO-GOs:** Active, growing solid tumors without explicit MD palliative override; Unknown tumor status/no recent scans; Active proliferative diabetic retinopathy (VEGF risk).\n- **Cold Chain Policy:** Lyophilized powder may be temperature stable, but ONCE RECONSTITUTED, the vial MUST be refrigerated (2°C to 8°C) and discarded per manufacturer/clinic SOP.",
+    "s1_claims_discipline_internal": "- **CLINICAL INTENT:** Our objective is strictly tissue repair and recovery from iatrogenic damage (surgery, radiation, chemo). BPC-157 is NOT a cancer treatment.\n- **WHAT WE CAN CLAIM:** BPC-157 is a peptide that accelerates wound healing and mucosal repair. It is clinically utilized to help heal the gut lining after harsh therapies or to accelerate recovery after surgical tumor removal.\n- **WHAT WE CANNOT CLAIM:** We cannot claim BPC-157 treats cancer. In fact, we must explicitly state that its pro-healing mechanisms (potential for creating new blood vessels) pose a theoretical risk of feeding active tumors.",
+    "s2_patient_communication_public": "## THE TISSUE HEALER (BPC-157)\nBPC-157 is a synthetic version of a protective protein naturally found in human stomach acid. It is widely used in regenerative medicine for its remarkable ability to heal damaged muscles, tendons, and gut lining.\n\n1) **The Recovery Agent:** In our clinic, we use BPC-157 to repair the severe damage cancer treatments leave behind. This includes healing the gut after chemotherapy (mucositis) or accelerating wound healing after a tumor has been surgically removed.\n2) **The Angiogenesis Paradox:** To heal tissue, BPC-157 may signal the body to build new blood vessels (a process called angiogenesis) to bring oxygen to the wound. \n3) **The Safety Gate:** Because tumors also need new blood vessels to grow, giving BPC-157 to someone with an actively growing tumor is a theoretical risk. Therefore, we strictly reserve this peptide for patients in remission, post-surgery, or when the medical team determines the benefit for gut healing outweighs the risk.\n\n*Safety Note: Depending on your protocol, this is taken either as an oral capsule for gut issues, or as a tiny injection under the skin for systemic healing. Reconstituted injectable vials MUST be kept in the refrigerator.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 ANGIOGENESIS & MUCOSAL REPAIR\n- **VEGF Modulation:** BPC-157 may modulate angiogenic signaling (VEGF pathways reported in some models) and its receptors (VEGFR2), potentially driving angiogenesis and endothelial cell proliferation in damaged tissues. \n- **Nitric Oxide (NO) System Modulation:** Acts as a modulator of the NO pathway, which may influence endothelial/NO signaling during the healing phase.\n- **F-Actin Formation:** Promotes the organization of F-actin in fibroblasts, accelerating cellular migration to the site of injury (granulation tissue formation).\n\n## 3.2 ADME PROFILE\n- **Absorption:** Oral formulations are used for GI targeting; systemic bioavailability is uncertain and formulation-dependent (varies heavily between arginine salt vs. acetate formulations). Subcutaneous administration provides rapid systemic distribution.\n- **Metabolism:** Degraded by systemic peptidases into smaller, inactive amino acid fragments.\n- **Clearance:** Rapid plasma clearance, but downstream modulation of growth factors dictates the prolonged biological half-life of the healing response.",
+    "s4_limitations_failure_modes_internal": "- **Tumor Fueling (Theoretical):** The primary failure mode in oncology is the inadvertent vascularization of a dormant or active micro-tumor. Upregulating systemic VEGF in an active oncologic environment directly antagonizes standard anti-angiogenic therapies (e.g., Bevacizumab/Avastin).\n- **Retinal Proliferation:** In patients with advanced diabetic retinopathy, massive VEGF up-regulation can trigger acute macular edema or retinal detachment.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: THE ANGIOGENESIS GATE (CRITICAL POLICY)\n- **IF tumor status is unclear, no recent imaging is available, or progression is suspected:** THEN NO-GO until MD clarifies risk/benefit.\n- **IF patient has an ACTIVE, highly vascularized solid tumor (e.g., Glioblastoma, HCC) and is NOT in a palliative/end-of-life setting:** THEN ABSOLUTE NO-GO. \n- **IF patient is actively receiving anti-angiogenic targeted therapy (e.g., Bevacizumab/Avastin):** THEN ABSOLUTE NO-GO. Direct mechanistic antagonism.\n- **IF patient recently stopped anti-angiogenic therapy:** THEN Require a strict clinic-defined washout window post-therapy before initiating BPC-157 per MD order.\n- **IF patient is post-surgical (tumor fully resected) OR in clinical remission:** THEN Cleared for use to accelerate surgical recovery or resolve iatrogenic tissue damage.\n- **IF patient has severe, debilitating GI mucositis/cachexia and active disease:** THEN Require explicit MD override (Quality of Life / Palliative exemption).\n\n## ALGORITHM 2: ROUTE SELECTION SOP\n- **IF target is chemo/radiation-induced mucositis, gastric ulcers, or \"leaky gut\":** THEN Utilize Oral route (capsules or liquid formulation).\n- **IF target is post-surgical wound healing, tendon repair, or systemic inflammation:** THEN Utilize Subcutaneous (SC) route near the site of injury or in abdominal adipose tissue.\n\n## ALGORITHM 3: DISPENSING & COLD CHAIN SOP\n- **Reconstitution:** MUST be reconstituted strictly with bacteriostatic water under aseptic technique.\n- **Storage:** ONCE RECONSTITUTED, the vial MUST remain refrigerated at 2°C to 8°C (36°F - 46°F). \n- **IF vial is left at room temperature for > 24 hours post-reconstitution:** THEN Discard and replace per manufacturer/clinic SOP.\n\n## ALGORITHM 4: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** General oncology metabolic panel. \n- **Condition-Specific Baseline:** Retinal exam clearance if history of severe proliferative diabetic retinopathy.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age (Policy NO-GO due to unknown effects on fetal angiogenesis)."
+  },
+  "display_name": "Gi Bpc157",
+  "domain": "GI",
+  "kind": "broad",
+  "purpose": "encyclopedia"
+}

@@ -1,0 +1,111 @@
+// services/kbRouter.js — dual-mode routing entry point
+// Called by chatWorker BEFORE any main Gemini inference call.
+
+const axios = require('axios');
+const { getIndex } = require('./kbRetriever');
+
+// ── Hard-stop trigger map (in-memory, loaded once at boot) ────────────────────
+// Keys: lowercase keyword or /regex/. Values: array of KB IDs to force-fetch.
+const HARD_STOPS = new Map([
+  ['pregnancy',        ['00_policy_pregnancy_breastfeeding']],
+  ['breastfeeding',    ['00_policy_pregnancy_breastfeeding']],
+  ['enceinte',         ['00_policy_pregnancy_breastfeeding']],
+  // IDs must be EXACT — no wildcards, no prefix expansion.
+  // Replace these with your actual compiled IDs from kb/json/index.json.
+  ['suboxone',         ['11_immune_ldn']],
+  ['buprenorphine',    ['11_immune_ldn']],
+  ['opioids',          ['11_immune_ldn']],
+  ['bleomycin',        ['32_iv_hbot_contraindications']],  // exact ID — add other hbot variants as separate entries if needed
+  ['g6pd',             ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
+  ['hemolysis',        ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
+  ['favism',           ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
+  ['melena',           ['00_triage_bleeding', '00_policy_b17_gate']],
+  ['hematemesis',      ['00_triage_bleeding', '00_policy_b17_gate']],
+  ['blood in stool',   ['00_triage_bleeding']],
+  ['seizure',          ['00_triage_neuro', '00_policy_ivermectin_gate']],
+  ['ataxia',           ['00_triage_neuro']],
+  ['confusion',        ['00_triage_neuro']],
+  ['neuro red flag',   ['00_triage_neuro', '00_policy_dca_gate']],
+]);
+
+// Always load on every DEPTH 2 request (global policies).
+// Keep this list short — these must be in every clinical response.
+const ALWAYS_LOAD = [
+  '00_policy_clinical_intent_and_claims',
+  '00_policy_teleconsult_er',
+];
+
+// ── Stage 1: Node prefilter — O(N) on trigger count, <5ms wall-clock, no disk read ──────
+// N = number of hard-stop triggers (20–50 typical). Still <1ms in practice — "O(1)" was imprecise.
+function runPrefilter(message) {
+  const needle = message.toLowerCase();
+  const hits   = new Set();
+  for (const [trigger, ids] of HARD_STOPS) {
+    if (needle.includes(trigger)) ids.forEach(id => hits.add(id));
+  }
+  return [...hits];
+}
+
+// ── Stage 2: LLM router — Gemini Flash-Lite reads KB_ROUTER from cache ───────
+const GEMINI_FLASH_LITE_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`;
+
+async function runLLMRouter(message, prefilterHits, tagCandidates, cacheName) {
+  // Pass ONLY tag-matched candidates (max 30) — never the full ID list.
+  // Injecting 200–500 IDs would blow the router prompt and break the "<2s" target.
+  // KB_ROUTER in cache contains routing rules — the LLM needs signals, not a catalogue.
+  const prompt = `User message: ${message}
+Prefilter already force-fetching: ${prefilterHits.join(', ') || 'none'}
+Candidate KB IDs (tag-matched, max 30): ${tagCandidates.slice(0, 30).join(', ') || 'none'}
+
+Apply KB_ROUTER rules. Return ONLY valid JSON: {"always_load":[],"fetch":[],"reasons":[]}`;
+
+  // BUG-G8 FIX: timeout added — flash-lite router, 10s sufficient
+  // BUG-G8 FIX: timeout added — flash-lite router, 10s sufficient
+  const { data } = await axios.post(GEMINI_FLASH_LITE_URL, {
+    cachedContent: cacheName,
+    contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    generationConfig: { maxOutputTokens: 300, temperature: 0 }
+  }, { timeout: 10000 });
+  try {
+    // M6 — strip markdown fences: Flash-Lite sometimes wraps output in ```json``` even at temp=0
+    const raw = data.candidates[0].content.parts[0].text.trim()
+      .replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+    return JSON.parse(raw);
+  } catch {
+    console.warn('[kbRouter] LLM parse failed — using prefilter result only');
+    return { always_load: [], fetch: [], reasons: ['llm_parse_failed'] };
+  }
+}
+
+// ── Entry point: called by chatWorker for every DEPTH 2 request ──────────────
+// Returns the deduplicated final set of KB IDs to load via kbRetriever.
+async function resolveKBIds(message, cacheName) {
+  // Stage 1 — deterministic, <5ms
+  const prefilterHits = runPrefilter(message);
+
+  // Stage 1b — tag-match prefilter (sync, no LLM, feeds Stage 2)
+  // Scans index in-memory, returns top candidates by tag overlap score. Max 30.
+  // F1: hoist toLowerCase() outside the map — 1 call, not N×M calls
+  const needle = message.toLowerCase();
+  const tagCandidates = [...getIndex().entries()]
+    .map(([id, e]) => ({ id, score: e.tags.filter(t => needle.includes(t.toLowerCase())).length }))
+    .filter(c => c.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(c => c.id);  // top candidates — slice(0,30) applied in prompt
+
+  // Stage 2 — LLM finalizes (~200ms)
+  const llm = await runLLMRouter(message, prefilterHits, tagCandidates, cacheName);
+
+  // Stage 3 — Merge rule (source of truth)
+  // Final = ALWAYS_LOAD ∪ prefilter_hits ∪ llm.always_load ∪ llm.fetch
+  const finalSet = new Set([
+    ...ALWAYS_LOAD,
+    ...prefilterHits,
+    ...(llm.always_load || []),
+    ...(llm.fetch       || []),
+  ]);
+  return [...finalSet];  // kbRetriever.loadKBFiles() resolves via index.json
+}
+
+// L1 — export runPrefilter so chatWorker can invoke hard-stops independently of DEPTH tier
+module.exports = { resolveKBIds, runPrefilter };

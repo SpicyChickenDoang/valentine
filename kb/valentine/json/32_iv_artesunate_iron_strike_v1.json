@@ -1,0 +1,41 @@
+{
+  "id": "32_iv_artesunate_iron_strike_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "ARTESUNATE",
+      "ARTEMISININ",
+      "IRON_DEPENDENT_CYTOTOXICITY",
+      "ROS_BURST",
+      "TRANSFERRIN_RECEPTOR",
+      "FERROPTOSIS",
+      "HEMOLYSIS",
+      "NEUROTOXICITY"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH (Pro-Oxidant / Targeted Cytotoxicity)",
+    "use_for": "Inducing localized oxidative stress and potential ferroptosis-like cell death by reacting with intracellular iron pools in metabolically active/malignant cells.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "07_MITOCHONDRIA",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Severe Anemia (Hb < 8.0 g/dL), G6PD Deficiency (ABSOLUTE/Hemolysis risk), Active bleeding/peptic ulcer, Known hypersensitivity to artemisinins, Pregnancy (ABSOLUTE in 1st trimester; Policy NO-GO overall unless specialist-approved).",
+    "triage_questions": "Do you have a history of severe anemia or G6PD deficiency? Any active bleeding or black stools? Are you taking high doses of antioxidants (like Vitamin C or Glutathione) today? Have you ever had an allergic reaction to malaria medications? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of acute hemolysis, severe anemia, active bleeding, or neurological toxicity. Symptoms of dark urine, jaundice, profound fatigue, black stools, or new-onset ataxia require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** An endoperoxide compound that cleaves upon contact with intracellular ferrous iron (Fe2+), releasing a massive burst of reactive oxygen species (ROS) and free radicals.\n- **Administration:** Slow IV push or short infusion. Highly unstable once reconstituted; must be injected immediately.\n- **Hard NO-GOs:** G6PD Deficiency; Severe baseline anemia; Active GI bleed/ulcer.\n- **Sequencing Policy:** MUST be separated from antioxidant therapies. Avoid same-day overlap; separate by ≥24h unless MD overrides.\n- **Monitoring:** CBC (watch for delayed hemolysis / reticulocytopenia); Iron panel (ferritin/transferrin); LFTs; Neurotoxicity signs (ataxia).",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** Artesunate can generate localized oxidative stress when it interacts with iron. Because some cancer cells upregulate iron receptors (transferrin) to fuel rapid growth, Artesunate may selectively induce free radical damage in these iron-rich environments (context-dependent).\n- **WHAT WE CANNOT CLAIM:** We cannot claim Artesunate \"cures\" cancer or acts as a universal targeted chemotherapy. We cannot claim it is entirely harmless to healthy cells, as generalized hemolysis and neurotoxicity remain clinical risks.",
+    "s2_patient_communication_public": "## THE IRON-TRIGGERED STRIKE (ARTESUNATE)\nArtesunate is a medication originally derived from the sweet wormwood plant. In integrative oncology, we use it to exploit a specific metabolic weakness in certain rapidly growing cells.\n\n1) **The Setup:** Many tumor cells require massive amounts of iron to divide quickly. They are highly \"iron-hungry,\" pulling in much more iron than your healthy cells do.\n2) **The Trigger:** Artesunate is highly reactive to iron. When it enters a cell packed with iron, it triggers a rapid chemical reaction, releasing a burst of oxidative stress (similar to a localized rusting process). \n3) **The Goal:** Because the tumor cells are hoarding iron, they may take the brunt of this oxidative burst, while healthy cells—which have normal iron levels—are generally better able to tolerate the exposure.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 IRON-DEPENDENT ENDOPEROXIDE CLEAVAGE\n- **Free Radical Generation:** The endoperoxide bridge of Artesunate is cleaved by ferrous iron (Fe2+), yielding carbon-centered free radicals and ROS. This can lead to lipid peroxidation, mitochondrial membrane depolarization, and DNA damage (ferroptosis-like pathways).\n- **Targeting Rationale:** Malignant cells frequently overexpress Transferrin Receptor 1 (TfR1) to maintain high intracellular iron pools, potentially increasing their susceptibility to artemisinin-induced cytotoxicity compared to non-malignant tissue.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Rapidly hydrolyzed in blood/tissues to the active metabolite dihydroartemisinin (DHA).\n- **Clearance:** Extremely short plasma half-life (parent drug <30 mins; DHA ~1-2 hours). The biological oxidative damage, however, persists long after the drug is cleared.\n- **Excretion:** Hepatic glucuronidation; primarily biliary and renal excretion.",
+    "s4_limitations_failure_modes_internal": "- **Iron Depletion:** If the patient is profoundly iron-deficient, the intracellular \"trigger\" is missing, rendering the endoperoxide cleavage minimal and the therapy largely ineffective.\n- **Antioxidant Neutralization:** Concurrent high-tissue levels of antioxidants (e.g., recent high-dose IV Vitamin C, Glutathione, Alpha Lipoic Acid) may blunt the ROS burst, potentially neutralizing the cytostatic effect.\n- **Hypoxia:** As an oxidative therapy, severe tissue hypoxia may limit the magnitude of ROS generation.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: MEDICATION, G6PD & ANTIOXIDANT RECONCILIATION\n- **IF G6PD Deficient:** THEN ABSOLUTE NO-GO. Fatal hemolytic crisis risk.\n- **IF scheduled for IV Vitamin C, Glutathione, or potent antioxidants:** THEN avoid same-day overlap; separate by ≥24h unless MD overrides.\n\n## ALGORITHM 2: BLEEDING & NEUROTOXICITY (RED FLAGS)\n- **IF active GI bleed/ulcer symptoms (e.g., black stools, hematemesis):** THEN NO-GO.\n- **Neurotoxicity Watch:** IF new ataxia, confusion, or seizure occurs: THEN STOP therapy immediately and initiate in-person ER evaluation.\n\n## ALGORITHM 3: HEMATOLOGICAL EMERGENCY (HEMOLYSIS)\n- **The Risk:** Delayed hemolytic anemia or immediate red blood cell destruction.\n- **IF Symptoms (Dark/tea-colored urine, acute jaundice, profound shortness of breath, sudden fatigue) occur:**\n  - THEN STOP therapy immediately.\n  - THEN Order STAT CBC, Reticulocyte count, LDH, Haptoglobin, and indirect Bilirubin.\n  - THEN Initiate immediate in-person ER evaluation for transfusion/supportive care if Hb drops precipitously.\n\n## ALGORITHM 4: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** CBC with differential + Quantitative G6PD assay + Iron Panel (Ferritin, Transferrin, TIBC) + LFTs.\n- **Iron Protocol:** IF Ferritin is extremely low (<15-20 ng/mL) alongside low transferrin saturation, clinical correlation is required to determine if therapy will be biologically effective.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation unless specialist-approved (Absolute NO-GO in 1st trimester due to embryo-fetal toxicity)."
+  },
+  "display_name": "Artesunate — Iron-Triggered Strike",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

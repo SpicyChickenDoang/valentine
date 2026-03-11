@@ -1,0 +1,44 @@
+{
+  "id": "32_iv_mah_ozonotherapy_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "OZONOTHERAPY",
+      "MAH",
+      "MAJOR_AUTOHEMOTHERAPY",
+      "LIPID_PEROXIDATION",
+      "ROS_BURST",
+      "NRF2_ACTIVATION",
+      "G6PD_DEFICIENCY",
+      "HEMOLYSIS",
+      "THYROTOXICOSIS",
+      "HEPARIN_INDUCED_THROMBOCYTOPENIA",
+      "AIR_EMBOLISM"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH (Systemic Pro-Oxidant / Hormetic Stressor)",
+    "use_for": "Inducing a transient, calculated oxidative burst ex vivo to stimulate systemic endogenous antioxidant responses (Nrf2 pathway) and modulate rheological parameters.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "11_IMMUNE",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "G6PD Deficiency (ABSOLUTE/Fatal Hemolysis), Uncontrolled Hyperthyroidism (ABSOLUTE/Thyroid storm), Direct IV Gas Injection/Inhalation (ABSOLUTE NO-GO), Known HIT (Heparin allergy), Active severe bleeding, Pregnancy/Breastfeeding (Policy NO-GO).",
+    "triage_questions": "Do you have a verified quantitative G6PD result on file? Do you have an overactive thyroid? Are you taking blood thinners (Eliquis, Xarelto, Warfarin)? Have you ever had an allergic reaction to Heparin (HIT)? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of acute hemolysis, chest pain, or respiratory distress. Symptoms of dark urine, sudden dyspnea, or severe palpitations require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** Ex vivo ozonation of autologous blood. Ozone reacts instantly with blood lipids to generate Hydrogen Peroxide (H2O2) and Lipid Oxidation Products (LOPs). \n- **Strict Route Policy:** Direct IV ozone gas injection and inhalation are ABSOLUTE NO-GOs / not offered. Ex vivo closed circuit (MAH) only.\n- **Hard NO-GOs:** G6PD Deficiency; Uncontrolled Hyperthyroidism (TSH < normal with elevated Free T4); Active bleeding.\n- **Symmetric Sequencing Policy:** 1. Separate from systemic antioxidants (Glutathione, ALA) by ≥ 24h (quenching risk). \n  2. No same-day pro-oxidant strikes (IVC, Artesunate, B17, PDT) unless explicitly designed and dose-reduced by MD (extreme oxidative overload risk).\n- **Monitoring:** Vitals (BP/HR/O2) during reinfusion. Stop triggers: chest pain, dyspnea, wheeze, or visual blood anomalies.",
+    "s1_claims_discipline_internal": "- **CLINICAL INTENT:** Our objective is remission when achievable. MAH is used as an adjunct systemic hormetic stressor (like high-intensity exercise for the immune system) piloted by safety and objective response.\n- **WHAT WE CAN CLAIM:** Ex vivo ozonation generates messenger molecules that may upregulate the body's endogenous antioxidant defenses (via Nrf2) and may improve blood rheology and oxygen delivery to tissues.\n- **WHAT WE CANNOT CLAIM:** We cannot claim \"ozone kills cancer cells in the body.\" Ozone breaks down very rapidly upon contact with blood; no ozone enters the tumor. We cannot claim it is safe without strict G6PD and thyroid clearance.",
+    "s2_patient_communication_public": "## THE HORMETIC STRESSOR (MAH OZONOTHERAPY)\nMajor Autohemotherapy (MAH) involves drawing a small amount of your blood, mixing it with precise amounts of medical ozone gas in a sterile bag, and returning it to you. \n\n1) **The \"Vaccine\" Effect:** The ozone gas never actually enters your bloodstream directly. It reacts very rapidly with the fats in your drawn blood, creating \"messenger molecules.\" When we return this blood to you, these messengers act like an alarm system, challenging your body to wake up its own immune and antioxidant defenses.\n2) **The Hormetic Stress:** This concept is called \"hormesis\"—a brief, calculated stress that makes the system stronger, much like lifting weights makes muscles grow.\n3) **The Safety Gates:** Because this therapy requires your red blood cells to handle a brief burst of oxidative stress in the bag, we strictly require a specific blood test (G6PD) beforehand. If your cells lack this protective enzyme, the therapy is strictly forbidden.\n\n*Safety Note: We also must ensure your thyroid is not overactive, and we use a blood thinner in the bag to prevent clotting. Strict laboratory clearance is mandatory.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 LIPID PEROXIDATION & NRF2 ACTIVATION\n- **The Ex Vivo Reaction:** Ozone (O3) reacts very rapidly with polyunsaturated fatty acids (PUFAs) and plasma antioxidants. It generates two primary messengers: ROS (primarily H2O2) and LOPs (Lipid Oxidation Products, e.g., 4-HNE). \n- **The In Vivo Signal:** Reinfused H2O2 diffuses into mononuclear cells to transiently activate immune signaling pathways. Reinfused LOPs bind to Keap1, releasing Nrf2, which translocates to the nucleus to upregulate Antioxidant Response Elements (ARE), including SOD, CAT, and HO-1.\n\n## 3.2 ADME PROFILE\n- **Absorption:** N/A. No meaningful ozone persists; the signal is mediated by secondary messengers (LOPs). Efficacy relies entirely on the half-life and distribution of these secondary messengers.\n- **Clearance:** LOPs are rapidly metabolized by the liver via phase II conjugation (Glutathione S-transferases) and excreted renally.",
+    "s4_limitations_failure_modes_internal": "- **Hemolytic Rupture:** In G6PD-deficient patients, red blood cells cannot regenerate NADPH to neutralize the H2O2 generated in the bag. The cells will rupture, causing a potentially fatal hemolytic crisis upon reinfusion.\n- **The Antioxidant Paradox (Quenching):** If the patient has high circulating levels of exogenous antioxidants, the O3 will be entirely quenched before it can react with PUFAs. The therapy becomes an expensive saline drip.\n- **Lethal Misuse (Gas Embolism & ARDS):** Direct intravenous injection of ozone gas causes fatal air embolism. Accidental inhalation of ambient ozone causes severe oxidative pulmonary edema (ARDS).",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: G6PD, THYROID & VISUAL HEMOLYSIS CHECK\n- **IF G6PD is Deficient or borderline low:** THEN ABSOLUTE NO-GO. \n- **IF active hyperthyroidism or Thyrotoxicosis (TSH low + FT4 high):** THEN ABSOLUTE NO-GO. \n- **HEMOLYSIS / CLOT CHECK (NURSING SOP):** IF blood in the MAH bag turns abnormally dark/black, looks like \"chocolate\", or exhibits visible fibrin clumps/clots: THEN DO NOT REINFUSE. Discard bag safely and escalate to MD.\n\n## ALGORITHM 2: ANTICOAGULANT SELECTION SOP\n- **The Risk:** Microthrombi formation in the ex vivo circuit leading to pulmonary embolism.\n- **IF known history of HIT (Heparin-Induced Thrombocytopenia) or Heparin allergy:** THEN NO-GO for Heparin; MUST use Citrate (ACD-A) per MD order.\n- **IF patient is on oral anticoagulants (DOACs, Warfarin):** THEN Require MD review to adjust the ex vivo anticoagulant volume (to prevent systemic bleeding risk upon reinfusion).\n- **IF signs of hypocalcemia (tingling lips/fingers) occur during reinfusion with Citrate:** THEN slow the infusion rate immediately (citrate chelates calcium).\n\n## ALGORITHM 3: VITAL MONITORING & REACTION MANAGEMENT\n- **SOP:** Monitor BP, HR, and O2 Sat continuously during reinfusion.\n- **IF patient develops sudden chest pain, dyspnea, wheezing, or severe palpitations:** \n  - THEN STOP infusion immediately.\n  - THEN Administer 100% O2 and maintain IV access.\n  - THEN Escalate to ER / MD (Rule out micro-embolism or acute hemolysis).\n\n## ALGORITHM 4: SYMMETRIC SEQUENCING POLICY\n- **IF scheduled for Antioxidants (IV Glutathione, ALA) today:** THEN separate by ≥ 24 hours (Quenching risk).\n- **IF scheduled for Pro-Oxidants (High-Dose IVC, Artesunate, B17, PDT) today:** THEN NO-GO for same-day MAH. Policy assumes extreme oxidative overload risk unless explicitly designed and dose-reduced by specialist.\n\n## ALGORITHM 5: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** Quantitative G6PD assay + CBC (focus on Hb/Platelets) + CMP (LFT/eGFR) + TSH/Free T4.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age (Policy NO-GO)."
+  },
+  "display_name": "IV Mah Ozonotherapy",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

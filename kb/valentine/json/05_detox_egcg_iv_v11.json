@@ -1,0 +1,43 @@
+{
+  "id": "05_detox_egcg_iv_v11",
+  "version": "11.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "EGCG",
+      "EPIGALLOCATECHIN_GALLATE",
+      "DNMT_INHIBITION",
+      "EPIGENETIC_MODULATOR",
+      "FAS_INHIBITOR",
+      "HEPATOTOXICITY",
+      "COMT_METABOLISM",
+      "RIGHT_UPPER_QUADRANT_PAIN",
+      "DARK_URINE",
+      "JAUNDICE"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH (Epigenetic Modulation)",
+    "use_for": "Context-dependent epigenetic modulation (DNA methyltransferase inhibition) and suppression of fatty acid synthase (FAS) in metabolically active cells.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "05_DETOX_LIVER",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Pre-existing Hepatic Impairment or Jaundice (ABSOLUTE/Hepatotoxicity risk), Strict Fasting State >12h (Spikes liver toxicity risk), Active Viral Hepatitis, Recent Binge Drinking (≤72h), Concurrent Hepatotoxic Drugs, Pregnancy/Breastfeeding (Policy NO-GO).",
+    "triage_questions": "Do you have any known liver disease, active viral hepatitis, or recent elevated liver enzymes? Have you had a light meal within the last 2-4 hours (strict fasting >12h is a NO-GO)? Have you consumed heavy amounts of alcohol in the last 72 hours? Are you taking high doses of Tylenol/Acetaminophen? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of acute transaminitis or jaundice. Symptoms of right upper quadrant pain, severe nausea, or dark urine require immediate in-person hepatic evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** A concentrated green tea catechin acting as an epigenetic modulator (inhibits DNMT) and metabolic inhibitor (FAS).\n- **Fasting Policy:** IV EGCG is NO-GO during strict fasting/metabolic priming unless MD explicitly dose-reduces and documents risk.\n- **Sequencing Policy:** Do not overlap with ROS strikes (IVC/Artesunate/B17/Ozone) in the same session. EGCG is a polyphenol; separate by ≥ 24h unless explicitly prescribed as a temporal pre-pulse.\n- **Hard NO-GOs:** Baseline jaundice; Active viral hepatitis; Acute hepatic failure; Recent heavy alcohol binge (≤72h).\n- **Monitoring:** LFTs (AST/ALT/Bilirubin) are mandatory. Stop immediately if right upper quadrant (RUQ) pain or severe nausea spikes.",
+    "s1_claims_discipline_internal": "- **CLINICAL INTENT:** Our objective is remission when achievable. EGCG is used as an adjunct metabolic/epigenetic lever and is piloted by safety and objective response.\n- **WHAT WE CAN CLAIM:** IV EGCG delivers high plasma concentrations of a specific catechin that may modulate epigenetic signaling (like DNA methylation) and cellular metabolism. \n- **WHAT WE CANNOT CLAIM:** We cannot claim EGCG is just \"harmless green tea.\" IV EGCG carries a well-documented risk of acute, dose-dependent hepatotoxicity. We cannot claim DNMT inhibition in vitro translates to clinical demethylation or tumor control in vivo.",
+    "s2_patient_communication_public": "## THE EPIGENETIC MODULATOR (IV EGCG)\nEGCG is the most potent active compound found in green tea. However, taking it intravenously is a serious medical intervention, entirely different from drinking tea or taking oral supplements.\n\n1) **The Software Glitch:** Cancer cells often survive by \"turning off\" the body's natural defense genes. They use a chemical process (methylation) to lock these genes down, acting like a software virus that disables your antivirus program.\n2) **The Epigenetic Modulator:** High-dose IV EGCG is hypothesized to act as a mild inhibitor of this locking process. By interfering with the \"locks,\" it may help the cell re-express its natural tumor-suppressor genes.\n3) **The Liver Bottleneck:** Processing this massive dose of EGCG requires significant effort from your liver. It can cause acute liver stress. \n\n*Safety Note: Because of the known risk to the liver, we strictly monitor your liver enzymes through blood tests. You MUST have a light, low-fat meal 2 to 4 hours before your infusion, as an empty stomach drastically spikes the toxicity to your liver.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 EPIGENETIC & METABOLIC INHIBITION\n- **DNMT Inhibition:** EGCG acts as a competitive inhibitor of DNA methyltransferase 1 (DNMT1). This may lead to the demethylation and reactivation of epigenetically silenced tumor suppressor genes (e.g., p16, RAR-beta) (context-dependent).\n- **FAS Inhibition:** EGCG suppresses Fatty Acid Synthase (FAS), an enzyme frequently overexpressed in lipogenic tumors (e.g., breast, prostate) to fuel membrane synthesis and rapid proliferation.\n\n## 3.2 ADME PROFILE\n- **Absorption:** Bypasses the highly inefficient oral absorption (normally < 1-5%). \n- **Metabolism:** Extensively metabolized by the liver via Catechol-O-methyltransferase (COMT). This may increase methyl donor demand via COMT-related metabolism; risk depends on dosing, duration, and patient methylation status.\n- **Clearance:** Hepatic clearance and biliary excretion. Half-life is highly variable depending on hepatic COMT activity and systemic methylation status.",
+    "s4_limitations_failure_modes_internal": "- **Acute Hepatotoxicity:** The primary failure mode is iatrogenic liver injury. High-dose IV EGCG can cause severe transaminitis and acute hepatic necrosis, particularly if the patient's Phase II conjugation pathways are exhausted.\n- **Methylation Depletion:** Because EGCG demands COMT activity, chronic administration without supporting the methylation cycle can lead to systemic methyl donor depletion, paradoxical epigenetic silencing, and increased circulating catecholamines.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: HEPATIC SAFETY & STOP LADDER (POLICY)\n- **IF baseline jaundice OR bilirubin elevated above clinic threshold:** THEN NO-GO.\n- **IF known active viral hepatitis or acute hepatitis suspected:** THEN NO-GO.\n- **IF recent heavy alcohol use / binge within 72h:** THEN postpone and re-check labs (policy).\n- **THE HEPATIC STOP LADDER:**\n  - **IF AST/ALT rises to > 3x baseline OR bilirubin rises:** THEN STOP protocol + mandate MD review before any resumption.\n  - **IF AST/ALT > 5x ULN OR clinical symptoms occur (RUQ pain, dark urine, persistent nausea):** THEN Initiate immediate ER evaluation + STOP all hepatically cleared IVs until medically cleared.\n\n## ALGORITHM 2: THE FASTING TOXICITY GATE\n- **The Risk:** Fasting significantly increases the bioavailability and hepatic exposure of EGCG, raising the risk of severe hepatotoxicity.\n- **IF prolonged fasting (>12h) same day:** THEN NO-GO. \n- **SOP:** Require a light meal within 2–4h pre-infusion (low-fat, non-greasy).\n\n## ALGORITHM 3: METHYLATION & COMT RECONCILIATION\n- **IF multi-week protocol (>2 weeks):** THEN add methylation support per policy (e.g., methyl-B vitamins ± SAMe/folinic acid) and monitor tolerance.\n- **IF anxiety, insomnia, or palpitations escalate:** THEN suspect methyl depletion / catecholamine excess. Reduce dose or stop + reassess.\n\n## ALGORITHM 4: NURSING ADMINISTRATION SOP\n- **SOP:** Start infusion SLOW for the first 10–15 minutes. \n- **Monitor:** BP, HR, and Temperature.\n- **IF flushing, RUQ pain, or severe nausea spikes during infusion:** THEN STOP infusion immediately, assess vitals, and escalate to MD.\n\n## ALGORITHM 5: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** CMP (AST/ALT, ALP, total/direct bilirubin, albumin) ≤ 14 days before first dose.\n- **Condition-Specific Baseline:** INR (if suspicion of liver fragility) + HBsAg / HCV Ab (if risk or history of viral hepatitis).\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age (Policy NO-GO unless specialist-approved)."
+  },
+  "display_name": "Detox EGCG IV",
+  "domain": "Detox/Liver",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

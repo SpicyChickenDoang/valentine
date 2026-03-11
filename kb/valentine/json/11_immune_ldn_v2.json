@@ -1,0 +1,42 @@
+{
+  "id": "11_immune_ldn_v2",
+  "version": "2.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "LDN",
+      "LOW_DOSE_NALTREXONE",
+      "OPIOID_GROWTH_FACTOR",
+      "OGF_OGFR_AXIS",
+      "TOLL_LIKE_RECEPTOR_4",
+      "CYTOSTATIC_EFFECT",
+      "IMMUNE_MODULATION",
+      "ENDORPHIN_REBOUND",
+      "MET_ENKEPHALIN"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH (Foundational Immunomodulation)",
+    "use_for": "Upregulating endogenous opioid peptide production and modulating the OGF-OGFR signaling axis to exert a context-dependent cytostatic effect on malignant cells.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "11_IMMUNE",
+      "06_NEUROLOGY"
+    ],
+    "red_flags": "Concurrent Opioid Analgesic use (ABSOLUTE/Withdrawal risk), Standard-dose naltrexone (50mg+) or Vivitrol (rebound failure), Acute Hepatitis/Liver Failure, Recent Organ Transplant (Immunosuppression interference), Pregnancy/Breastfeeding (Policy NO-GO unless specialist-approved).",
+    "triage_questions": "Are you currently taking any opioid-based pain medications (e.g., Tramadol, Oxycodone, Morphine, Codeine, Methadone, Buprenorphine)? Are you already on standard-dose Naltrexone or the Vivitrol shot? Do you have any history of liver failure or hepatitis? Are you taking immunosuppressants for an organ transplant? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of opioid withdrawal or acute liver flare. Symptoms of severe abdominal pain, jaundice, or acute opiate withdrawal (tachycardia, agitation) require immediate in-person clinical evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** Transient opioid receptor blockade → rebound in endogenous opioid peptides (incl. met-enkephalin/OGF) and downstream signaling sensitivity.\n- **Hard NO-GOs:** Active use of any opioid analgesics (washout duration is opioid-dependent; MD confirmation required); Active standard-dose naltrexone or extended-release naltrexone (Vivitrol); Acute liver failure; Post-transplant immunosuppression (unless team approved).\n- **Dose Ladder (Policy):** Start 1.5 mg nightly → 3 mg after 1–2 weeks → 4.5 mg if tolerated.\n- **Monitoring:** Sleep disturbances/vivid dreams; LFTs; Signs of induced opioid withdrawal.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** LDN acts as a transient antagonist of opioid receptors; it may influence the OGF-OGFR axis and endorphin signaling via transient opioid receptor blockade and rebound peptide dynamics (context-dependent).\n- **WHAT WE CANNOT CLAIM:** We cannot claim LDN \"kills\" cancer cells directly (it is cytostatic, not cytotoxic). We cannot claim it replaces conventional immunotherapy or that it guarantees an immune-mediated tumor regression.",
+    "s2_patient_communication_public": "## THE IMMUNE REBOUND (LOW DOSE NALTREXONE)\nLow Dose Naltrexone (LDN) is a unique way to \"trick\" the body into strengthening its own natural defenses and internal regulation.\n\n1) **The Blockage:** At very low doses taken before bed, LDN briefly blocks your body’s opioid receptors for a few hours while you sleep.\n2) **The Rebound:** Your body senses this blockage and responds by producing a surge of natural \"feel-good\" chemicals (endorphins) and increasing the number of receptors ready to receive them.\n3) **The Goal:** By the morning, the LDN is gone, but your body is left with a higher level of these natural compounds. This \"rebound\" can help calm overactive inflammation and may slow down the signals that some cancer cells use to divide and grow.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 OGF-OGFR AXIS & TLR4 MODULATION\n- **The Rebound Effect:** Transient opioid receptor blockade may influence OGF–OGFR signaling and endorphin dynamics (context-dependent).\n- **Cytostatic Action:** Increased OGF-OGFR binding upon drug clearance potentially upregulates inhibitory signaling (p16/p21), delaying the G1-S phase transition.\n- **Anti-inflammatory Pathway:** LDN is proposed to modulate TLR4-related signaling in some models, potentially reducing microglial activation and systemic pro-inflammatory cytokine production.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Extensive first-pass hepatic metabolism to 6-beta-naltrexol (active).\n- **Excretion:** Primarily renal.\n- **Half-life:** Parent drug ~4 hours; Metabolite ~13 hours. Blockade must remain short-lived to allow the \"rebound window.\"",
+    "s4_limitations_failure_modes_internal": "1) **Opioid Competition:** Use of exogenous opioids saturates receptors, making transient blockade impossible and triggering acute withdrawal.\n2) **Dose Dependency:** If the dose exceeds the LDN range (or if standard 50mg naltrexone is active), the receptor blockade becomes permanent, abolishing the beneficial rebound effect.\n3) **Circadian Disruption:** Daytime dosing may be less effective as it does not align with the natural nocturnal peak of endorphin production.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: OPIOID & NALTREXONE INTERACTION (POLICY)\n- **IF Patient is on ANY opioid or standard/ER naltrexone:** THEN ABSOLUTE CONTRAINDICATION.\n- **EDGE CASES:** Includes Buprenorphine/Suboxone, Methadone, Fentanyl patches, and Vivitrol shots.\n- **SOP:** Washout duration is opioid-dependent; MD confirmation of successful washout is required before initiation. \n- **POLICY:** NO-GO until MD review if history of opioid use disorder or current naltrexone use.\n\n## ALGORITHM 2: ADVERSE SLEEP EFFECTS\n- **IF insomnia or vivid dreams occur:**\n  - THEN Move dose earlier (e.g., 19:00 instead of 22:00).\n  - THEN Reduce dose to the previous tolerated step (e.g., return to 1.5mg).\n\n## ALGORITHM 3: TRANSPLANT & IMMUNOSUPPRESSION\n- **IF post-transplant on immunosuppressants:** THEN NO-GO. Refuse unless the patient's transplant team provides explicit written approval.\n\n## ALGORITHM 4: BASELINE MONITORING & LABS\n- **Mandatory Baseline:** LFTs (CMP) + CBC.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age unless specialist-approved."
+  },
+  "display_name": "LDN — Low Dose Naltrexone",
+  "domain": "Immune",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

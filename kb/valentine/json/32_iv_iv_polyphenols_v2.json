@@ -1,0 +1,45 @@
+{
+  "id": "32_iv_iv_polyphenols_v2",
+  "version": "2.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "IV_POLYPHENOLS",
+      "QUERCETIN_IV",
+      "POLYPHENOL_INFUSION",
+      "NF_KAPPA_B",
+      "STAT3",
+      "DRUG_EFFLUX_INHIBITION",
+      "P_GLYCOPROTEIN",
+      "PHASE_II_METABOLISM",
+      "SEQUENCING_ROS",
+      "IRON_CHELATION",
+      "ANEMIA_RISK"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH",
+    "use_for": "Short-horizon anti-inflammatory signaling modulation (NF-κB/STAT3) and potential MDR (P-gp) modulation as a sensitizing “pre-pulse” before selected interventions (not a standalone cytotoxic therapy).",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "11_IMMUNE",
+      "32_IV_THERAPIES",
+      "05_DETOX_LIVER"
+    ],
+    "red_flags": "Iron-deficiency anemia / low ferritin, active anticoagulation with bleeding risk, severe hepatic impairment (AST/ALT > 3x ULN), history of severe hypersensitivity to plant extracts/solubilizers, concurrent narrow-therapeutic-index P-gp substrates (e.g., Digoxin), severe renal impairment (formulation-dependent).",
+    "triage_questions": "Any history of iron-deficiency anemia or low ferritin? Any history of severe allergies (including reactions to IV excipients/solubilizers)? Are you taking Digoxin or other heart rhythm meds? Any anticoagulants (DOAC/warfarin)? Any known liver disease or recent high AST/ALT?",
+    "teleconsult_limits": "No remote management of anemia, anticoagulant dosing, or arrhythmia drugs. Signs of allergic reaction, jaundice, syncope, severe dyspnea, or chest pain require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Role:** Short-lived sensitizer/support (NF-κB/STAT3 modulation; possible MDR/P-gp modulation). Not a standalone cytotoxic.\n- **Do not mix:** Never in same bag/line concurrently with ROS strikes (IVC/B17/laser). Use as **pre-pulse** + flush line.\n- **Key red flags:** Low ferritin/anemia; narrow-therapeutic-index P-gp drugs (Digoxin/cyclosporine/tacrolimus); severe allergy; AST/ALT >3x ULN.\n- **Baseline minimum:** CBC (Hb) + ferritin (≤30d). If anticoagulants/NTI drugs or bleeding risk: MD oversight ± coag panel per policy.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** IV polyphenol infusions bypass oral bioavailability limits and can achieve transient pharmacologic exposure. They may modulate inflammatory signaling (NF-κB/STAT3 axis) and, in some experimental contexts, can reduce drug efflux activity (e.g., P-gp) — primarily as a short-lived **sensitizer/support** step in a broader protocol.\n- **WHAT WE CANNOT CLAIM:** We cannot claim IV polyphenols are a standalone cytotoxic “cancer kill” therapy, nor can we claim consistent MDR reversal or guaranteed synergy across tumors. We cannot claim anti-inflammatory signaling modulation equals tumor control.",
+    "s2_patient_communication_public": "## THE INFLAMMATION SIGNAL SILENCERS\nPolyphenols are plant-derived molecules known for anti-inflammatory and cell-signaling effects. Many oral forms are poorly absorbed. Delivering a controlled polyphenol infusion can reach higher short-term exposure.\n\n1) **Signal Modulation:** Some tumors use inflammatory signaling (“growth noise”) to support survival. Polyphenols may help temporarily quiet parts of this signaling.\n2) **Sensitizing Step:** In some settings, polyphenols can act as a short “pre-pulse” to make other interventions more biologically relevant.\n3) **How we use it:** This is typically supportive and timing-dependent. We use it as part of a sequence — not as a standalone treatment.\n\n*Safety note: if you have anemia, liver problems, heart-rhythm medications, or strong allergies, we may modify or skip this infusion.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 SIGNALING MODULATION (PLEIOTROPIC, CONTEXT-DEPENDENT)\n- **NF-κB / STAT3 axis (concept):** Many polyphenols can influence upstream kinases and transcriptional programs that govern cytokines and anti-apoptotic signaling. Clinical effect is variable and dose/timing dependent.\n- **MDR / P-gp modulation (context):** Some polyphenols can inhibit or modulate ABC transporters in vitro (ABCB1/P-gp). In vivo relevance varies by formulation, exposure, and tumor context; treat as a potential sensitizer, not a guarantee.\n\n## 3.2 ADME / FORMULATION CONSTRAINTS\n- **Formulation:** Many polyphenols are lipophilic; IV use may require solubilizers or liposomal systems. Excipients themselves can drive hypersensitivity risk. Do not mix with incompatible IV solutions (precipitation risk).\n- **Kinetics:** Rapid Phase II metabolism (glucuronidation/sulfation). Effective plasma exposure is short (often <1 hour), so sequencing relative to the next intervention is operationally important.\n- **Iron chelation:** Phenolic hydroxyl groups can bind iron (Fe3+). In iron-deficient patients this may worsen symptoms; in iron-overload contexts it may be neutral/beneficial.\n\n## 3.3 CURCUMIN POSITIONING (HOUSE POLICY)\n- **Curcumin:** Use as **oral companion** (bioavailability-enhanced) rather than IV in this program, unless a separate validated IV formulation policy exists. This file focuses on IV polyphenol infusions (e.g., quercetin-based) with oral curcumin as adjunct if indicated.",
+    "s4_limitations_failure_modes_internal": "1) **Rapid clearance barrier:** High Phase II activity or high hepatic clearance can shorten exposure below functional thresholds.\n2) **Antioxidant paradox / ROS sequencing:** At certain concentrations and contexts, polyphenols may behave more antioxidant-like and could blunt ROS-driven interventions if poorly sequenced.\n3) **Anemia / ferritin low:** Iron chelation and reduced iron availability may worsen fatigue/dyspnea in iron-deficient patients.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: SEQUENCING WITH PRO-OXIDANTS (ROS TIMING)\n- **Rule:** Do **not** mix IV polyphenols in the same bag as pro-oxidants (IVC/B17) or other reactive agents.\n- **IF used as sensitizer:** THEN administer IV polyphenols as **pre-pulse** (typical window: **30–60 minutes before** the next intervention), then **flush the line** and transition per protocol timing. Avoid overlap that could quench ROS if the next step is a ROS-based strike.\n\n## ALGORITHM 2: ANEMIA / IRON SAFETY\n- **IF ferritin < 30 ng/mL OR symptomatic iron-deficiency anemia:** THEN avoid or delay IV polyphenols; correct anemia first.\n- **IF symptoms develop (tachycardia, pallor, dyspnea, dizziness):** THEN stop infusion and assess CBC/iron parameters.\n\n## ALGORITHM 3: DRUG–DRUG INTERACTIONS (P-gp / NARROW TI)\n- **High-risk examples (NTI / P-gp substrates):** Digoxin, cyclosporine, tacrolimus, sirolimus, certain antiarrhythmics (class-dependent), and other narrow-therapeutic-index agents.\n- **IF patient is on any NTI / P-gp substrate:** THEN avoid by default **or** require physician oversight with close toxicity monitoring.\n- **IF patient is on anticoagulants (DOAC/warfarin) or has bleeding risk:** THEN do not proceed without MD review; consider baseline coag panel per policy.\n\n## ALGORITHM 4: BASELINE LABS (MINIMUM)\n- **Default baseline (≤30 days):** CBC (Hb) + Ferritin.\n- **IF anticoagulants/bleeding risk:** THEN obtain coagulation panel (PT/INR + aPTT) **≤72 hours** pre-infusion per policy.\n- **IF liver disease suspected or AST/ALT > 3x ULN:** THEN avoid or dose-reduce; if uncertain, repeat LFTs close to infusion.\n\n## ALGORITHM 5: HYPERSENSITIVITY / INFUSION REACTION (NURSING SOP)\n- **During infusion:** monitor **BP + HR + temp + symptoms**; maintain IV access for rescue meds.\n- **IF rash, wheeze, throat tightness, hypotension, chest pain, syncope:** THEN stop infusion immediately, keep line open with compatible fluid, and follow emergency reaction SOP; urgent in-person care.\n\n# END OF FILE"
+  },
+  "display_name": "IV IV Polyphenols",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

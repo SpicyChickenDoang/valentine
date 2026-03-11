@@ -1,0 +1,38 @@
+{
+  "id": "00_triage_medication_reconciliation_monograph_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "MED_RECONCILIATION",
+      "INTERACTIONS",
+      "OPIOIDS",
+      "ANTICOAGULANTS",
+      "SSRI_MAOI",
+      "CHEMO_HISTORY",
+      "SUPPLEMENTS"
+    ],
+    "category": "Triage — Medication Reconciliation",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Deterministic medication/supplement reconciliation to prevent lethal interactions.",
+    "coupled_systems": [
+      "00_policy_synonym_map",
+      "00_policy_teleconsult_er"
+    ],
+    "red_flags": "Opioids+LDN, serotonergics+methylene blue, anticoagulants+bleeding symptoms, bleomycin+HBOT, bortezomib+IVC.",
+    "triage_questions": "List ALL meds + supplements. Any opioids/suboxone? anticoagulants? SSRIs/SNRIs/MAOI? chemo history?"
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Always ask full med/supp list when proposing anything.\n- High-risk classes: opioids, anticoagulants, serotonergics/MAOI, chemo agents.\n- Output: NO-GO / HOLD / OK-with-spacing decision.",
+    "s1_claims_discipline_internal": "- We do not adjust Rx dosing remotely.\n- We identify interaction risk and route appropriately.",
+    "s2_patient_communication_public": "To keep you safe, I need a complete list of medications and supplements. Some combinations can be dangerous, so we may need to pause or space certain items.",
+    "s3_pharmacokinetics_adme_internal": "Core interaction families:\n- Serotonergics + methylene blue → serotonin toxicity.\n- Opioids/buprenorphine + LDN → withdrawal.\n- Anticoagulants + antiplatelet agents → bleeding.\n- Bleomycin history + HBOT → pulmonary risk.\n- Bortezomib + high-dose vitamin C → antagonism.",
+    "s4_limitations_failure_modes_internal": "- Failure mode: missing OTC/herbals (CBD, grapefruit, quercetin) → ask explicitly.",
+    "s5_clinical_decision_trees_internal": "IF opioids/suboxone/methadone/fentanyl → NO-GO for LDN.\nIF serotonergics/MAOI/tramadol/linezolid/DXM → NO-GO for methylene blue until MD washout plan.\nIF anticoagulants → bleeding screen + caution with curcumin/others.\nAlways log meds in snapshot and re-check."
+  },
+  "display_name": "Medication Reconciliation — Triage",
+  "domain": "Triage",
+  "kind": "broad",
+  "purpose": "triage"
+}

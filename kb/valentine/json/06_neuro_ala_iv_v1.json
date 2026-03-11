@@ -1,0 +1,43 @@
+{
+  "id": "06_neuro_ala_iv_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "ALA",
+      "ALPHA_LIPOIC_ACID",
+      "THIOCTIC_ACID",
+      "METABOLIC_MODULATION",
+      "NEUROPATHY",
+      "HYPOGLYCEMIA",
+      "AMP_KINASE",
+      "REDOX_AMPHIPHILE",
+      "GLUT4"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH (Metabolic Support & Neuropathy Management)",
+    "use_for": "Enhancing insulin sensitivity, supporting mitochondrial dehydrogenase enzymes, and mitigating peripheral neuropathy via systemic redox modulation.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "07_MITOCHONDRIA",
+      "06_NEUROLOGY",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Fasting state/Hypoglycemia risk (ABSOLUTE/requires pre-meal), Active vomiting/poor oral intake (Postpone), Concurrent Insulin or Sulfonylurea use (Hypoglycemia risk), Severe Thiamine (B1) deficiency / Alcohol Use Disorder (Encephalopathy risk), Pregnancy/Breastfeeding (Policy NO-GO).",
+    "triage_questions": "Are you diabetic? Do you take insulin or medications like Glipizide/Glyburide? Have you eaten a solid meal containing carbohydrates in the last 2 hours? Are you currently experiencing nausea, vomiting, or an inability to eat? Do you have a history of heavy alcohol use or malnutrition? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote adjustment of insulin or oral hypoglycemic agents. Symptoms of acute hypoglycemia (tremor, confusion, diaphoresis) during or post-infusion require immediate in-person medical intervention."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** A redox-active amphiphilic molecule acting as a critical mitochondrial enzyme cofactor. Induces GLUT4 translocation, increasing cellular glucose uptake.\n- **Administration Policy:** Slow IV infusion (rapid push causes severe nausea, flushing, and throat discomfort). Light-sensitive (keep bag covered if policy dictates).\n- **Hard NO-GOs:** Fasting patients (MUST eat before infusion); Unmonitored insulin-dependent diabetics; Known severe Thiamine (Vitamin B1) deficiency.\n- **Hydration/Intake Policy:** IF patient is vomiting or has poor oral intake → postpone infusion (severe hypoglycemia risk).\n- **Sequencing Policy:** Like Glutathione, oral/IV ALA possesses potent antioxidant buffering capacity. MUST be separated from pro-oxidant strikes (IVC, Artesunate) by ≥ 24 hours minimum; policy assumes significant blunting risk.\n- **Monitoring:** Point-of-care blood glucose (pre- and post-infusion if diabetic or symptomatic); signs of hypoglycemia.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** IV Alpha Lipoic Acid may support mitochondrial energy metabolism and is clinically utilized to mitigate symptoms of peripheral neuropathy. It transiently increases cellular glucose uptake and acts as a broad-spectrum redox modulator.\n- **WHAT WE CANNOT CLAIM:** We cannot claim ALA cures cancer. We cannot claim it is safe to administer to fasting patients or that it will universally reverse established, severe chemotherapy-induced nerve damage.",
+    "s2_patient_communication_public": "## THE METABOLIC SHIELD (ALPHA LIPOIC ACID IV)\nAlpha Lipoic Acid (ALA) is a unique compound naturally found in every cell of your body. It is \"amphiphilic,\" meaning it can travel through both water and fat, allowing it to easily enter the brain and nerve tissues.\n\n1) **The Nerve Protector:** In integrative oncology, we frequently use IV ALA to help protect your peripheral nerves from the toxic effects of certain chemotherapies (or metabolic drugs like DCA), aiming to reduce numbness and tingling.\n2) **The Metabolic Shift:** ALA supports the mitochondria (the cell's engines) and strongly signals your body to pull sugar out of the blood and into the cells.\n3) **The Hypoglycemia Risk:** Because it pulls sugar out of the blood so effectively, it acts a bit like insulin. If you receive this IV on an empty stomach, your blood sugar will drop rapidly, causing dizziness, sweating, and weakness.\n\n*Safety Note: You MUST eat a solid meal containing carbohydrates within 1 to 2 hours before your infusion. If you are diabetic and take insulin, or if you are feeling too nauseous to eat, we must strictly monitor you or postpone the treatment to prevent a dangerous crash.*",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 MITOCHONDRIAL METABOLISM & AMPK ACTIVATION\n- **Cofactor Role:** ALA functions as a redox cofactor in mitochondrial dehydrogenase complexes (e.g., Pyruvate Dehydrogenase and Alpha-Ketoglutarate Dehydrogenase), facilitating the entry of metabolites into the TCA cycle.\n- **Insulin Mimetic (GLUT4):** ALA activates AMP-activated protein kinase (AMPK) and PI3K pathways, driving the translocation of GLUT4 transporters to the cell membrane. This can increase glucose uptake via GLUT4 translocation (insulin sensitivity effect).\n- **Redox Buffering:** Capable of regenerating other endogenous antioxidants (Vitamin C, Vitamin E, Glutathione) by cycling between its oxidized (ALA) and reduced (DHLA) states.\n\n## 3.2 ADME PROFILE\n- **Absorption:** IV administration bypasses hepatic first-pass metabolism that limits oral bioavailability.\n- **Distribution:** Wide distribution. Can cross the blood-brain barrier (BBB) and distribute to peripheral nerve tissues due to its amphiphilic nature.\n- **Clearance:** Rapid hepatic metabolism (beta-oxidation) and renal excretion. Plasma half-life is on the order of 30 to 40 minutes, but intracellular signaling effects (e.g., AMPK activation) persist longer.",
+    "s4_limitations_failure_modes_internal": "- **The Thiamine Trap:** ALA relies heavily on Thiamine (Vitamin B1) to run the Pyruvate Dehydrogenase complex. Giving high-dose IV ALA to a patient with severe, undetected B1 deficiency (e.g., severe malnutrition, alcohol abuse) can precipitate a metabolic crisis or Wernicke-like encephalopathy.\n- **The Antioxidant Paradox:** Similar to Glutathione, administering systemic ALA too close to a pro-oxidant therapy (Artesunate, High-Dose IVC) risks neutralizing the intended oxidative burst in the tumor microenvironment.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: THE HYPOGLYCEMIA PROTOCOL (POLICY)\n- **IF patient is fasting, vomiting, or has poor oral intake:** THEN POSTPONE INFUSION. Do not administer due to severe hypoglycemia risk. Patient must be able to tolerate and keep down a carb-containing meal.\n- **IF patient has not eaten in the last 2 hours (but is able to eat):** THEN DO NOT START. Require patient to eat a snack/meal (e.g., crackers, juice, sandwich) and wait 20 minutes before proceeding.\n- **IF patient is on Insulin or Sulfonylureas:** THEN check baseline point-of-care (POC) capillary glucose.\n  - IF glucose < 100 mg/dL: THEN Require carbohydrate intake before starting.\n  - Ensure immediate availability of oral glucose gels or IV Dextrose 50% (D50) at the chairside.\n- **IF symptomatic hypoglycemia develops (tremor, diaphoresis, confusion):** THEN STOP infusion, check POC glucose, and administer fast-acting carbohydrates (or IV D50 if altered mental status).\n\n## ALGORITHM 2: THE THIAMINE (B1) SAFETY GATE\n- **IF history of heavy alcohol use disorder, severe eating disorder, or extreme malnutrition:** THEN Suspect baseline Thiamine deficiency.\n- **SOP:** Prophylactic co-administration of Vitamin B1 (or a B-Complex) is recommended prior to or concurrently with high-dose ALA to prevent metabolic encephalopathy.\n\n## ALGORITHM 3: SEQUENCING & PRO-OXIDANT WASHOUT\n- **IF scheduled for pro-oxidant IVs (IVC, Artesunate, Ozone) today:** THEN NO-GO.\n- **SOP:** Separate ALA infusions by ≥ 24 hours from pro-oxidant strikes; policy assumes significant blunting risk of the ROS mechanism.\n\n## ALGORITHM 4: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** CMP (eGFR, LFTs, fasting glucose/HbA1c) ≤ 30 days.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation (Policy NO-GO unless specialist-approved)."
+  },
+  "display_name": "Neuro ALA IV",
+  "domain": "Neuro",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

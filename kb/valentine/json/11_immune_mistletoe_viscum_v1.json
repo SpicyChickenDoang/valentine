@@ -1,0 +1,42 @@
+{
+  "id": "11_immune_mistletoe_viscum_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "MISTLETOE",
+      "VISCUM_ALBUM",
+      "IMMUNOMODULATION",
+      "LECTINS",
+      "VISCOTOXINS",
+      "CYTOKINE_RELEASE",
+      "TUMOR_EDEMA",
+      "HOST_TREE_ROTATION",
+      "QUALITY_OF_LIFE"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM-HIGH (Immunomodulation & QoL)",
+    "use_for": "Hypothesis-driven immune stimulation via localized or systemic cytokine release, aiming to improve health-related quality of life and modulate the tumor microenvironment.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "11_IMMUNE",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Intracranial/Spinal Tumors or Metastases (POLICY NO-GO/Fatal edema risk unless specialist-approved), Active Autoimmune Flare, Uncontrolled Hyperthyroidism, Known hypersensitivity to Viscum album, Pregnancy/Breastfeeding (Policy NO-GO).",
+    "triage_questions": "Do you have any tumors or metastases in your brain or spine? Do you have an active autoimmune disease like Rheumatoid Arthritis or Lupus? Do you have an overactive thyroid? Are you currently taking high-dose steroids (e.g., Prednisone)? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of anaphylaxis, extreme fever (>39.5°C), or new neurologic symptoms (seizures/headaches)."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** Contains ribosome-inactivating proteins (mistletoe lectins) and membrane-permeabilizing peptides (viscotoxins) that may induce apoptosis and stimulate a pro-inflammatory cytokine cascade.\n- **Administration:** Subcutaneous (SQ) or Slow Intravenous Infusion (IV). *Never IV push.*\n- **Hard NO-GOs:** Brain/spinal tumors (POLICY NO-GO unless specialist-approved with dexamethasone); Active autoimmune crisis; Uncontrolled hyperthyroidism; Concurrent high-dose systemic corticosteroids (neutralizes therapy).\n- **Target Reaction (SQ):** A localized erythematous skin reaction (2–5 cm) is the therapeutic target, NOT an allergic failure. \n- **Monitoring:** Temperature (therapeutic fever), injection site erythema size (SQ), CBC (watch for targeted eosinophilia), signs of systemic anaphylaxis (IV).",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** Mistletoe extract may support immune system activity and is commonly used to potentially improve health-related quality of life (fatigue, sleep, appetite) during oncology treatments. It contains biological compounds that can trigger cellular apoptosis in controlled laboratory models.\n- **WHAT WE CANNOT CLAIM:** We cannot claim Mistletoe is a standalone cure for cancer or a replacement for standard oncology protocols. We cannot promise tumor shrinkage or that it is entirely free of severe inflammatory risks.",
+    "s2_patient_communication_public": "## THE IMMUNE WAKE-UP CALL (MISTLETOE THERAPY)\nMistletoe therapy (Viscum album) is one of the most widely studied integrative therapies in oncology. It is used primarily to support your body's natural defenses and improve your day-to-day quality of life.\n\n1) **The Extracts:** Mistletoe contains unique natural compounds (lectins and viscotoxins). When introduced into the body, they act like an \"alarm system,\" potentially waking up your immune cells.\n2) **The \"Good\" Reaction:** Because it stimulates the immune system, you may experience a mild, flu-like fever or a red, warm patch at the injection site. We actually *want* to see this mild reaction—it indicates your immune system is actively responding to the therapy.\n3) **The Goal:** The primary goal is to help maintain your energy, sleep, and appetite while providing supportive immune modulation alongside your primary cancer treatments.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 IMMUNOMODULATION & CYTOTOXICITY\n- **Apoptotic Trigger:** Mistletoe Lectins (ML I, II, III) act as ribosome-inactivating proteins (RIPs), halting cellular protein synthesis and potentially inducing apoptosis in susceptible cells. Viscotoxins exert a rapid cytotoxic effect via cell membrane permeabilization.\n- **Cytokine Release:** Administration stimulates mononuclear cells to release an array of cytokines (IL-1, IL-6, TNF-alpha, IFN-gamma), creating a pro-inflammatory signaling cascade that recruits NK cells and cytotoxic T-cells.\n\n## 3.2 ADME PROFILE\n- **Absorption:** SQ administration provides a depot effect, ensuring sustained immune stimulation over 24-48 hours. IV administration triggers a rapid, systemic cytokine pulse requiring stricter anaphylaxis monitoring.\n- **Clearance:** Proteolytic degradation of peptides/proteins.\n- **Biological Half-Life:** The immunological cascade (eosinophilia, cytokine elevation) persists significantly longer than the plasma presence of the raw plant proteins.",
+    "s4_limitations_failure_modes_internal": "- **Host-Tree Tolerance (Antibody Formation):** Prolonged use of the exact same host tree extract (e.g., *Mali*/Apple) may lead to the formation of high-titer neutralizing anti-mistletoe antibodies, blunting the therapeutic response. \n- **Tumor Edema (Compartment Risk):** The pro-inflammatory cytokine release causes localized swelling (edema) around tumor sites. In enclosed anatomical spaces (cranium, spinal canal), this expansion is a life-threatening complication.\n- **Steroid Neutralization:** Heavy concurrent use of corticosteroids (e.g., >10mg Prednisone) will suppress the cytokine cascade, rendering the Mistletoe therapy biologically inert.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: TUMOR EDEMA, THYROID & STEROID RECONCILIATION\n- **IF Brain/Spinal Tumor or Cranial Metastases:** THEN POLICY NO-GO. High risk of fatal peritumoral edema and herniation. Can only proceed with explicit, documented specialist override AND concurrent prophylactic dexamethasone.\n- **IF uncontrolled hyperthyroidism:** THEN NO-GO until stabilized; fever response can be dangerous and precipitate a thyroid storm.\n- **IF on high-dose corticosteroids:** THEN Delay therapy or expect significantly blunted efficacy.\n\n## ALGORITHM 2: THE SQ \"5-CENTIMETER RULE\" (DOSE TITRATION)\n- **IF SQ injection site erythema is < 2 cm:** THEN Increase the dose at the next session (immune response is sub-optimal).\n- **IF SQ injection site erythema is 2 cm to 5 cm:** THEN Maintain current dose (optimal therapeutic window achieved).\n- **IF SQ injection site erythema is > 5 cm OR causes severe regional pain:** THEN Hold therapy until fully resolved, then resume at a lower dose or switch the host-tree extract.\n\n## ALGORITHM 3: HOST-TREE ROTATION POLICY\n- **IF patient stops showing therapeutic site reaction or mild fever after prolonged use:**\n  - THEN Suspect neutralizing antibodies.\n  - THEN Rotate the host-tree extract (e.g., switch from *Viscum album Mali* [Apple] to *Pini* [Pine], *Quercus* [Oak], or *Fraxini* [Ash]) per MD order.\n\n## ALGORITHM 4: IV SOP, FEVER & ANAPHYLAXIS MANAGEMENT\n- **IV Administration SOP:** IV only in anaphylaxis-ready setting; baseline BP/HR/O2; consider premedication per MD if history of allergies.\n- **IF Mild Fever (<38.5°C):** THEN Do NOT suppress with antipyretics (NSAIDs/Paracetamol) unless patient is profoundly uncomfortable. This is a desired immunological effect.\n- **IF High Fever (>39.0°C) or severe rigors:** THEN Administer supportive hydration, consider antipyretics, and reduce the dose for the next session.\n- **IF Systemic Allergic Symptoms (hives, wheezing, hypotension) during IV:** THEN STOP infusion immediately. Deploy Anaphylaxis protocol (Epinephrine) and initiate ER transfer.\n\n## ALGORITHM 5: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** CBC with differential (monitor Eosinophils as a marker of response) + LFTs + CRP + TSH/Free T4 (if history of thyroid dysfunction).\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation (Policy NO-GO unless specialist-approved)."
+  },
+  "display_name": "Mistletoe (Viscum album)",
+  "domain": "Immune",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

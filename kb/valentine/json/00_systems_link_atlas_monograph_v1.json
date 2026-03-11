@@ -1,0 +1,39 @@
+{
+  "id": "00_systems_link_atlas_monograph_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "SYSTEMS_LINKS",
+      "360",
+      "BRIDGES",
+      "ORAL_HEALTH",
+      "CARDIOVASCULAR",
+      "GUT_SKIN",
+      "SLEEP_METABOLIC",
+      "HORMONES_BONE"
+    ],
+    "category": "Systems — Cross-Domain Link Atlas",
+    "intervention_priority": "HIGH (360 Core)",
+    "use_for": "Cross-system linking guide to connect symptoms, labs, meds and risks across domains without hallucination.",
+    "coupled_systems": [
+      "00_triage_red_flags_universal_monograph_v1",
+      "00_triage_medication_reconciliation_monograph_v1"
+    ],
+    "red_flags": "Chest pain + fever, severe dyspnea, neuro deficits, severe bleeding, pregnancy risk context.",
+    "triage_questions": "Primary symptom? timeline? red flags? meds? key labs? pregnancy?"
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Activate high-value cross-links only when decision-relevant.\n- Load 1 bridge + 1–2 domain monographs.\n- If red flags: universal triage first.\n- Examples: gums→vascular risk; gut→skin/hormone clearance; sleep→glucose; menopause→bone+mucosa.",
+    "s1_claims_discipline_internal": "- Links are probabilistic associations, not diagnosis.\n- Require corroboration (timeline + symptoms + labs/exam).\n- Use links to decide questions/labs/referral, not to over-explain.",
+    "s2_patient_communication_public": "Sometimes one symptom connects to another system. I’ll ask a few targeted questions to see if a link matters and what the safest next step is (labs, exam, or referral).",
+    "s3_pharmacokinetics_adme_internal": "Internal link patterns:\n1) Oral inflammation ↔ vascular/endothelial stress: ask fever, chest pain, dyspnea; consider CRP/CBC; refer if red flags.\n2) Gut ↔ estrogen clearance: constipation/dysbiosis → PMS/acne/mood; assess stool regularity; consider gut + hormone pathway.\n3) Sleep ↔ metabolic: poor sleep → insulin resistance/appetite; consider fasting glucose/insulin if chronic.\n4) Menopause ↔ mucosal substrate: nasal+vaginal+oral dryness constellation; consider hormone transition pathway; labs as indicated.",
+    "s4_limitations_failure_modes_internal": "- Failure mode: over-linking. Require ≥2 supporting signals before pursuing a link.\n- Avoid alarming narratives; keep to one hypothesis + next step.",
+    "s5_clinical_decision_trees_internal": "IF cross-link suspected THEN ask 3–5 targeted questions → load bridge + 1–2 domains → decide: reassure/home plan vs labs vs in-person.\nHard stop: if universal red flags → escalate and stop deep linking."
+  },
+  "display_name": "Systems Link Atlas — 360° Bridges",
+  "domain": "Systems",
+  "kind": "broad",
+  "purpose": "encyclopedia"
+}

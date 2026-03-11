@@ -1,0 +1,41 @@
+{
+  "id": "11_immune_gcmaf_v2",
+  "version": "2.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "GcMAF",
+      "MACROPHAGE_ACTIVATION",
+      "VITAMIN_D_BINDING_PROTEIN",
+      "NAGALASE_INHIBITION",
+      "IMMUNE_EVALUATION",
+      "CD14",
+      "PHAGOCYTOSIS",
+      "ANGIOGENESIS_MODULATION"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "MEDIUM",
+    "use_for": "Hypothesis-driven immune support aimed at modulating macrophage activity and monitoring enzymatic trends (Nagalase) in selected clinical contexts.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "11_IMMUNE",
+      "05_DETOX_LIVER"
+    ],
+    "red_flags": "Organ/Bone Marrow Transplant (ABSOLUTE/Graft rejection risk), Severe Autoimmune Flare, Acute systemic infection, Known severe hypersensitivity to human serum/blood products or prior severe biologic injection reaction, Pregnancy/Breastfeeding (Policy NO-GO unless specialist-approved).",
+    "triage_questions": "Have you ever had an organ or bone marrow transplant? Do you have an active autoimmune disease currently in flare? Are you taking high-dose corticosteroids or immunosuppressants? Any known severe allergies to blood, serum, or biologic injections? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of cytokine release, systemic inflammatory response syndrome (SIRS), or autoimmune flares. High fever or signs of graft-vs-host disease require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** GcMAF is a modified Vitamin D-binding protein hypothesized to act as a macrophage activating factor (MAF); it may potentially interfere with Nagalase-mediated immune evasion in some models.\n- **Administration:** Typically Subcutaneous (SQ) or Intramuscular (IM) — NOT Intravenous (IV) unless explicitly validated by clinic policy.\n- **Hard NO-GOs:** Organ/tissue transplant recipients (high graft rejection risk); Current high-dose steroid therapy (>10mg Prednisone equivalent); Active autoimmune crisis; Acute systemic infection.\n- **Nagalase Policy:** Do not position Nagalase as a diagnostic or validated predictor of response. Use as a trend marker only (same lab). **Do not escalate dosing based on Nagalase alone. Any change requires clinical correlation (symptoms, CRP trend, and safety).**\n- **Monitoring:** CBC with differential (monocyte trends); CRP; Body temperature; Clinical signs of inflammation.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** GcMAF is a protein that may support the activation of macrophages in some biological contexts. It aims to support immune activation, though clinical response is highly variable and not guaranteed.\n- **WHAT WE CANNOT CLAIM:** We cannot claim GcMAF \"dissolves\" tumors or replaces established immunotherapy. We cannot claim Nagalase is a definitive cancer biomarker; clinical interpretability of this assay varies significantly.",
+    "s2_patient_communication_public": "## SUPPORTING THE IMMUNE RESPONSE (GcMAF)\nGcMAF is an experimental, supportive protein therapy designed to help the body’s natural defense cells, called macrophages, stay active.\n\n1) **The Concept:** Some tumors and chronic conditions are associated with an enzyme called Nagalase, which may interfere with how immune cells recognize threats. We use Nagalase testing as a simple trend marker to monitor your immune environment over time.\n2) **The Approach:** GcMAF is a modified form of a natural protein found in your blood. When introduced, it is intended to provide a \"signal\" that may help macrophages resume their role as the body's primary surveillance and cleanup crew.\n3) **The Goal:** This is a hypothesis-driven adjunct therapy. It is designed to support your immune system's natural function alongside your primary medical treatments.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 PROPOSED MACROPHAGE MODULATION\n- **Theoretical Enzymatic Interference:** Nagalase (alpha-N-acetylgalactosaminidase) is proposed to deglycosylate the Gc protein, potentially hindering its conversion into active MAF. Exogenous GcMAF administration aims to bypass this putative blockade.\n- **Biological Signaling:** If activated, macrophages may exhibit increased phagocytic ingestion and cytokine release. Secondary effects may include modulation of endothelial signaling pathways related to angiogenesis.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Endogenous proteolytic degradation.\n- **Clearance:** Rapid systemic clearance; however, the induced biological \"pulse\" of macrophage activity may persist beyond the plasma presence of the protein.\n- **Distribution:** Primarily systemic and lymphatic circulation; targets macrophage-dense tissues (spleen, marrow, liver).",
+    "s4_limitations_failure_modes_internal": "- **Assay Variability:** Nagalase assays lack universal standardization; results can be influenced by non-malignant inflammation or viral activity.\n- **Immune Paralysis:** In advanced malignancy with high T-reg populations or massive TGF-beta production, GcMAF signaling may be insufficient to overcome localized immune suppression.\n- **Vitamin D Status:** Low serum 25(OH)D may potentially limit the protein’s functional context, as the parent Gc-protein is a primary Vitamin D carrier.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: MEDICATION, TRANSPLANT, ALLERGY & INFECTION RECONCILIATION\n- **IF history of Organ/Bone Marrow Transplant:** THEN ABSOLUTE NO-GO. Refuse treatment due to high risk of graft rejection.\n- **IF acute systemic infection suspected/confirmed:** THEN NO-GO. Resolve infection prior to immune stimulation.\n- **IF history of anaphylaxis to biologics or blood/serum-derived products:** THEN NO-GO unless medical director approval + anaphylaxis-ready setting.\n- **IF on Corticosteroids (>10mg Prednisone equivalent):** THEN Delay initiation; steroids significantly blunt macrophage activation pathways.\n\n## ALGORITHM 2: EMERGENCY / FLARE MANAGEMENT\n- **The Risk:** Systemic Inflammatory Response / Cytokine Flare.\n- **IF Fever >39.0°C OR systemic symptoms (tachycardia, hypotension, severe rigors) occur:**\n  - THEN STOP administration immediately.\n  - THEN Initiate immediate in-person ER evaluation for potential systemic inflammatory response.\n- **IF fever persists >24h or hypotension:** THEN ER evaluation + stop therapy until medically cleared.\n- **IF Mild localized swelling/tenderness:** THEN Monitor closely; ensure adequate hydration and reassess dosing interval.\n\n## ALGORITHM 3: BASELINE LABS & VITAMIN D POLICY\n- **Mandatory Baseline:** CBC with differential + CRP + Serum Nagalase (same lab for all future tests) + Vitamin D (25-OH).\n- **Vitamin D Protocol:** \n  - IF 25-OH Vitamin D is < 30 ng/mL: THEN initiate Vitamin D3 supplementation per clinic policy and re-check in 8-12 weeks.\n  - IF 25-OH Vitamin D is < 20 ng/mL: THEN prioritize correction before or during protocol initiation (MD oversight).\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation unless specialist-approved."
+  },
+  "display_name": "GcMAF — Macrophage Modulation",
+  "domain": "Immune",
+  "kind": "narrow",
+  "purpose": "encyclopedia"
+}

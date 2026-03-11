@@ -1,0 +1,41 @@
+{
+  "id": "32_iv_glutathione_gsh_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "GLUTATHIONE_IV",
+      "GSH",
+      "MASTER_ANTIOXIDANT",
+      "ROS_QUENCHING",
+      "PHASE_II_DETOXIFICATION",
+      "PLATINUM_NEUROTOXICITY",
+      "ANTIOXIDANT_PARADOX"
+    ],
+    "category": "Pharmacological Monograph & Clinical Algorithms",
+    "intervention_priority": "HIGH (Sequencing & Washout Risk Management)",
+    "use_for": "Systemic antioxidant replenishment, hepatic phase II conjugation support, and mitigation of specific iatrogenic toxicities (e.g., neuropathy) during recovery windows.",
+    "coupled_systems": [
+      "12_ONCOLOGY",
+      "05_DETOX_LIVER",
+      "32_IV_THERAPIES",
+      "06_NEUROLOGY"
+    ],
+    "red_flags": "Same-day administration with Pro-Oxidant therapies (ABSOLUTE/Therapeutic quenching), Active asthma flare or severe sulfite hypersensitivity (Bronchospasm risk), Decompensated hepatic failure, Pregnancy/Breastfeeding (Policy NO-GO unless specialist-approved).",
+    "triage_questions": "Are you scheduled for ANY other IV therapies today (especially Vitamin C, Artesunate, Ozone, or B17)? Do you have a history of asthma or severe allergies to sulfites/preservatives? Do you have active wheezing or an asthma flare today? Do you have severe liver disease? Any chance you are pregnant?",
+    "teleconsult_limits": "No remote management of acute bronchospasm or anaphylactoid reactions. Symptoms of sudden wheezing, chest tightness, or facial swelling during/post infusion require immediate in-person ER evaluation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- **Mechanism Overview:** Exogenous administration of the primary intracellular endogenous antioxidant (tripeptide). Donates electrons to neutralize reactive oxygen species (ROS) and facilitates toxin excretion.\n- **Administration Policy:** Slow IV push or short infusion in an anaphylaxis-ready setting.\n- **Hard NO-GOs:** Concurrent/same-day use with pro-oxidant strikes (IVC, Artesunate, Ozone, B17); Active acute asthma exacerbation.\n- **The Washout Rule (Sequencing):** MUST be separated from pro-oxidant therapies by ≥ 24 hours minimum; policy assumes significant blunting risk.\n- **Monitoring:** Respiratory status (watch for sulfite-induced wheezing/bronchospasm during the first 10 mins); Hepatic panel.",
+    "s1_claims_discipline_internal": "- **WHAT WE CAN CLAIM:** IV Glutathione provides a transient delivery of the body's primary antioxidant. It may support liver detoxification pathways and can help mitigate specific side effects of certain conventional treatments (like nerve damage from specific chemotherapies) when timed correctly.\n- **WHAT WE CANNOT CLAIM:** We cannot claim Glutathione treats or cures cancer. In fact, if administered incorrectly, we must acknowledge the \"antioxidant paradox\": excessive antioxidants can protect tumor cells from the oxidative stress intended to destroy them.",
+    "s2_patient_communication_public": "## THE RECOVERY AGENT (IV GLUTATHIONE)\nGlutathione is often called the body's \"master antioxidant.\" It is naturally produced in your liver and acts as a biological cleanup crew, neutralizing free radicals and processing cellular waste.\n\n1) **The Recovery Role:** Cancer treatments—and the disease itself—can severely deplete your natural glutathione stores, leading to fatigue, nerve irritation, and a weakened liver. We use IV Glutathione to rapidly replenish these stores during your \"recovery\" days.\n2) **The Antioxidant Paradox:** Many of our most powerful cancer therapies (like High-Dose Vitamin C or Artesunate) work by intentionally creating localized oxidative stress (a \"pro-oxidant\" strike) to damage tumor cells. \n3) **The Timing Rule:** Because Glutathione is a potent antioxidant, giving it on the same day as a pro-oxidant therapy would act like a fire extinguisher, putting out the fire before it can affect the tumor. Therefore, strict timing and separation are required for your safety and the treatment's success.",
+    "s3_pharmacokinetics_adme_internal": "## 3.1 REDOX BUFFERING & PHASE II DETOXIFICATION\n- **ROS Quenching:** GSH acts as an electron donor, reducing hydrogen peroxide (H2O2) and lipid peroxides to water and alcohols, respectively, catalyzed by Glutathione Peroxidase (GPx). \n- **Conjugation:** Catalyzed by Glutathione S-transferases (GSTs), GSH binds to electrophilic toxins, rendering them more water-soluble for biliary and renal excretion.\n- **Neuroprotection (Context-Dependent):** GSH may bind to and inactivate heavy metals and platinum-based chemotherapy agents (e.g., Oxaliplatin), potentially reducing the severity of peripheral neuropathy if administered post-chemotherapy.\n\n## 3.2 ADME PROFILE\n- **Metabolism:** Rapidly hydrolyzed in the plasma by the enzyme gamma-glutamyl transpeptidase (GGT) into constituent amino acids (glutamate, cysteine, glycine), which are then taken up by cells for intracellular de novo GSH synthesis.\n- **Clearance:** Extremely rapid plasma clearance. The terminal half-life of exogenous IV GSH is on the order of minutes. The biological effect relies on intracellular accumulation of its precursors.",
+    "s4_limitations_failure_modes_internal": "- **The Tumor Shield (Antioxidant Paradox):** Malignant cells frequently upregulate their own GSH synthesis to survive hypoxic environments and resist chemotherapy/radiation. Inappropriate systemic GSH loading may inadvertently fortify the tumor's antioxidant defenses.\n- **Ineffective Penetration:** Intact GSH does not easily cross most cell membranes; therapeutic efficacy relies heavily on its extracellular breakdown and subsequent intracellular reconstruction, a process that can be energy-intensive and slow in heavily depleted patients.",
+    "s5_clinical_decision_trees_internal": "## ALGORITHM 1: THE PRO-OXIDANT WASHOUT (STRICT POLICY)\n- **IF patient is scheduled for IVC, Artesunate, Ozone (MAH), B17, or PDT within 24 hours:** THEN ABSOLUTE NO-GO for Glutathione. \n- **SOP:** Glutathione MUST be separated from pro-oxidant therapies; policy assumes significant blunting risk; maintain ≥ 24-hour gap.\n\n## ALGORITHM 2: ASTHMA & SULFITE HYPERSENSITIVITY\n- **The Risk:** Many IV Glutathione formulations contain sulfites as a preservative. Sulfites can trigger severe, acute bronchospasm in susceptible asthmatic patients.\n- **IF history of active/uncontrolled asthma or known sulfite allergy:** THEN Require MD override, ensure bronchodilators are readily available, and administer via very slow drip (not IV push).\n- **IF patient develops wheezing, coughing, or dyspnea during administration:** THEN STOP infusion immediately, maintain IV access, administer Albuterol/corticosteroids per anaphylaxis protocol, and escalate to MD.\n\n## ALGORITHM 3: CHEMOTHERAPY SEQUENCING (PLATINUM AGENTS)\n- **IF patient is receiving Platinum-based chemotherapy (Cisplatin, Oxaliplatin):** THEN Glutathione must NEVER be administered BEFORE or DURING the chemo infusion (risk of binding and neutralizing the cytotoxic agent).\n- **SOP:** Only administer as a neuro-protective recovery agent ≥ 24-48 hours POST-chemotherapy, strictly per the primary oncologist's approval.\n\n## ALGORITHM 4: BASELINE LABS & PREGNANCY POLICY\n- **Mandatory Baseline:** CMP (Focus on AST/ALT, Bilirubin, eGFR) ≤ 30 days.\n- **Pregnancy Policy:** A negative pregnancy test result (HCG) obtained within ≤7 days of initiation is mandatory for females of childbearing age before initiation (Policy NO-GO unless specialist-approved)."
+  },
+  "display_name": "IV Glutathione GSH",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}
