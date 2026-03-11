@@ -1,21 +1,26 @@
 // services/patientMemory.js
-const db = require('../db'); // no destructuring — db module exports the pool directly
+const db = require('../db'); // Now exports Supabase client
 
 async function loadPatientContext(tenantId, msisdnHash) {  // C4: tenantId added — prevents cross-tenant bleed
-  const profile = await db.query(
-    'SELECT * FROM patient_profiles WHERE tenant_id = $1 AND msisdn_hash = $2',
-    [tenantId, msisdnHash]
-  );
-  if (!profile.rows[0]) return null;
+  const { data: profile, error } = await db
+    .from('patient_profiles')
+    .select('*')
+    .eq('tenant_id', tenantId)
+    .eq('msisdn_hash', msisdnHash)
+    .single();
+
+  if (error || !profile) return null;
 
   // FIX: tenant_id filter added for multi-tenant isolation
-  const recentSessions = await db.query(
-    `SELECT summary, chief_complaint, recommendations, follow_up_note, session_date
-     FROM session_summaries WHERE tenant_id = $1 AND patient_id = $2
-     ORDER BY session_date DESC LIMIT 3`,
-    [tenantId, profile.rows[0].id]
-  );
-  return { profile: profile.rows[0], recentSessions: recentSessions.rows };
+  const { data: recentSessions } = await db
+    .from('session_summaries')
+    .select('summary, chief_complaint, recommendations, follow_up_note, session_date')
+    .eq('tenant_id', tenantId)
+    .eq('patient_id', profile.id)
+    .order('session_date', { ascending: false })
+    .limit(3);
+
+  return { profile, recentSessions: recentSessions || [] };
 }
 
 function formatPatientContext({ profile, recentSessions }) {

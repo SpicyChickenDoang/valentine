@@ -14,7 +14,7 @@ const { fetchMediaWithFallback } = require('../utils/fetchMedia');         // C2
 const { sendChunked } = require('../services/whatsappFormatter');
 const waClient = require('../services/whatsappClient');
 const db = require('../db');
-const redis = require('../services/redis');
+const redis = require('../config/redis2');
 
 // C2 — single geminiClient instance at module level (not per-job)
 // FIX P1: Guard against missing GEMINI_API_KEY
@@ -245,30 +245,53 @@ const worker = new Worker(
         // n'est PAS structurellement idempotente. Ici elle l'est → gate inutile et dangereuse.
         const profileUpdate = extractProfileUpdate(text);
         if (profileUpdate) {
-            await db.query(`
-        UPDATE patient_profiles SET
-          allergies     = ARRAY(SELECT DISTINCT UNNEST(COALESCE(allergies, '{}') || $1::text[])),
-          conditions    = ARRAY(SELECT DISTINCT UNNEST(COALESCE(conditions, '{}') || $2::text[])),
-          medications   = $3::jsonb,
-          last_labs     = $4::jsonb,
-          terrain_flags = $5::jsonb,
-          follow_up_note = COALESCE($6, follow_up_note),
-          updated_at    = now()
-        WHERE tenant_id = $7 AND msisdn_hash = $8`,
-                [profileUpdate.allergies || [],
-                profileUpdate.conditions || [],
-                JSON.stringify(profileUpdate.medications || []),
-                JSON.stringify(profileUpdate.last_labs || {}),
-                JSON.stringify(profileUpdate.terrain_flags || {}),
-                profileUpdate.follow_up_note || null,
-                    tenantId, msisdnHash]);
+            // First, fetch existing profile to merge arrays (Supabase doesn't have raw SQL array operations)
+            const { data: existing } = await db
+                .from('patient_profiles')
+                .select('allergies, conditions, medications, last_labs, terrain_flags, follow_up_note')
+                .eq('tenant_id', tenantId)
+                .eq('msisdn_hash', msisdnHash)
+                .single();
+
+            if (existing) {
+                // Merge arrays with new values, removing duplicates
+                const mergedAllergies = [...new Set([...(existing.allergies || []), ...(profileUpdate.allergies || [])])];
+                const mergedConditions = [...new Set([...(existing.conditions || []), ...(profileUpdate.conditions || [])])];
+
+                await db
+                    .from('patient_profiles')
+                    .update({
+                        allergies: mergedAllergies,
+                        conditions: mergedConditions,
+                        medications: profileUpdate.medications || existing.medications,
+                        last_labs: profileUpdate.last_labs || existing.last_labs,
+                        terrain_flags: profileUpdate.terrain_flags || existing.terrain_flags,
+                        follow_up_note: profileUpdate.follow_up_note || existing.follow_up_note,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq('tenant_id', tenantId)
+                    .eq('msisdn_hash', msisdnHash);
+            }
         }
 
-        await db.query(
-            'INSERT INTO chat_logs (tenant_id, msisdn_id, msisdn_hash, model, cached_tokens, input_tokens, output_tokens, latency_ms, depth_classification, kb_objects_retrieved, kb_objects_cited, citation_match, job_id, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,NOW()) ON CONFLICT (job_id) DO NOTHING',
-            [tenantId, msisdn_id, msisdnHash, model, cachedTokens, inputTokens, outputTokens,
-                latencyMs, depthClassification, retrievedIds, citedIds, citationMatch, job.id]
-        );
+        await db
+            .from('chat_logs')
+            .insert({
+                tenant_id: tenantId,
+                msisdn_id: msisdn_id,
+                msisdn_hash: msisdnHash,
+                model: model,
+                cached_tokens: cachedTokens,
+                input_tokens: inputTokens,
+                output_tokens: outputTokens,
+                latency_ms: latencyMs,
+                depth_classification: depthClassification,
+                kb_objects_retrieved: retrievedIds,
+                kb_objects_cited: citedIds,
+                citation_match: citationMatch,
+                job_id: String(job.id),
+                created_at: new Date().toISOString()
+            }, { onConflict: 'job_id' });  // ON CONFLICT DO NOTHING equivalent
     },
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
 );
