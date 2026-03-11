@@ -3,8 +3,8 @@ require('dotenv').config();
 const app = require('./app');
 const port = 3000;
 
-// const { ensurePlatformCache } = require('./services/cacheSetup');
-// const redis = require('./services/redis');
+const { ensurePlatformCache } = require('./services/cacheSetup');
+const redis = require('./services/redis');
 
 async function startServer() {
   // Hash gate + distributed lock handled inside ensurePlatformCache
