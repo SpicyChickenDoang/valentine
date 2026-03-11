@@ -1,8 +1,10 @@
 // services/geminiChat.js
 const axios = require('axios');
 
+const { ai, flash } = require('./geminiClient');
 const GEMINI_API = 'https://generativelanguage.googleapis.com/v1beta/models';
 const KEY = process.env.GEMINI_API_KEY;
+
 
 // services/geminiChat.js — add tools to payload
 

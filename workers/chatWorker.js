@@ -13,7 +13,7 @@ const { notifyAlert } = require('../utils/notifyAlert');
 const { fetchMediaWithFallback } = require('../utils/fetchMedia');         // C2 — was missing → ReferenceError on any media message
 const { sendChunked } = require('../services/whatsappFormatter');
 const waClient = require('../services/whatsappClient');
-const db = require('../db');
+const { query } = require('../db');
 const redis = require('../config/redis2');
 
 // C2 — single geminiClient instance at module level (not per-job)
@@ -245,53 +245,68 @@ const worker = new Worker(
         // n'est PAS structurellement idempotente. Ici elle l'est → gate inutile et dangereuse.
         const profileUpdate = extractProfileUpdate(text);
         if (profileUpdate) {
-            // First, fetch existing profile to merge arrays (Supabase doesn't have raw SQL array operations)
-            const { data: existing } = await db
-                .from('patient_profiles')
-                .select('allergies, conditions, medications, last_labs, terrain_flags, follow_up_note')
-                .eq('tenant_id', tenantId)
-                .eq('msisdn_hash', msisdnHash)
-                .single();
+            // Fetch existing profile to merge arrays
+            const existingResult = await query(
+                `SELECT allergies, conditions, medications, last_labs, terrain_flags, follow_up_note
+                 FROM patient_profiles
+                 WHERE tenant_id = $1 AND msisdn_hash = $2`,
+                [tenantId, msisdnHash]
+            );
 
-            if (existing) {
+            if (existingResult.rows.length > 0) {
+                const existing = existingResult.rows[0];
                 // Merge arrays with new values, removing duplicates
                 const mergedAllergies = [...new Set([...(existing.allergies || []), ...(profileUpdate.allergies || [])])];
                 const mergedConditions = [...new Set([...(existing.conditions || []), ...(profileUpdate.conditions || [])])];
 
-                await db
-                    .from('patient_profiles')
-                    .update({
-                        allergies: mergedAllergies,
-                        conditions: mergedConditions,
-                        medications: profileUpdate.medications || existing.medications,
-                        last_labs: profileUpdate.last_labs || existing.last_labs,
-                        terrain_flags: profileUpdate.terrain_flags || existing.terrain_flags,
-                        follow_up_note: profileUpdate.follow_up_note || existing.follow_up_note,
-                        updated_at: new Date().toISOString()
-                    })
-                    .eq('tenant_id', tenantId)
-                    .eq('msisdn_hash', msisdnHash);
+                await query(
+                    `UPDATE patient_profiles
+                     SET allergies = $1,
+                         conditions = $2,
+                         medications = $3,
+                         last_labs = $4,
+                         terrain_flags = $5,
+                         follow_up_note = $6,
+                         updated_at = NOW()
+                     WHERE tenant_id = $7 AND msisdn_hash = $8`,
+                    [
+                        JSON.stringify(mergedAllergies),
+                        JSON.stringify(mergedConditions),
+                        JSON.stringify(profileUpdate.medications ?? existing.medications),
+                        JSON.stringify(profileUpdate.last_labs ?? existing.last_labs),
+                        JSON.stringify(profileUpdate.terrain_flags ?? existing.terrain_flags),
+                        profileUpdate.follow_up_note ?? existing.follow_up_note,
+                        tenantId,
+                        msisdnHash
+                    ]
+                );
             }
         }
 
-        await db
-            .from('chat_logs')
-            .insert({
-                tenant_id: tenantId,
-                msisdn_id: msisdn_id,
-                msisdn_hash: msisdnHash,
-                model: model,
-                cached_tokens: cachedTokens,
-                input_tokens: inputTokens,
-                output_tokens: outputTokens,
-                latency_ms: latencyMs,
-                depth_classification: depthClassification,
-                kb_objects_retrieved: retrievedIds,
-                kb_objects_cited: citedIds,
-                citation_match: citationMatch,
-                job_id: String(job.id),
-                created_at: new Date().toISOString()
-            }, { onConflict: 'job_id', ignoreDuplicates: true });  // ON CONFLICT DO NOTHING
+        // ON CONFLICT DO NOTHING - prevents duplicate inserts on retry
+        await query(
+            `INSERT INTO chat_logs (
+                tenant_id, msisdn_id, msisdn_hash, model, cached_tokens, input_tokens,
+                output_tokens, latency_ms, depth_classification, kb_objects_retrieved,
+                kb_objects_cited, citation_match, job_id, created_at
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW())
+            ON CONFLICT (job_id) DO NOTHING`,
+            [
+                tenantId,
+                msisdn_id,
+                msisdnHash,
+                model,
+                cachedTokens,
+                inputTokens,
+                outputTokens,
+                latencyMs,
+                depthClassification,
+                JSON.stringify(retrievedIds),
+                JSON.stringify(citedIds),
+                citationMatch,
+                String(job.id)
+            ]
+        );
     },
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
 );

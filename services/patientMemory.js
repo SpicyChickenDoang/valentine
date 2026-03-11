@@ -1,26 +1,28 @@
 // services/patientMemory.js
-const db = require('../db'); // Now exports Supabase client
+const { query } = require('../db');
 
-async function loadPatientContext(tenantId, msisdnHash) {  // C4: tenantId added — prevents cross-tenant bleed
-  const { data: profile, error } = await db
-    .from('patient_profiles')
-    .select('*')
-    .eq('tenant_id', tenantId)
-    .eq('msisdn_hash', msisdnHash)
-    .single();
+async function loadPatientContext(tenantId, msisdnHash) {
+  const profileResult = await query(
+    `SELECT * FROM patient_profiles
+     WHERE tenant_id = $1 AND msisdn_hash = $2`,
+    [tenantId, msisdnHash]
+  );
 
-  if (error || !profile) return null;
+  if (profileResult.rows.length === 0) return null;
 
-  // FIX: tenant_id filter added for multi-tenant isolation
-  const { data: recentSessions } = await db
-    .from('session_summaries')
-    .select('summary, chief_complaint, recommendations, follow_up_note, session_date')
-    .eq('tenant_id', tenantId)
-    .eq('patient_id', profile.id)
-    .order('session_date', { ascending: false })
-    .limit(3);
+  const profile = profileResult.rows[0];
 
-  return { profile, recentSessions: recentSessions || [] };
+  // Fetch recent sessions with tenant isolation
+  const sessionsResult = await query(
+    `SELECT summary, chief_complaint, recommendations, follow_up_note, session_date
+     FROM session_summaries
+     WHERE tenant_id = $1 AND patient_id = $2
+     ORDER BY session_date DESC
+     LIMIT 3`,
+    [tenantId, profile.id]
+  );
+
+  return { profile, recentSessions: sessionsResult.rows || [] };
 }
 
 function formatPatientContext({ profile, recentSessions }) {

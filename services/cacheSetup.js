@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const axios = require('axios');
+const { getDomain } = require('../config/domains');
+const { ai } = require('./geminiClient');
 
 // IMPORTANT: all cache keys are tenant-scoped
 // Multi-tenant design: each tenant has its own cache/lock/hash Redis keys (namespaced by tenantId).
@@ -16,9 +18,9 @@ const axios = require('axios');
 const tenantId = process.env.TENANT_ID;
 if (!tenantId) throw new Error('[cacheSetup] TENANT_ID env var missing');
 
-const LOCK_KEY   = `${tenantId}:agent:cache_lock`;
-const CACHE_KEY  = `${tenantId}:agent:cache_name`;
-const HASH_KEY   = `${tenantId}:agent:cache_hash`;
+const LOCK_KEY = `${tenantId}:agent:cache_lock`;
+const CACHE_KEY = `${tenantId}:agent:cache_name`;
+const HASH_KEY = `${tenantId}:agent:cache_hash`;
 
 function buildStaticContent() {
   // Cache = agent system prompt + KB_ROUTER. Never individual KB files.
@@ -26,15 +28,22 @@ function buildStaticContent() {
   // Without it, the "router-in-cache" model collapses: Gemini has no routing rules.
   // MIN-2: explicit guard — prevents cryptic ENOENT at boot with no indication of which file is missing
   // FIX P0: Dynamic paths based on TENANT_DOMAIN (multi-domain architecture)
-  const domain = process.env.TENANT_DOMAIN;
-  if (!domain) throw new Error('[cacheSetup] TENANT_DOMAIN env var missing');
-  const required = [`./prompts/${domain}_prompt.txt`, `./kb/${domain}/00_KB_ROUTER.txt`];
+  const domainKey = process.env.TENANT_DOMAIN;
+  if (!domainKey) throw new Error('[cacheSetup] TENANT_DOMAIN env var missing');
+
+  // Validate domain exists + get config (throws if unknown)
+  const domainConfig = getDomain(domainKey);
+  console.log(`[cacheSetup] Domain: ${domainKey}, PII fields: ${domainConfig.piiFields.join(', ')}`);
+
+  if (!domainConfig) throw new Error('[cacheSetup] TENANT_DOMAIN env var missing');
+  const required = [`./prompts/${domainConfig}_prompt.txt`, `./kb/${domainConfig}/00_KB_ROUTER.txt`];
+
   for (const f of required)
     if (!fs.existsSync(f)) throw new Error(`[cacheSetup] MISSING required file: ${f}`);
   const agentPrompt = fs.readFileSync(required[0], 'utf8');
-  const kbRouter    = fs.readFileSync(required[1], 'utf8');
+  const kbRouter = fs.readFileSync(required[1], 'utf8');
   return 'AGENT SYSTEM POLICY\n' + agentPrompt
-       + '\n\n---\nKB ROUTING RULES\n' + kbRouter;
+    + '\n\n---\nKB ROUTING RULES\n' + kbRouter;
 }
 
 function sha256(content) {
@@ -59,8 +68,8 @@ async function ensurePlatformCache(redis) {
 
   try {
     const staticContent = buildStaticContent();
-    const newHash      = sha256(staticContent);
-    const storedHash   = await redis.get(HASH_KEY);
+    const newHash = sha256(staticContent);
+    const storedHash = await redis.get(HASH_KEY);
     const existingName = await redis.get(CACHE_KEY);
 
     // 2. Hash gate — skip rebuild if content unchanged
@@ -73,24 +82,21 @@ async function ensurePlatformCache(redis) {
     console.log('[CACHE] Hash changed — rebuilding');
     const displayName = `agent_platform_cache_${newHash.slice(0, 12)}`;
     // BUG-G8 FIX: timeout added — missing timeout = worker hangs indefinitely on TCP hang
-    const { data } = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/cachedContents?key=${process.env.GEMINI_API_KEY}`,
-      {
-        model: 'models/gemini-2.5-flash',
-        displayName: displayName,
-        systemInstruction: { parts: [{ text: staticContent }] },
-        ttl: '86400s'
-      },
-      { timeout: 20000 }  // 20s — cache build only, slower than inference
-    );
+    const cache = await ai.caches.create({
+      model: 'gemini-2.5-flash',
+      displayName: displayName,
+      systemInstruction: staticContent,
+      ttl: '86400s'
+    });
+    const cacheName = cache.name;
 
     // 4. Atomic swap — write name + hash in single Redis transaction
     const multi = redis.multi();
-    multi.set(CACHE_KEY, data.name, 'EX', 86000);
-    multi.set(HASH_KEY,  newHash,  'EX', 86000);
+    multi.set(CACHE_KEY, cacheName, 'EX', 86000);
+    multi.set(HASH_KEY, newHash, 'EX', 86000);
     await multi.exec();
-    console.log('[CACHE] New cache live:', data.name);
-    return data.name;
+    console.log('[CACHE] New cache live:', cacheName);
+    return cacheName;
 
   } finally {
     // FIX-4: atomic Lua CAS — GET+DEL was a race: another instance could acquire between the two calls

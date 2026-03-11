@@ -1,6 +1,6 @@
 const { Worker } = require('bullmq');
-const redis = require('../config/redis');
-const supabase = require('../config/supabase');
+const redis = require('../config/redis2');
+const { query } = require('../db');
 
 const worker = new Worker(
   'whatsapp-messages',
@@ -9,37 +9,25 @@ const worker = new Worker(
 
     const { session, phone, timestamp, redisKey, ...messageData } = job.data;
 
-    // Store in Supabase
+    // Store in PostgreSQL
     try {
-      const { data, error } = await supabase
-        .from('whatsapp_messages')
-        .insert({
-          session,
-          phone,
-          message_data: messageData,
-          redis_key: redisKey,
-          created_at: new Date(timestamp).toISOString(),
-        })
-        .select();
+      const result = await query(
+        `INSERT INTO whatsapp_messages (session, phone, message_data, redis_key, created_at)
+         VALUES ($1, $2, $3, $4, TO_TIMESTAMP($5 / 1000.0))
+         RETURNING id`,
+        [session, phone, JSON.stringify(messageData), redisKey, timestamp]
+      );
 
-      if (error) {
-        console.error('[SUPABASE] Insert failed:', error.message);
-        throw error;
-      }
-
-      console.log('[SUPABASE] Message stored:', data[0].id);
+      console.log('[db] Message stored:', result.rows[0].id);
     } catch (err) {
-      console.error('[SUPABASE] Error:', err.message);
-      // Don't throw - let the job complete even if Supabase fails
+      console.error('[db] Error storing message:', err.message);
+      // Don't throw - let the job complete even if DB fails
     }
 
     return { processed: true, stored: true };
   },
   {
-    connection: {
-      host: 'localhost',
-      port: 6379,
-    },
+    connection: redis,
   }
 );
 
