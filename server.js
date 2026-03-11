@@ -17,6 +17,7 @@ async function startServer() {
 
   // Start the message worker
   require('./workers/messageWorker');
+  require('./workers/chatWorker');
 }
 
 startServer();
