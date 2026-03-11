@@ -291,7 +291,7 @@ const worker = new Worker(
                 citation_match: citationMatch,
                 job_id: String(job.id),
                 created_at: new Date().toISOString()
-            }, { onConflict: 'job_id' });  // ON CONFLICT DO NOTHING equivalent
+            }, { onConflict: 'job_id', ignoreDuplicates: true });  // ON CONFLICT DO NOTHING
     },
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
 );
