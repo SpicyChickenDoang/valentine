@@ -3,7 +3,7 @@
 // Domain-agnostic: same queue handles all tenants (valentine, majordome, etc.)
 
 const { Queue } = require('bullmq');
-const redis = require('../services/redis2');
+const redis = require('../config/redis2');
 
 // Single queue for all agent chat jobs — tenant isolation via job.data.tenantId
 const agentQueue = new Queue('agent-chat-jobs', {
