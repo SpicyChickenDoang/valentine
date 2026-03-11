@@ -19,4 +19,18 @@ const agentQueue = new Queue('agent-chat-jobs', {
   }
 });
 
-module.exports = { agentQueue };
+/**
+ * Add a chat job to the queue
+ * @param {Object} data - Job data
+ * @param {string} data.tenantId - Tenant ID (from env or job data)
+ * @param {string} data.msIsdn_id - MSISDN ID (optional)
+ * @param {string} data.from - Sender phone number
+ * @param {string} data.message - Message text
+ * @param {string} [data.mediaUrl] - Optional media URL
+ * @param {Object} [options] - BullMQ job options
+ */
+async function addChatJob(data, options = {}) {
+  return await agentQueue.add('chat-message', data, options);
+}
+
+module.exports = { agentQueue, addChatJob };

@@ -24,7 +24,7 @@ const redis = new Redis(redisUrl, {
   
   // Timeout settings
   connectTimeout: 10000,        // 10s connection timeout
-  commandTimeout: 5000,         // 5s per command (prevents worker hang)
+  commandTimeout: 10000,         // 5s per command (prevents worker hang)
 });
 
 // Event handlers

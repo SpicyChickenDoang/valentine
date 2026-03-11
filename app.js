@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const redis = require('./config/redis')
-const messageQueue = require('./queues/messageQueue')
+const redis = require('./config/redis2')
+const { agentQueue } = require('./queues/agentQueue')
 const inboundMessageRoutes = require('./routes/inboundMessage')
 
 // Parse JSON bodies
@@ -21,28 +21,20 @@ app.get('/', (req, res) => {
 // Check Redis and Queue status
 app.get('/status', async (req, res) => {
   try {
-    // Get Redis keys
-    const keys = await redis.keys('waha:message:*')
-    const messages = []
-
-    // Get last 10 messages from Redis
-    for (const key of keys.slice(-10)) {
-      const data = await redis.get(key)
-      messages.push({ key, data: JSON.parse(data) })
-    }
+    // Get Redis keys for session data
+    const keys = await redis.keys('*:session:*')
 
     // Get queue stats
     const queueStats = {
-      waiting: await messageQueue.getWaitingCount(),
-      active: await messageQueue.getActiveCount(),
-      completed: await messageQueue.getCompletedCount(),
-      failed: await messageQueue.getFailedCount(),
+      waiting: await agentQueue.getWaitingCount(),
+      active: await agentQueue.getActiveCount(),
+      completed: await agentQueue.getCompletedCount(),
+      failed: await agentQueue.getFailedCount(),
     }
 
     res.json({
       redis: {
-        totalMessages: keys.length,
-        recentMessages: messages,
+        activeSessions: keys.length,
       },
       queue: queueStats,
     })

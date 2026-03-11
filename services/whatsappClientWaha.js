@@ -25,7 +25,7 @@ const client = axios.create({
  * @param {string} [options.session] - Override default session name
  * @returns {Promise<Object>} - API response
  */
-async function sendMessage({ to, body, session }) {
+async function sendMessage({ to, body, session = WHA_SESSION }) {
   const sessionName = session || WHA_SESSION;
 
   // Clean phone number - remove any @s.whatsapp.net, +, etc.

@@ -86,8 +86,8 @@ async function ensurePlatformCache(redis) {
     const cache = await ai.caches.create({
       model: 'gemini-2.5-flash',
       config: {
-        contents: staticContent,
-        systemInstruction: "You are an expert analyzing transcripts.",
+        // contents: staticContent,
+        systemInstruction: staticContent,
       },
     });
     const cacheName = cache.name;
