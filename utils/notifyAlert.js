@@ -1,6 +1,7 @@
 // utils/notifyAlert.js
 const axios = require('axios');
 async function notifyAlert(tenantId, payload) {
+  return 0;
   const url = process.env.ALERT_WEBHOOK_URL;  // set per tenant
   if (!url) return;  // silent if not configured
   try {

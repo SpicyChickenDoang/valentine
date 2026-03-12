@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const crypto = require('crypto')
 const { addChatJob } = require('../queues/agentQueue')
+const { insertChatLog } = require('../services/patientDb')
 
 /**
  * WHA Webhook Handler
@@ -27,10 +29,56 @@ router.post('/inbound-message', async (req, res) => {
     const payload = req.body.payload || req.body
     const webhookPayload = req.body
 
+    // Check if this is a bot message (fromMe=true)
+    if (webhookPayload.payload.fromMe === true) {
+      console.log('[WEBHOOK] Message from bot (fromMe=true) - logging but not responding')
+
+      // Extract message text for logging
+      let message = ''
+      if (payload.message?.conversation) {
+        message = payload.message.conversation
+      } else if (payload.message?.extendedTextMessage?.text) {
+        message = payload.message.extendedTextMessage.text
+      } else if (payload._data?.message?.conversation) {
+        message = payload._data.message.conversation
+      } else if (payload._data?.message?.extendedTextMessage?.text) {
+        message = payload._data.message.extendedTextMessage.text
+      }
+
+      // Log bot message to chat_logs for audit trail
+      const tenantId = process.env.TENANT_ID
+      const fromPhone = webhookPayload.payload._data?.key?.remoteJid?.replace(/@.*$/, '') || 'unknown'
+      const msisdnHash = crypto.createHash('sha256').update(fromPhone).digest('hex')
+
+      await insertChatLog({
+        tenantId,
+        msIsdn_id: fromPhone,
+        msisdnHash,
+        model: 'bot_message',
+        cachedTokens: 0,
+        inputTokens: 0,
+        outputTokens: 0,
+        model_latency_ms: 0,
+        depthClassification: 'N/A',
+        retrievedIds: [],
+        citedIds: [],
+        citationMatch: false,
+        jobId: `bot_${webhookPayload.payload.id || Date.now()}`
+      }).catch(err => console.error('[WEBHOOK] Failed to log bot message:', err.message))
+
+      return res.status(200).send('OK')
+    }
+
+    // Check for non-message events
+    if(webhookPayload.event == 'session.status') {
+      console.log(`[WEBHOOK] Ignoring non-message event: ${webhookPayload.event}`)
+      return res.status(200).send('OK')
+    }
+
     // Extract phone number (remove @s.whatsapp.net, @lid, etc.)
     const from = payload.from || payload._data?.key?.remoteJid || 'unknown'
     const phone = from.replace(/@.*$/, '') // Clean: remove everything after @
-    const fromPhone = payload._data?.key?.remoteJidAlt.replace(/@.*$/, '')
+    const fromPhone = webhookPayload.payload._data?.key?.remoteJid.replace(/@.*$/, '')
 
     // Extract message text from various WHA payload formats
     let message = ''

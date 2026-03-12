@@ -9,11 +9,11 @@ const { loadKBFiles, formatKBContext } = require('../services/kbRetriever');
 const { parseCitedObjects, checkCitationMatch } = require('../services/citationParser');
 const { extractProfileUpdate } = require('../services/jsonExtractor');    // FIX-1: was missing → ReferenceError on every turn with new patient facts
 const { loadPatientContext, formatPatientContext } = require('../services/patientMemory'); // C5 — unified session init
+const { upsertPatientProfile, insertChatLog } = require('../services/patientDb'); // Database operations for patients and chat logs
 const { notifyAlert } = require('../utils/notifyAlert');
 const { fetchMediaWithFallback } = require('../utils/fetchMedia');         // C2 — was missing → ReferenceError on any media message
 const { sendChunked } = require('../services/whatsappFormatter');
 const waClient = require('../services/whatsappClient');
-const { query } = require('../db');
 const redis = require('../config/redis2');
 
 // C2 — single geminiClient instance at module level (not per-job)
@@ -236,91 +236,26 @@ const worker = new Worker(
         const profileUpdate = extractProfileUpdate(text);
         console.log('[chatWorker] Profile update:', JSON.stringify(profileUpdate, null, 2));
         if (profileUpdate) {
-            // Fetch existing profile to merge arrays
-            const existingResult = await query(
-                `SELECT allergies, conditions, medications, last_labs, terrain_flags, follow_up_note
-                 FROM patient_profiles
-                 WHERE tenant_id = $1 AND msisdn_hash = $2`,
-                [tenantId, msisdnHash]
-            );
-
-            if (existingResult.rows.length > 0) {
-                const existing = existingResult.rows[0];
-                // Merge arrays with new values, removing duplicates
-                const mergedAllergies = [...new Set([...(existing.allergies || []), ...(profileUpdate.allergies || [])])];
-                const mergedConditions = [...new Set([...(existing.conditions || []), ...(profileUpdate.conditions || [])])];
-
-                await query(
-                    `UPDATE patient_profiles
-                     SET allergies = $1,
-                         conditions = $2,
-                         medications = $3,
-                         last_labs = $4,
-                         terrain_flags = $5,
-                         follow_up_note = $6,
-                         updated_at = NOW()
-                     WHERE tenant_id = $7 AND msisdn_hash = $8`,
-                    [
-                        JSON.stringify(mergedAllergies),
-                        JSON.stringify(mergedConditions),
-                        JSON.stringify(profileUpdate.medications ?? existing.medications),
-                        JSON.stringify(profileUpdate.last_labs ?? existing.last_labs),
-                        JSON.stringify(profileUpdate.terrain_flags ?? existing.terrain_flags),
-                        profileUpdate.follow_up_note ?? existing.follow_up_note,
-                        tenantId,
-                        msisdnHash
-                    ]
-                );
-            } else {
-                // Patient doesn't exist yet - create new profile
-                await query(
-                    `INSERT INTO patient_profiles (
-                        tenant_id, msisdn_hash, first_name, age, sex, location, language,
-                        allergies, conditions, medications, last_labs, terrain_flags, follow_up_note
-                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
-                    [
-                        tenantId,
-                        msisdnHash,
-                        profileUpdate.first_name || null,
-                        profileUpdate.age || null,
-                        profileUpdate.sex || null,
-                        profileUpdate.location || null,
-                        profileUpdate.language || 'en',
-                        JSON.stringify(profileUpdate.allergies || []),
-                        JSON.stringify(profileUpdate.conditions || []),
-                        JSON.stringify(profileUpdate.medications || {}),
-                        JSON.stringify(profileUpdate.last_labs || null),
-                        JSON.stringify(profileUpdate.terrain_flags || null),
-                        profileUpdate.follow_up_note || null
-                    ]
-                );
-            }
+            // Upsert patient profile - creates new or updates existing with merged arrays
+            await upsertPatientProfile(tenantId, msisdnHash, profileUpdate);
         }
 
         // ON CONFLICT DO NOTHING - prevents duplicate inserts on retry
-        await query(
-            `INSERT INTO chat_logs (
-                tenant_id, msisdn_id, msisdn_hash, model, cached_tokens, input_tokens,
-                output_tokens, latency_ms, depth_classification, kb_objects_retrieved,
-                kb_objects_cited, citation_match, job_id, created_at
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, NOW())
-            ON CONFLICT (job_id) DO NOTHING`,
-            [
-                tenantId,
-                msisdn_id,
-                msisdnHash,
-                model,
-                cachedTokens,
-                inputTokens,
-                outputTokens,
-                latencyMs,
-                depthClassification,
-                JSON.stringify(retrievedIds),
-                JSON.stringify(citedIds),
-                citationMatch,
-                String(job.id)
-            ]
-        );
+        await insertChatLog({
+            tenantId,
+            msIsdn_id: msisdn_id,
+            msisdnHash,
+            model,
+            cachedTokens,
+            inputTokens,
+            outputTokens,
+            latencyMs,
+            depthClassification,
+            retrievedIds,
+            citedIds,
+            citationMatch,
+            jobId: job.id
+        });
     },
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
 );
