@@ -25,10 +25,12 @@ router.post('/inbound-message', async (req, res) => {
     // Extract data from WHA payload
     const session = req.body.session || 'default'
     const payload = req.body.payload || req.body
+    const webhookPayload = req.body
 
     // Extract phone number (remove @s.whatsapp.net, @lid, etc.)
     const from = payload.from || payload._data?.key?.remoteJid || 'unknown'
     const phone = from.replace(/@.*$/, '') // Clean: remove everything after @
+    const fromPhone = payload._data?.key?.remoteJidAlt.replace(/@.*$/, '')
 
     // Extract message text from various WHA payload formats
     let message = ''
@@ -64,13 +66,38 @@ router.post('/inbound-message', async (req, res) => {
     }
 
     // Add job directly to chatWorker queue
+    // const job = await addChatJob({
+    //   tenantId,
+    //   msisdn_id: phone, // Using phone as msisdn_id
+    //   from: phone,
+    //   message,
+    //   mediaUrl
+    // })
+
     const job = await addChatJob({
+      // Tenant & session
       tenantId,
-      msisdn_id: phone, // Using phone as msisdn_id
-      from: phone,
+      session: webhookPayload.session,
+      // Who we are
+      me: webhookPayload.me.id,
+      // Message identity
+      messageId: webhookPayload.payload.id,
+      timestamp: webhookPayload.payload.timestamp,
+      // Sender info
+      msisdn_id: phone,
+      from: fromPhone,
+      fromMe: webhookPayload.payload.fromMe,
+      pushName: webhookPayload.payload._data.pushName,
+      // Message content
       message,
-      mediaUrl
+      mediaUrl,
+      hasMedia: webhookPayload.payload.hasMedia,
+      // Key (for reply/ack targeting)
+      key: webhookPayload.payload._data.key,
+      // Source
+      source: webhookPayload.payload.source,
     })
+
 
     console.log(`[WEBHOOK] Added chat job ${job.id} for ${phone}`)
     console.log('==============================')

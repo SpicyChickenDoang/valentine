@@ -58,8 +58,6 @@ function chunkMessage(text, max = MAX_CHUNK) {
 }
 
 async function sendChunked(waClient, to, rawText) {
-  console.log(`[whatsappFormatter] Sending chunked message to ${to}... ${rawText} chars and ${waClient}`);
-  
   const formatted = formatForWhatsApp(rawText);
   const chunks = chunkMessage(formatted);
   for (const [i, chunk] of chunks.entries()) {

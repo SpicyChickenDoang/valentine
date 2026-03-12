@@ -14,7 +14,8 @@ const client = axios.create({
   baseURL: WHA_BASE_URL,
   timeout: 10000,  // 10s timeout
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'X-Api-Key': process.env.WAHA_API_KEY
   }
 });
 
@@ -32,8 +33,8 @@ async function sendMessage({ to, body, session = WHA_SESSION }) {
   // Clean phone number - remove any @s.whatsapp.net, +, etc.
   const cleanPhone = to.replace(/[^\d]/g, '');
 
-  // console.log(`[whatsappClientWaha] Sending message to ${cleanPhone} via session ${sessionName}... and body: ${body}`);
-  
+  // console.log(`[whatsappClientWaha] Sending message to ${cleanPhone} via session ${sessionName}... and body: ${body} and ${process.env.WAHA_API_KEY}`);
+
   try {
     const { data } = await client.post('/api/sendText', {
       session: sessionName,
