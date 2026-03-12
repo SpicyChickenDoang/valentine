@@ -232,9 +232,7 @@ const worker = new Worker(
         // → medical traceability violation (HIPAA/GDPR audit trail).
         // Rule: only use a Redis gate if the underlying SQL mutation
         // n'est PAS structurellement idempotente. Ici elle l'est → gate inutile et dangereuse.
-        console.log('[chatWorker] About to extract profile update from AI response...');
         const profileUpdate = extractProfileUpdate(text);
-        console.log('[chatWorker] Profile update:', JSON.stringify(profileUpdate, null, 2));
         if (profileUpdate) {
             // Upsert patient profile - creates new or updates existing with merged arrays
             await upsertPatientProfile(tenantId, msisdnHash, profileUpdate);

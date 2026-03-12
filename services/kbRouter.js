@@ -12,9 +12,9 @@ const HARD_STOPS = new Map([
   ['enceinte',         ['00_policy_pregnancy_breastfeeding']],
   // IDs must be EXACT — no wildcards, no prefix expansion.
   // Replace these with your actual compiled IDs from kb/json/index.json.
-  ['suboxone',         ['11_immune_ldn']],
-  ['buprenorphine',    ['11_immune_ldn']],
-  ['opioids',          ['11_immune_ldn']],
+  ['suboxone',         ['11_immune_ldn_v2']],
+  ['buprenorphine',    ['11_immune_ldn_v2']],
+  ['opioids',          ['11_immune_ldn_v2']],
   ['bleomycin',        ['32_iv_hbot_contraindications']],  // exact ID — add other hbot variants as separate entries if needed
   ['g6pd',             ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
   ['hemolysis',        ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
