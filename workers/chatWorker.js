@@ -29,7 +29,6 @@ const worker = new Worker(
     'agent-chat-jobs',
     async (job) => {
         // tenantId + msisdn_id from job.data — never from process.env (multi-tenant safe)
-        console.log(`[ertot] ${JSON.stringify(job)}`);
         
         const { tenantId, msisdn_id, from, message, mediaUrl } = job.data;
 
@@ -139,25 +138,11 @@ const worker = new Worker(
             // BUG-G13 FIX: agentChat() replaced by geminiChatWithTools() — required by Section 07.
             // agentChat() never attached the Function Declarations → the model could not
             // call calculate_lab_ratios → eGFR, HOMA-IR, and ratios were hallucinated.
-            // geminiChatWithTools() sends the tools, intercepts functionCall if returned,
+            // geminiChatWithTools() intercepts functionCall if returned,
             // executes calculateLabRatios() deterministically, then calls Gemini again with the result.
             // If Gemini does not request a tool (non-clinical message), the path is identical to agentChat().
             const t0 = Date.now();
             try {
-                const toolsConfig = [{
-                    functionDeclarations: [{
-                        name: 'calculate_lab_ratios',
-                        description: 'Calculates deterministic biomarker ratios and scores (eGFR CKD-EPI 2021, HOMA-IR, TG/HDL, LDL/HDL) from raw lab values. Always call this before interpreting renal, metabolic, or lipid panels.',
-                        parameters: {
-                            type: 'OBJECT',
-                            properties: {
-                                markers: { type: 'OBJECT', description: 'Raw lab values keyed by biomarker name' },
-                                patient_context: { type: 'OBJECT', description: 'Patient metadata: age, sex, weight_kg' }
-                            },
-                            required: ['markers']
-                        }
-                    }]
-                }];
                 const mediaBase64 = mediaUrl ? await fetchMediaWithFallback(mediaUrl) : null;
                 const userParts = [
                     ...(kbContext ? [{ text: `KB CONTEXT:\n${kbContext}` }] : []),
@@ -168,7 +153,8 @@ const worker = new Worker(
                 ];
                 // FIX: Convert tier to actual Gemini model ID
                 const geminiModel = modelTier === 'pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
-                const res = await geminiChatWithTools({ model: geminiModel, cacheName, userParts, tools: toolsConfig });
+                // tools are now in the cache - no need to pass them
+                const res = await geminiChatWithTools({ model: geminiModel, cacheName, userParts });
                 ({ text, model, cachedTokens, inputTokens, outputTokens } = res);
             } catch (err) {
                 console.error('[chatWorker] geminiChatWithTools failed:', err.message);
@@ -221,6 +207,7 @@ const worker = new Worker(
 
                 // Mark as sent (XX = only if key exists)
                 await redis.set(sendStateKey, 'sent', 'XX', 'EX', 3600);
+                console.log('[chatWorker] Message sent successfully, proceeding to profile update...');
             } catch (err) {
                 // CRITICAL: Unlock to allow BullMQ retry to attempt sending again
                 await redis.del(sendStateKey);
@@ -245,7 +232,9 @@ const worker = new Worker(
         // → medical traceability violation (HIPAA/GDPR audit trail).
         // Rule: only use a Redis gate if the underlying SQL mutation
         // n'est PAS structurellement idempotente. Ici elle l'est → gate inutile et dangereuse.
+        console.log('[chatWorker] About to extract profile update from AI response...');
         const profileUpdate = extractProfileUpdate(text);
+        console.log('[chatWorker] Profile update:', JSON.stringify(profileUpdate, null, 2));
         if (profileUpdate) {
             // Fetch existing profile to merge arrays
             const existingResult = await query(
@@ -280,6 +269,29 @@ const worker = new Worker(
                         profileUpdate.follow_up_note ?? existing.follow_up_note,
                         tenantId,
                         msisdnHash
+                    ]
+                );
+            } else {
+                // Patient doesn't exist yet - create new profile
+                await query(
+                    `INSERT INTO patient_profiles (
+                        tenant_id, msisdn_hash, first_name, age, sex, location, language,
+                        allergies, conditions, medications, last_labs, terrain_flags, follow_up_note
+                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`,
+                    [
+                        tenantId,
+                        msisdnHash,
+                        profileUpdate.first_name || null,
+                        profileUpdate.age || null,
+                        profileUpdate.sex || null,
+                        profileUpdate.location || null,
+                        profileUpdate.language || 'en',
+                        JSON.stringify(profileUpdate.allergies || []),
+                        JSON.stringify(profileUpdate.conditions || []),
+                        JSON.stringify(profileUpdate.medications || {}),
+                        JSON.stringify(profileUpdate.last_labs || null),
+                        JSON.stringify(profileUpdate.terrain_flags || null),
+                        profileUpdate.follow_up_note || null
                     ]
                 );
             }

@@ -103,15 +103,30 @@ async function agentChat({ modelTier, cacheName, kbContext, dossier, history, me
 }
 
 // services/geminiChat.js — add geminiChatWithTools() for tool-aware calls
-async function geminiChatWithTools({ model, cacheName, userParts, tools }) {
+// NOTE: tools are now included in the cache, not in the request
+async function geminiChatWithTools({ model, cacheName, userParts }) {
     const payload = {
         cachedContent: cacheName,
         contents: [{ role: 'user', parts: userParts }],
-        tools: tools,
+        // tools are now in the cache - do NOT pass them here or Gemini will return 400
         generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
     };
-    // BUG-G8 FIX: timeout added
-    const { data } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, payload, { timeout: 15000 });
+
+    // DEBUG: Log request details (remove sensitive data in production)
+    console.log('[geminiChatWithTools] Request details:');
+    console.log('  model:', model);
+    console.log('  cacheName:', cacheName);
+    console.log('  userParts length:', userParts.length);
+
+    let data;
+    try {
+        ({ data } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, payload, { timeout: 15000 }));
+    } catch (e) {
+        console.error('[geminiChatWithTools] Gemini API error:');
+        console.error('  Status:', e.response?.status);
+        console.error('  Error:', JSON.stringify(e.response?.data, null, 2));
+        throw e;
+    }
     const candidate = data.candidates[0];
 
     // 1. Check if Gemini is requesting a tool call instead of returning text
@@ -136,7 +151,15 @@ async function geminiChatWithTools({ model, cacheName, userParts, tools }) {
             generationConfig: { temperature: 0.1, maxOutputTokens: 800 }  // M5: deterministic for clinical math follow-up
         };
         // BUG-G8 FIX: timeout added on followUp call
-        const { data: d2 } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, followUp, { timeout: 15000 });
+        let d2;
+        try {
+            ({ data: d2 } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, followUp, { timeout: 15000 }));
+        } catch (e) {
+            console.error('[geminiChatWithTools] Follow-up API error:');
+            console.error('  Status:', e.response?.status);
+            console.error('  Error:', JSON.stringify(e.response?.data, null, 2));
+            throw e;
+        }
         // FIX: Normalize return shape to match chatWorker destructuring
         const usage2 = d2.usageMetadata || {};
         return {

@@ -5,7 +5,8 @@
 const axios = require('axios');
 
 // Environment variables
-const WHA_BASE_URL = process.env.WHA_BASE_URL || 'http://localhost:3000';
+const WHA_BASE_URL = 'https://waha.aiprojectbali.com';
+// const WHA_BASE_URL = process.env.WHA_BASE_URL || 'https://waha.aiprojectbali.com';
 const WHA_SESSION = process.env.WHA_SESSION || 'default';
 
 // Create axios instance with defaults
@@ -31,6 +32,8 @@ async function sendMessage({ to, body, session = WHA_SESSION }) {
   // Clean phone number - remove any @s.whatsapp.net, +, etc.
   const cleanPhone = to.replace(/[^\d]/g, '');
 
+  // console.log(`[whatsappClientWaha] Sending message to ${cleanPhone} via session ${sessionName}... and body: ${body}`);
+  
   try {
     const { data } = await client.post('/api/sendText', {
       session: sessionName,

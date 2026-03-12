@@ -83,11 +83,26 @@ async function ensurePlatformCache(redis) {
     const displayName = `agent_platform_cache_${newHash.slice(0, 12)}`;
     // BUG-G8 FIX: timeout added — missing timeout = worker hangs indefinitely on TCP hang
     console.log("REQUEST", displayName)
+
+    // Tools must be included in cache for use with cachedContent
+    const calculateLabRatiosTool = {
+      name: 'calculate_lab_ratios',
+      description: 'Calculates deterministic biomarker ratios and scores (eGFR CKD-EPI 2021, HOMA-IR, TG/HDL, LDL/HDL) from raw lab values. Always call this before interpreting renal, metabolic, or lipid panels.',
+      parameters: {
+        type: 'OBJECT',
+        properties: {
+          markers: { type: 'OBJECT', description: 'Raw lab values keyed by biomarker name' },
+          patient_context: { type: 'OBJECT', description: 'Patient metadata: age, sex, weight_kg' }
+        },
+        required: ['markers']
+      }
+    };
+
     const cache = await ai.caches.create({
       model: 'gemini-2.5-flash',
       config: {
-        // contents: staticContent,
         systemInstruction: staticContent,
+        tools: [{ functionDeclarations: [calculateLabRatiosTool] }],
       },
     });
     const cacheName = cache.name;
