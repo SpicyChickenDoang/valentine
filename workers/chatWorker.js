@@ -29,6 +29,8 @@ const worker = new Worker(
     'agent-chat-jobs',
     async (job) => {
         // tenantId + msisdn_id from job.data — never from process.env (multi-tenant safe)
+        console.log(`[ertot] ${JSON.stringify(job)}`);
+        
         const { tenantId, msisdn_id, from, message, mediaUrl } = job.data;
 
         // FIX P2: Input validation — prevent crash on malformed job data
