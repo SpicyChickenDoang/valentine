@@ -10,6 +10,8 @@ async function startServer() {
   // Hash gate + distributed lock handled inside ensurePlatformCache
   const cacheName = await ensurePlatformCache(redis);
   process.env.AGENT_CACHE_NAME = cacheName;
+  console.log(`[SERVER] Using cache: ${cacheName}`);
+  
 
   app.listen(port, () => {
     console.log(`[SERVER] USE Engine Agent listening on port ${port}`);

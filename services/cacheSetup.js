@@ -18,6 +18,8 @@ const { ai } = require('./geminiClient');
 const tenantId = process.env.TENANT_ID;
 if (!tenantId) throw new Error('[cacheSetup] TENANT_ID env var missing');
 
+const MODELS = ['gemini-2.5-flash', 'gemini-2.5-pro'];
+
 const LOCK_KEY = `${tenantId}:agent:cache_lock`;
 const CACHE_KEY = `${tenantId}:agent:cache_name`;
 const HASH_KEY = `${tenantId}:agent:cache_hash`;
@@ -53,15 +55,15 @@ function sha256(content) {
 async function ensurePlatformCache(redis) {
   // 1. Distributed lock — UUID token, single flight across all instances
   const lockToken = crypto.randomUUID();
-  // M4 fix: lock TTL 45s must be < wait ceiling 50s — was 90s vs 15s → cascade startup crash
-  const acquired = await redis.set(LOCK_KEY, lockToken, 'NX', 'EX', 45);
+  // M4 fix: lock TTL 90s must be < wait ceiling (increased for 2 models)
+  const acquired = await redis.set(LOCK_KEY, lockToken, 'NX', 'EX', 90);
 
   if (!acquired) {
-    // Another instance is rebuilding — wait 50s (lock TTL 45s, so it always expires)
-    for (let i = 0; i < 50; i++) {
+    // Another instance is rebuilding — wait 100s (lock TTL 90s)
+    for (let i = 0; i < 100; i++) {
       await new Promise(r => setTimeout(r, 1000));
-      const name = await redis.get(CACHE_KEY);
-      if (name) return name;
+      const cached = await redis.get(CACHE_KEY);
+      if (cached) return JSON.parse(cached);
     }
     throw new Error('[CACHE] Lock held too long — rebuild did not complete');
   }
@@ -70,19 +72,26 @@ async function ensurePlatformCache(redis) {
     const staticContent = buildStaticContent();
     const newHash = sha256(staticContent);
     const storedHash = await redis.get(HASH_KEY);
-    const existingName = await redis.get(CACHE_KEY);
+    const existingCached = await redis.get(CACHE_KEY);
 
     // 2. Hash gate — skip rebuild if content unchanged
-    if (storedHash === newHash && existingName) {
-      console.log('[CACHE] Hash unchanged — reusing', existingName);
-      return existingName;
+    // Also handle migration from old single-cache string format
+    if (storedHash === newHash && existingCached) {
+      try {
+        const parsed = JSON.parse(existingCached);
+        // Verify it's the new format (has both model keys)
+        if (parsed['gemini-2.5-flash'] && parsed['gemini-2.5-pro']) {
+          console.log('[CACHE] Hash unchanged — reusing', parsed);
+          return parsed;
+        }
+      } catch (e) {
+        // Old format (plain string) or invalid JSON — needs rebuild
+        console.log('[CACHE] Old cache format detected — rebuilding...');
+      }
     }
 
-    // 3. Build new cache
-    console.log('[CACHE] Hash changed — rebuilding');
-    const displayName = `agent_platform_cache_${newHash.slice(0, 12)}`;
-    // BUG-G8 FIX: timeout added — missing timeout = worker hangs indefinitely on TCP hang
-    console.log("REQUEST", displayName)
+    // 3. Build new caches for both models
+    console.log('[CACHE] Hash changed — rebuilding for both models');
 
     // Tools must be included in cache for use with cachedContent
     const calculateLabRatiosTool = {
@@ -98,22 +107,29 @@ async function ensurePlatformCache(redis) {
       }
     };
 
-    const cache = await ai.caches.create({
-      model: 'gemini-2.5-flash',
-      config: {
-        systemInstruction: staticContent,
-        tools: [{ functionDeclarations: [calculateLabRatiosTool] }],
-      },
-    });
-    const cacheName = cache.name;
+    const cacheNames = {};
+
+    // Build cache for each model in parallel
+    await Promise.all(MODELS.map(async (model) => {
+      console.log(`[CACHE] Creating cache for ${model}...`);
+      const cache = await ai.caches.create({
+        model,
+        config: {
+          systemInstruction: staticContent,
+          tools: [{ functionDeclarations: [calculateLabRatiosTool] }],
+        },
+      });
+      cacheNames[model] = cache.name;
+      console.log(`[CACHE] Cache created for ${model}:`, cache.name);
+    }));
 
     // 4. Atomic swap — write name + hash in single Redis transaction
     const multi = redis.multi();
-    multi.set(CACHE_KEY, cacheName, 'EX', 86000);
+    multi.set(CACHE_KEY, JSON.stringify(cacheNames), 'EX', 86000);
     multi.set(HASH_KEY, newHash, 'EX', 86000);
     await multi.exec();
-    console.log('[CACHE] New cache live:', cacheName);
-    return cacheName;
+    console.log('[CACHE] New caches live:', cacheNames);
+    return cacheNames;
 
   } finally {
     // FIX-4: atomic Lua CAS — GET+DEL was a race: another instance could acquire between the two calls
