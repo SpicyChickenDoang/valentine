@@ -33,8 +33,6 @@ async function sendMessage({ to, body, session = WHA_SESSION }) {
   // Clean phone number - remove any @s.whatsapp.net, +, etc.
   const cleanPhone = to.replace(/[^\d]/g, '');
 
-  // console.log(`[whatsappClientWaha] Sending message to ${cleanPhone} via session ${sessionName}... and body: ${body} and ${process.env.WAHA_API_KEY}`);
-
   try {
     const { data } = await client.post('/api/sendText', {
       session: sessionName,

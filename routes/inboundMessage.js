@@ -78,7 +78,7 @@ router.post('/inbound-message', async (req, res) => {
     // Extract phone number (remove @s.whatsapp.net, @lid, etc.)
     const from = payload.from || payload._data?.key?.remoteJid || 'unknown'
     const phone = from.replace(/@.*$/, '') // Clean: remove everything after @
-    const fromPhone = webhookPayload.payload._data?.key?.remoteJid.replace(/@.*$/, '')
+    const fromPhone = webhookPayload.payload._data?.key?.remoteJidAlt.replace(/@.*$/, '')
 
     // Extract message text from various WHA payload formats
     let message = ''

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "ngroka": "ngrok http 3000 --domain=kasey-bandboxical-nolan.ngrok-free.dev",
+    "ngroke": "ngrok http 3000 --domain=domain_lu_win"
   },
   "keywords": [],
   "author": "",
