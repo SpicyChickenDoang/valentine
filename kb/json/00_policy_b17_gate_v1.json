@@ -1,0 +1,39 @@
+{
+  "id": "00_policy_b17_gate_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "B17",
+      "AMYGDALIN",
+      "LAETRILE",
+      "CYANIDE",
+      "NOT_OFFERED",
+      "ONCOLOGY",
+      "CONTROVERSIAL"
+    ],
+    "category": "Safety Gate — B17/Amygdalin (NOT OFFERED)",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Handling patient inquiries about B17/Amygdalin/Laetrile. This therapy is NOT offered due to cyanide toxicity risk and lack of efficacy evidence.",
+    "coupled_systems": [
+      "25_ONCOLOGY_SUPPORT",
+      "32_IV_THERAPIES"
+    ],
+    "red_flags": "Cyanide toxicity risk, No proven efficacy, Banned/restricted in most jurisdictions, Patient seeking 'last hope' cancer cure.",
+    "triage_questions": "What led you to ask about B17? Are you currently undergoing cancer treatment? Would you be open to discussing evidence-based supportive therapies?",
+    "teleconsult_limits": "Do NOT prescribe, recommend, or facilitate access to B17/Amygdalin. Redirect to evidence-based integrative oncology options."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- B17/Amygdalin/Laetrile: NOT IN FORMULARY, NOT OFFERED.\n- Compound found in apricot kernels, bitter almonds, other seeds.\n- Releases hydrogen cyanide (HCN) when metabolized.\n- Multiple clinical trials: no evidence of anti-cancer efficacy.\n- Documented fatal poisonings from oral amygdalin.\n- Banned by FDA for interstate sale; not legal in Indonesia (BPOM).\n- If patient asks: provide factual information, redirect to safe alternatives.",
+    "s1_claims_discipline_internal": "- We do NOT claim B17 has any therapeutic benefit.\n- We explain the documented risks (cyanide toxicity, lack of efficacy).\n- We do NOT judge patients for asking; many are desperate and misinformed.\n- We redirect to evidence-based supportive therapies available at REVIV.",
+    "s2_patient_communication_public": "I appreciate you asking about this — it shows you're exploring all your options, and that's completely understandable.\n\nB17 (also called amygdalin or laetrile) isn't something we offer. Here's why: it breaks down into cyanide in your body, which creates real safety concerns. There have been cases of serious poisoning. And importantly, when researchers tested it in clinical trials, it didn't show benefit against cancer.\n\nBut I hear that you're looking for supportive options. Can I tell you about some evidence-based therapies we do offer that may help? Things like high-dose IV Vitamin C (which has some research supporting quality of life in cancer), mistletoe therapy, or metabolic support protocols. Would that be helpful?",
+    "s3_pharmacokinetics_adme_internal": "## WHAT IS AMYGDALIN?\n- Cyanogenic glycoside found in seeds: apricot, bitter almond, apple, cherry, peach.\n- Marketed as 'Laetrile' or 'Vitamin B17' (misnomer — not a vitamin).\n- Chemical formula: C20H27NO11.\n\n## MECHANISM OF TOXICITY\n- Beta-glucosidase (in gut bacteria and some tissues) cleaves amygdalin.\n- Releases hydrogen cyanide (HCN) and benzaldehyde.\n- HCN inhibits cytochrome c oxidase → blocks cellular respiration → tissue hypoxia.\n- Lethal dose: as few as 50 apricot kernels or equivalent amygdalin.\n\n## CLINICAL EVIDENCE\n- 1970s-1980s: Promoted as cancer cure; FDA cracked down.\n- NCI Phase I/II trials: No objective responses, significant toxicity.\n- Cochrane systematic review (2015): No reliable evidence of benefit.\n- Multiple case reports of fatal cyanide poisoning.\n\n## INTERACTION WARNING\n- High-dose Vitamin C may increase cyanide release from amygdalin.\n- Do NOT combine IVC with amygdalin use (if patient is self-administering).",
+    "s4_limitations_failure_modes_internal": "- Desperation factor: Terminal patients may insist despite risks.\n- Internet misinformation: Many websites promote B17 with pseudoscientific claims.\n- Patient may be obtaining from Mexico or online: cannot control outside use.\n- If patient is already taking: counsel on risks, do not combine with IVC, document discussion.",
+    "s5_clinical_decision_trees_internal": "## IF PATIENT ASKS ABOUT B17\n1. Acknowledge their search for options (non-judgmental).\n2. Explain: NOT offered due to cyanide toxicity + no proven efficacy.\n3. Ask: What are you hoping to achieve? (symptom relief, tumor targeting, QoL?)\n4. Redirect: Offer evidence-based alternatives based on their goals.\n\n## EVIDENCE-BASED ALTERNATIVES TO DISCUSS\n- High-dose IV Vitamin C (if G6PD normal): Some evidence for QoL in cancer.\n- Mistletoe (Iscador): Used in integrative oncology in Europe; some trials positive.\n- Hyperthermia: Adjunct to chemo/radiation.\n- Nutritional optimization: Anti-inflammatory diet, correct deficiencies.\n- NAD+ therapy: Cellular energy support.\n- Metabolic support: See 12_onco_metabolic_priming.\n\n## IF PATIENT INSISTS ON B17\n- Document discussion of risks.\n- Do NOT prescribe, supply, or facilitate.\n- Offer physician consultation to discuss their situation.\n- If they are obtaining elsewhere: warn about IVC interaction, document."
+  },
+  "display_name": "Safety Gate — B17/Amygdalin (NOT OFFERED)",
+  "domain": "Policy",
+  "kind": "narrow",
+  "purpose": "policy"
+}

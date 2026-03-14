@@ -7,32 +7,32 @@ const { getIndex } = require('./kbRetriever');
 // ── Hard-stop trigger map (in-memory, loaded once at boot) ────────────────────
 // Keys: lowercase keyword or /regex/. Values: array of KB IDs to force-fetch.
 const HARD_STOPS = new Map([
-  ['pregnancy', ['00_policy_pregnancy_breastfeeding']],
-  ['breastfeeding', ['00_policy_pregnancy_breastfeeding']],
-  ['enceinte', ['00_policy_pregnancy_breastfeeding']],
+  ['pregnancy', ['00_policy_pregnancy_breastfeeding_v1']],
+  ['breastfeeding', ['00_policy_pregnancy_breastfeeding_v1']],
+  ['enceinte', ['00_policy_pregnancy_breastfeeding_v1']],
   // IDs must be EXACT — no wildcards, no prefix expansion.
   // Replace these with your actual compiled IDs from kb/json/index.json.
   ['suboxone', ['11_immune_ldn_v2']],
   ['buprenorphine', ['11_immune_ldn_v2']],
   ['opioids', ['11_immune_ldn_v2']],
-  ['bleomycin', ['32_iv_hbot_contraindications']],  // exact ID — add other hbot variants as separate entries if needed
-  ['g6pd', ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
-  ['hemolysis', ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
-  ['favism', ['32_iv_ivc_contraindications', '00_policy_pro_oxidant_gate']],
-  ['melena', ['00_triage_bleeding', '00_policy_b17_gate']],
-  ['hematemesis', ['00_triage_bleeding', '00_policy_b17_gate']],
-  ['blood in stool', ['00_triage_bleeding']],
-  ['seizure', ['00_triage_neuro', '00_policy_ivermectin_gate']],
-  ['ataxia', ['00_triage_neuro']],
-  ['confusion', ['00_triage_neuro']],
-  ['neuro red flag', ['00_triage_neuro', '00_policy_dca_gate']],
+  ['bleomycin', ['32_iv_hbot_contraindications_v1']],  // exact ID — add other hbot variants as separate entries if needed
+  ['g6pd', ['32_iv_ivc_contraindications_v1', '00_policy_pro_oxidant_gate_v1']],
+  ['hemolysis', ['32_iv_ivc_contraindications_v1', '00_policy_pro_oxidant_gate_v1']],
+  ['favism', ['32_iv_ivc_contraindications_v1', '00_policy_pro_oxidant_gate_v1']],
+  ['melena', ['00_triage_bleeding_v1', '00_policy_b17_gate_v1']],
+  ['hematemesis', ['00_triage_bleeding_v1', '00_policy_b17_gate_v1']],
+  ['blood in stool', ['00_triage_bleeding_v1']],
+  ['seizure', ['00_triage_neuro_v1', '00_policy_ivermectin_gate_v1']],
+  ['ataxia', ['00_triage_neuro_v1']],
+  ['confusion', ['00_triage_neuro_v1']],
+  ['neuro red flag', ['00_triage_neuro_v1', '00_policy_dca_gate_v1']],
 ]);
 
 // Always load on every DEPTH 2 request (global policies).
 // Keep this list short — these must be in every clinical response.
 const ALWAYS_LOAD = [
-  '00_policy_clinical_intent_and_claims',
-  '00_policy_teleconsult_er',
+  '00_policy_clinical_intent_and_claims_v1',
+  '00_policy_teleconsult_er_v1',
 ];
 
 // ── Stage 1: Node prefilter — O(N) on trigger count, <5ms wall-clock, no disk read ──────
@@ -61,22 +61,47 @@ Apply KB_ROUTER rules. Return ONLY valid JSON: {"always_load":[],"fetch":[],"rea
 
   console.log(`[kbRouter] Running LLM router with model ${model}...message: ${message}, prefilterHits: ${JSON.stringify(prefilterHits)}, tagCandidates: ${JSON.stringify(tagCandidates)}`);
 
-  // BUG-G8 FIX: timeout added — router, 10s sufficient
   try {
     const { data } = await axios.post(GEMINI_URL, {
       cachedContent: cacheName,
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { maxOutputTokens: 300, temperature: 0 },
+      generationConfig: { maxOutputTokens: 8192, temperature: 0 },
     }, { timeout: 10000, headers: { 'Content-Type': 'application/json' } });
+
+    console.log(`[kbRouter Y] ${JSON.stringify(data)}`);
+    
+    // Defensive check: validate response structure before accessing nested properties
+    if (!data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+      console.error('[kbRouter] Unexpected API response structure:', JSON.stringify(data));
+      throw new Error('invalid_response_structure');
+    }
 
     // M6 — strip markdown fences: Flash-Lite sometimes wraps output in ```json``` even at temp=0
     const raw = data.candidates[0].content.parts[0].text.trim()
       .replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
     return JSON.parse(raw);
   } catch (error) {
-    console.error("Gemini API Error Details:", JSON.stringify(error.response?.data, null, 2));
-    console.warn('[kbRouter] LLM parse failed — using prefilter result only');
-    return { always_load: [], fetch: [], reasons: ['llm_parse_failed'] };
+    // Distinguish error types
+    const isTimeout = error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT';
+    const isParseError = error instanceof SyntaxError;
+    const isInvalidStructure = error.message === 'invalid_response_structure';
+
+    if (isTimeout) {
+      console.warn('[kbRouter] LLM timeout — falling back to prefilter + tag candidates');
+    } else if (isParseError) {
+      console.warn('[kbRouter] LLM returned invalid JSON — falling back');
+    } else if (isInvalidStructure) {
+      console.warn('[kbRouter] LLM returned unexpected structure — falling back');
+    } else {
+      console.error('[kbRouter] LLM API error:', error.message);
+    }
+
+    // Don't waste the prefilter work — include it in fallback
+    return {
+      always_load: [],
+      fetch: prefilterHits,  // Use the deterministic results we already computed
+      reasons: ['llm_failed', isTimeout ? 'timeout' : isParseError ? 'parse_error' : isInvalidStructure ? 'invalid_structure' : 'api_error']
+    };
   }
 }
 
@@ -107,6 +132,8 @@ async function resolveKBIds(message, cacheName, model = 'gemini-2.5-flash') {
     ...(llm.always_load || []),
     ...(llm.fetch || []),
   ]);
+  console.log(`[kbRouter X] ${JSON.stringify([...finalSet])}`);
+  
   return [...finalSet];  // kbRetriever.loadKBFiles() resolves via index.json
 }
 

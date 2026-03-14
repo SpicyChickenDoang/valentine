@@ -1,0 +1,41 @@
+{
+  "id": "00_triage_neuro_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "TRIAGE",
+      "NEURO",
+      "STROKE",
+      "SEIZURE",
+      "HEADACHE",
+      "RED_FLAG",
+      "EMERGENCY",
+      "WEAKNESS",
+      "CONFUSION"
+    ],
+    "category": "Triage — Neurological Red Flags",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Identifying neurological presentations requiring immediate action (stroke, hemorrhage, infection) vs. those appropriate for outpatient care.",
+    "coupled_systems": [
+      "00_policy_teleconsult_er",
+      "00_triage_red_flags_universal"
+    ],
+    "red_flags": "FAST positive (stroke), Thunderclap headache (worst ever), Headache + fever + stiff neck (meningitis), Sudden vision loss, New seizure, Status epilepticus, Sudden confusion, Progressive limb weakness, Loss of consciousness.",
+    "triage_questions": "Is this headache different from usual? Did it come on suddenly? Any weakness/numbness, especially one side? Vision or speech changes? Fever, stiff neck, light sensitivity? Recent head injury?",
+    "teleconsult_limits": "Do NOT proceed with IV therapy if acute neurological red flag. Stroke symptoms = TIME-CRITICAL → ER NOW. No delays for booking or payment."
+  },
+  "content": {
+    "s0_quick_reference_internal": "## TIME-CRITICAL ER REFERRAL\n- FAST positive (Face drooping, Arm weakness, Speech difficulty): Stroke — thrombolysis window 4.5h.\n- Thunderclap headache ('worst headache of my life'): Subarachnoid hemorrhage.\n- Headache + fever + stiff neck: Meningitis — bacterial is life-threatening.\n- Sudden vision loss: Retinal artery occlusion, optic neuritis, stroke.\n- New seizure (first ever): Needs workup for tumor, infection, metabolic cause.\n- Status epilepticus (>5 min): Brain damage risk.\n- Sudden confusion / altered mental status: Stroke, infection, metabolic.\n- Progressive limb weakness (hours to days): Guillain-Barré, spinal cord compression.\n\n## ACTION: CALL 118 OR ER NOW — NO DELAYS.",
+    "s1_claims_discipline_internal": "- We recognize patterns suggesting neurological emergency — we do NOT diagnose.\n- Stroke symptoms are TIME-CRITICAL: every minute of delay = brain damage.\n- We do NOT attempt to manage neurological emergencies via chat.\n- We err heavily on side of safety — unclear neuro symptoms → refer.",
+    "s2_patient_communication_public": "## STROKE SYMPTOMS RESPONSE\n\"What you're describing sounds like possible stroke symptoms. Time is critical — every minute matters. Please call 118 NOW or have someone drive you to the nearest ER immediately. BIMC Kuta (+62 361 761263) and Siloam (+62 361 779900) both have 24/7 emergency rooms. Please go now — don't wait.\"\n\n## SEVERE HEADACHE RESPONSE\n\"A sudden, severe headache — the 'worst headache ever' — can be a sign of something serious that needs immediate attention. Please go to the emergency room right away for evaluation. Don't wait to see if it gets better.\"\n\n## MENINGITIS SUSPECTED RESPONSE\n\"Headache with fever and stiff neck can be signs of meningitis, which is a medical emergency. Please go to the ER immediately for evaluation.\"\n\n## FIRST SEIZURE RESPONSE\n\"A first-time seizure needs medical evaluation even if it has stopped. Please go to the emergency room for workup — they'll check for underlying causes that need to be addressed.\"",
+    "s3_pharmacokinetics_adme_internal": "## IMMEDIATE ER REFERRAL — TIME-CRITICAL\n\n### Stroke Symptoms (FAST)\n- F = Face drooping\n- A = Arm weakness\n- S = Speech difficulty\n- T = Time to call 118\n- Window: Thrombolysis up to 4.5h; thrombectomy up to 24h for some.\n- Action: EMERGENCY. Call 118 or ER with stroke capability.\n\n### Thunderclap Headache\n- Description: Sudden, severe, 'worst headache of my life' — peaks within seconds to minutes.\n- Concern: Subarachnoid hemorrhage (aneurysm rupture).\n- Action: ER NOW for CT head. Lumbar puncture if CT negative.\n\n### Meningitis Triad\n- Headache + Fever + Stiff neck + Photophobia.\n- Concern: Bacterial meningitis — rapidly fatal without treatment.\n- Action: ER immediately for LP and empiric antibiotics.\n\n### Sudden Vision Loss\n- Concern: Retinal artery occlusion (hours matter), optic neuritis, stroke.\n- Action: ER or ophthalmology emergency.\n\n### New Onset Seizure\n- Concern: Tumor, infection, metabolic, structural lesion.\n- Action: ER for workup even if seizure has stopped.\n\n### Status Epilepticus\n- Definition: Seizure >5 min or multiple seizures without recovery.\n- Risk: Brain damage, death if prolonged.\n- Action: Call 118. Life-threatening emergency.\n\n### Sudden Confusion / Altered Mental Status\n- Concern: Stroke, infection, metabolic, drug toxicity.\n- Action: ER for evaluation. Don't assume 'normal.'\n\n### Progressive Limb Weakness (hours to days)\n- Concern: Guillain-Barré syndrome, spinal cord compression.\n- Action: ER — may need ICU for respiratory monitoring.\n\n### Loss of Consciousness + Injury\n- Concern: Cardiac, neurological, or metabolic cause; head trauma.\n- Action: ER for workup.\n\n### Post-Head Trauma Headache (with vomiting, drowsiness)\n- Concern: Intracranial hemorrhage — epidural, subdural.\n- Action: ER for CT head.\n\n## URGENT BUT NOT ER (24-72h)\n- New headache in patient >50, scalp tenderness: Temporal arteritis (GCA) — risk of blindness. ESR/CRP urgently.\n- Progressive headache over weeks, worse in morning: Raised ICP — tumor, hydrocephalus. Needs imaging.\n- Symmetric progressive numbness/tingling hands and feet: Peripheral neuropathy workup.\n- New diplopia (double vision): Cranial nerve palsy, myasthenia — neurology/ophthalmology.\n- Tremor + slowed movement + stiffness: Parkinsonism — neurology referral.",
+    "s4_limitations_failure_modes_internal": "- Delayed recognition: Patient may attribute stroke symptoms to 'stress' or 'tiredness.' Always ask about sudden onset.\n- 'Worst ever' threshold: Patients may not volunteer unless asked specifically.\n- Young patients: Stroke can occur at any age. Do not dismiss based on age.\n- Meningitis: May present atypically; photophobia or neck stiffness may be subtle.\n- Seizure witnessed vs. reported: If reported but not witnessed, still needs evaluation.",
+    "s5_clinical_decision_trees_internal": "## NEURO SCREENING QUESTIONS\n1. Is this headache different from headaches you've had before?\n2. Did it come on suddenly or gradually?\n3. Any weakness, numbness, or tingling — especially on one side?\n4. Any changes in your vision or speech?\n5. Any fever, stiff neck, or sensitivity to light?\n6. Any recent head injury?\n\n## TRIAGE ALGORITHM\n\n### IF FAST positive (face/arm/speech):\n→ STROKE EMERGENCY. Call 118 or ER NOW. Time = brain.\n\n### IF thunderclap headache ('worst ever', sudden):\n→ ER NOW for CT. Possible subarachnoid hemorrhage.\n\n### IF headache + fever + stiff neck:\n→ ER NOW. Possible meningitis.\n\n### IF sudden vision loss:\n→ ER or ophthalmology emergency within hours.\n\n### IF first seizure OR seizure >5 min:\n→ ER for workup.\n\n### IF sudden confusion OR progressive weakness:\n→ ER for evaluation.\n\n### IF chronic stable headache, known migraine, or chronic neuropathy seeking IV support:\n→ Can proceed with IV therapy after screening for red flags.\n\n## CAN PROCEED WITH CAUTION\n- Chronic stable headache (tension-type, known migraine) seeking support.\n- Known peripheral neuropathy (diabetic, etc.) — IV B vitamins may help.\n- Chronic fatigue with brain fog — common reason for NAD+ therapy.\n- Post-COVID cognitive symptoms — appropriate for evaluation and support.\n\n**Note: 'Chronic' does NOT mean 'benign.' Still screen for red flags; any change in pattern requires evaluation.**"
+  },
+  "display_name": "Triage — Neurological Red Flags",
+  "domain": "Triage",
+  "kind": "broad",
+  "purpose": "triage"
+}

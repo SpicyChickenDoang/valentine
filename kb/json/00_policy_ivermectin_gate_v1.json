@@ -1,0 +1,38 @@
+{
+  "id": "00_policy_ivermectin_gate_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "IVERMECTIN",
+      "ANTIPARASITIC",
+      "PARASITES",
+      "COVID",
+      "OFF_LABEL",
+      "PHYSICIAN_ONLY"
+    ],
+    "category": "Safety Gate — Ivermectin Protocol",
+    "intervention_priority": "MEDIUM (Controlled Indication)",
+    "use_for": "Handling ivermectin requests. Prescribed ONLY for documented parasitic infections by physician. Off-label use (COVID-19, cancer) NOT supported.",
+    "coupled_systems": [
+      "11_IMMUNE",
+      "24_CHRONIC_INFECTIONS"
+    ],
+    "red_flags": "Request for COVID-19 use (not supported), Self-medication without diagnosis, Pregnancy/breastfeeding, Loa loa coinfection risk (West/Central Africa).",
+    "triage_questions": "What condition are you hoping to treat with ivermectin? Have you been diagnosed with a parasitic infection? Have you traveled to areas with Loa loa (West/Central Africa)?",
+    "teleconsult_limits": "No prescribing for COVID-19 or cancer. Parasitic use requires physician evaluation and positive test or strong clinical suspicion."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Ivermectin at REVIV: PHYSICIAN-ONLY, INDICATION-RESTRICTED.\n- APPROVED: Documented parasitic infections (strongyloides, onchocerciasis, scabies, intestinal parasites).\n- NOT SUPPORTED: COVID-19 treatment/prophylaxis, cancer treatment, Long COVID.\n- If patient asks for COVID use: empathetic redirect to evidence-based options.\n- Requires: Positive stool/blood parasite test OR strong clinical suspicion + physician evaluation.",
+    "s1_claims_discipline_internal": "- We explain that ivermectin is an effective antiparasitic medication for specific indications.\n- We do NOT claim efficacy for COVID-19 (large RCTs negative: TOGETHER, ACTIV-6).\n- We do NOT claim efficacy for cancer (preclinical only, no human data).\n- We position ourselves as evidence-based while remaining non-judgmental.",
+    "s2_patient_communication_public": "I understand COVID is a real concern, and it's natural to look for options.\n\nIvermectin was studied extensively for COVID-19, but the large clinical trials — including TOGETHER and ACTIV-6 — didn't show it helps. So it's not something we prescribe for that purpose.\n\nHowever, if you're dealing with ongoing symptoms after COVID, or you want to support your immune system, we do have protocols that have helped many people. Would you like to hear about those?\n\n---\n\n[If asking for parasites:]\nFor parasitic infections, ivermectin can definitely be appropriate — it's actually very effective for certain parasites. But we do need a doctor's evaluation and usually a test to confirm what we're treating. Would you like to book a consultation? They can order the right tests and prescribe if needed.",
+    "s3_pharmacokinetics_adme_internal": "## APPROVED INDICATIONS (Evidence-Based)\n- Strongyloidiasis: 200 mcg/kg × 2 days\n- Onchocerciasis (river blindness): 150 mcg/kg single dose\n- Scabies: 200 mcg/kg × 1, repeat day 8-14\n- Head lice (topical): 0.5% lotion\n- Other intestinal parasites: Per physician protocol\n\n## NOT SUPPORTED USES (Insufficient Evidence)\n- COVID-19 treatment or prophylaxis: Large RCTs (TOGETHER, ACTIV-6) showed no benefit. WHO, FDA, EMA do not recommend.\n- Cancer treatment: Preclinical studies only; no human trial data.\n- Long COVID: No RCT evidence; anecdotal only.\n\n## SAFETY CONSIDERATIONS\n- Contraindications: Pregnancy (Category C), Breastfeeding (excreted in milk), Children <15kg (dose adjustment), Loa loa coinfection (risk of fatal encephalopathy in West/Central Africa travelers).\n- Drug interactions: Warfarin (may increase INR), CYP3A4 inhibitors (increase ivermectin levels).\n- Side effects: Generally well-tolerated. Mazzotti reaction possible in filariasis (fever, rash, hypotension).",
+    "s4_limitations_failure_modes_internal": "- COVID misinformation: Many patients have been exposed to claims not supported by evidence.\n- Desperation/distrust: Some patients distrust mainstream medicine; maintain rapport.\n- Self-sourcing: Patients may obtain veterinary ivermectin; counsel on dangers.\n- Loa loa: Must screen West/Central Africa travel; fatal encephalopathy risk.",
+    "s5_clinical_decision_trees_internal": "## IF PATIENT ASKS FOR IVERMECTIN — COVID-19\n1. Acknowledge their concern (non-judgmental).\n2. Explain: Large trials didn't show benefit; not something we prescribe for COVID.\n3. Ask: What symptoms are you experiencing? (redirect to what we CAN help with)\n4. Offer: Immune support protocols, Long COVID support if applicable.\n\n## IF PATIENT ASKS FOR IVERMECTIN — PARASITES\n1. Ask: Have you been diagnosed? Any travel history?\n2. If suspected parasites: Offer physician consultation for proper workup.\n3. Physician will order: Stool O&P, serologies as indicated.\n4. If positive: Ivermectin can be prescribed with appropriate dosing.\n5. Screen: Loa loa risk if West/Central Africa travel.\n\n## IF PATIENT IS SELF-MEDICATING WITH VETERINARY IVERMECTIN\n1. Do NOT judge.\n2. Explain: Veterinary formulations have different concentrations and inactive ingredients; human formulations are safer.\n3. Offer: Physician consultation for proper evaluation if parasites suspected.\n4. Document discussion."
+  },
+  "display_name": "Safety Gate — Ivermectin Protocol",
+  "domain": "Policy",
+  "kind": "narrow",
+  "purpose": "policy"
+}

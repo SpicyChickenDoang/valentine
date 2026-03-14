@@ -5,7 +5,7 @@ const path = require('path');
 const REPO_ROOT = path.resolve(__dirname, '..');
 // FIX P2: Dynamic path based on TENANT_DOMAIN (multi-domain architecture)
 const domain = process.env.TENANT_DOMAIN || 'default';
-const INDEX_PATH = path.resolve(REPO_ROOT, `kb/${domain}/index.json`);
+const INDEX_PATH = path.resolve(REPO_ROOT, `kb/index.json`);
 // ─── Boot-time index load ───────────────────────────────────────────────────
 // Loaded once, held in memory. Key = canonical id, value = index entry.
 let _index = null;

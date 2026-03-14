@@ -1,0 +1,40 @@
+{
+  "id": "00_policy_pro_oxidant_gate_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "PRO_OXIDANT",
+      "G6PD",
+      "IVC",
+      "OZONE",
+      "HEMOLYSIS",
+      "SAFETY_GATE",
+      "CONTRAINDICATION"
+    ],
+    "category": "Safety Gate — Pro-Oxidant Therapy Screening",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Mandatory screening for G6PD deficiency and other contraindications before recommending high-dose IVC (>15g), ozone, UBI, or H2O2 therapy.",
+    "coupled_systems": [
+      "32_iv_ivc_high_dose_v3",
+      "32_iv_mah_ozonotherapy_v1",
+      "00_triage_red_flags_universal"
+    ],
+    "red_flags": "G6PD deficiency (ABSOLUTE), Active hemolysis, Recent transfusion (<3 months), Severe renal insufficiency (eGFR <30), Iron overload/hemochromatosis, Pregnancy.",
+    "triage_questions": "Have you ever been tested for G6PD deficiency? Do you have any history of anemia or blood disorders? Have you had a blood transfusion in the past 3 months? Any kidney problems?",
+    "teleconsult_limits": "NO high-dose IVC or ozone until G6PD result documented as normal. Require lab confirmation before scheduling."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- Pro-oxidant therapies: High-dose IVC (>15g), Ozone (MAH/rectal/limb), UBI, IV H2O2.\n- MANDATORY: G6PD quantitative assay before any dose >10g IVC or any ozone.\n- G6PD deficient = ABSOLUTE CONTRAINDICATION (fatal hemolysis risk).\n- High-risk populations: Mediterranean, African, Southeast Asian ancestry (up to 25% prevalence in some regions).\n- If G6PD unknown: order test, do NOT proceed until result confirmed normal.",
+    "s1_claims_discipline_internal": "- We explain that pro-oxidant therapies work via oxidative stress mechanisms.\n- We do NOT proceed without documented G6PD clearance.\n- We acknowledge that even with clearance, oxidative therapies carry inherent risks.",
+    "s2_patient_communication_public": "Before we proceed with high-dose Vitamin C or ozone therapy, I need to check — have you ever been tested for G6PD deficiency?\n\nThis is a genetic condition that affects how your red blood cells handle oxidative stress. It's more common in certain populations, and it's really important for your safety that we know your status before these therapies.\n\nIf you haven't been tested, no problem — we can do a quick blood test before your session. Would you like me to add that to your booking?",
+    "s3_pharmacokinetics_adme_internal": "## PRO-OXIDANT THERAPY MECHANISMS\n- High-dose IV Vitamin C (>15g): Becomes pro-oxidant at pharmacological doses; generates H2O2 via Fenton reaction in extracellular fluid.\n- Ozone therapy (MAH, rectal, limb bagging): Controlled oxidative stress; ozonides and lipid peroxidation products mediate effects.\n- UBI (Ultraviolet Blood Irradiation): UV-induced oxidative modification of blood components.\n- IV Hydrogen Peroxide: Direct H2O2 administration (rarely used).\n\n## G6PD DEFICIENCY PATHOPHYSIOLOGY\n- G6PD enzyme generates NADPH via pentose phosphate pathway.\n- NADPH is essential for glutathione regeneration (antioxidant defense).\n- G6PD-deficient RBCs cannot neutralize oxidative stress → acute hemolysis.\n- Hemolysis can be severe, rapid, and potentially fatal.\n\n## OTHER CONTRAINDICATIONS\n- Active hemolysis or hemolytic anemia: Oxidative stress worsens hemolysis.\n- Recent blood transfusion (<3 months): May mask G6PD status (donor cells).\n- Severe renal insufficiency (eGFR <30): Oxalate risk with IVC.\n- Iron overload/hemochromatosis: Amplified oxidative stress via Fenton chemistry.\n- Pregnancy/breastfeeding: See 00_policy_pregnancy_breastfeeding.",
+    "s4_limitations_failure_modes_internal": "- False negative G6PD: Qualitative tests may miss partial deficiency; use quantitative assay.\n- Recent hemolysis: Can falsely elevate G6PD activity (young RBCs); retest after recovery.\n- Female carriers: X-linked condition; heterozygous females may have intermediate enzyme levels and still be at risk.\n- Patient non-disclosure: Some patients may not know their G6PD status or family history.",
+    "s5_clinical_decision_trees_internal": "## MANDATORY SCREENING ALGORITHM\n- IF requesting high-dose IVC (>10g) OR ozone therapy: THEN check G6PD status.\n- IF G6PD result on file AND normal: THEN may proceed with therapy.\n- IF G6PD result on file AND deficient: THEN ABSOLUTE CONTRAINDICATION. Offer alternatives (Myers, NAD+, etc.).\n- IF G6PD unknown: THEN order quantitative G6PD assay BEFORE scheduling therapy.\n- IF patient refuses G6PD test: THEN do NOT proceed with pro-oxidant therapy.\n\n## PRE-TREATMENT CHECKLIST\n1. G6PD quantitative result: NORMAL\n2. eGFR: >30 mL/min (>45 preferred for high-dose IVC)\n3. No active hemolysis (check H&H, retic, LDH, haptoglobin if concern)\n4. No recent transfusion (<3 months)\n5. Not pregnant/breastfeeding\n6. No hemochromatosis/iron overload"
+  },
+  "display_name": "Safety Gate — Pro-Oxidant Therapy (G6PD)",
+  "domain": "Policy",
+  "kind": "broad",
+  "purpose": "policy"
+}

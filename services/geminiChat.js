@@ -65,7 +65,7 @@ async function agentChat({ modelTier, cacheName, kbContext, dossier, history, me
                 ]
             }
         ],
-        generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
+        generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
     };
 
     // C7 — wrap axios: detect CACHE_EXPIRED (404), rate limit (429), server errors (5xx)
@@ -109,7 +109,7 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
         cachedContent: cacheName,
         contents: [{ role: 'user', parts: userParts }],
         // tools are now in the cache - do NOT pass them here or Gemini will return 400
-        generationConfig: { temperature: 0.3, maxOutputTokens: 800 }
+        generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
     };
 
     // DEBUG: Log request details (remove sensitive data in production)
@@ -148,7 +148,7 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
                 { role: 'model', parts: [{ functionCall: { name, args: args } }] },
                 { role: 'user', parts: [{ functionResponse: { name, response: { result: toolResult } } }] }
             ],
-            generationConfig: { temperature: 0.1, maxOutputTokens: 800 }  // M5: deterministic for clinical math follow-up
+            generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }  // M5: deterministic for clinical math follow-up
         };
         // BUG-G8 FIX: timeout added on followUp call
         let d2;
