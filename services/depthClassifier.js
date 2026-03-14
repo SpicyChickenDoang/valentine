@@ -57,8 +57,7 @@ const buildClassifierPrompt = (domain, history, message) => {
         ${history}
 
         Latest message:
-        ${message}
-        `.trim();
+        ${message}`.trim();
 };
 
 async function classifyDepth({ domain, history, message, geminiClient }) {

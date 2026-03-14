@@ -77,7 +77,6 @@ const worker = new Worker(
         // 2. Classify depth — C2: geminiClient passed, C3: history serialized as strings
         // FIX P1: tenantId (ex: reviv_bali) ≠ domain (ex: valentine). Use TENANT_DOMAIN env.
         const tenantDomain = process.env.TENANT_DOMAIN;
-        console.log(`[chatWorker] INCOMING TO CLASSIFYDEPTH`);
         const modelTier = await classifyDepth({
             domain: tenantDomain,
             history: history
@@ -88,9 +87,6 @@ const worker = new Worker(
             message,
             geminiClient  // C2 — was missing, caused silent TypeError → permanent flash fallback
         }).catch(() => 'flash');
-
-        console.log(`[chatWorker] modelTier: ${modelTier}`);
-        
 
         // 3. Get shared cache — now returns JSON with both model caches
         // FIX: use 'let' so we can reassign after retry
