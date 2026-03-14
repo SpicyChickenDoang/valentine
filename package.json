@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
     "ngroka": "ngrok http 3000 --domain=kasey-bandboxical-nolan.ngrok-free.dev",
-    "ngroke": "ngrok http 3000 --domain=domain_lu_win"
+    "ngroke": "ngrok http 3000 --domain=domain_lu_win",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -24,8 +25,10 @@
     "pg": "^8.20.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@jest/globals": "^30.3.0",
     "eslint": "^10.0.3",
+    "globals": "^17.4.0",
     "jest": "^30.3.0"
   }
 }
