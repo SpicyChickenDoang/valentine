@@ -97,20 +97,21 @@ const worker = new Worker(
             geminiClient  // C2 — was missing, caused silent TypeError → permanent flash fallback
         }).catch(() => 'flash');
 
-        // 3. Get shared cache — C4: guard null (first boot / Redis flush)
+        // 3. Get shared cache — now returns JSON with both model caches
         // FIX: use 'let' so we can reassign after retry
-        let cacheName = await redis.get(`${tenantId}:agent:cache_name`);
-        if (!cacheName) {
+        let cacheJson = await redis.get(`${tenantId}:agent:cache_name`);
+        if (!cacheJson) {
             // M2 — give 3s for race condition at startup (container boot), then retry via throw
             await new Promise(r => setTimeout(r, 3000));
-            // FIX: reassign cacheName, not new variable
-            cacheName = await redis.get(`${tenantId}:agent:cache_name`);
-            if (!cacheName) {
+            // FIX: reassign cacheJson, not new variable
+            cacheJson = await redis.get(`${tenantId}:agent:cache_name`);
+            if (!cacheJson) {
                 await sendChunked(waClient, from, SAFE_MODE_MESSAGE);
                 await notifyAlert(tenantId, { type: 'cache_missing', job_id: job.id });
                 throw new Error('CACHE_NOT_READY');  // M2: throw not return — BullMQ retries, message not lost
             }
         }
+        const cacheNames = JSON.parse(cacheJson);
 
         // 4. KB retrieval — L1: hard-stops run regardless of depth tier (safety-critical)
         const hardStopIds = runPrefilter(message);       // always run — pregnancy/G6PD/etc must load even on Flash
@@ -122,7 +123,9 @@ const worker = new Worker(
             retrievedIds = [...hardStopIds];
         }
         if (modelTier === 'pro') {
-            const relevant = loadKBFiles(await resolveKBIds(message, cacheName));
+            const geminiModel = modelTier === 'pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+            const cacheName = cacheNames[geminiModel];
+            const relevant = loadKBFiles(await resolveKBIds(message, cacheName, geminiModel));
             kbContext += formatKBContext(relevant);
             retrievedIds = [...new Set([...retrievedIds, ...relevant.map(p => p.id)])];
         }
@@ -164,6 +167,11 @@ const worker = new Worker(
                 ];
                 // FIX: Convert tier to actual Gemini model ID
                 const geminiModel = modelTier === 'pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+                // Select the correct cache for this model
+                const cacheName = cacheNames[geminiModel];
+                if (!cacheName) {
+                    throw new Error(`[chatWorker] Cache not found for model: ${geminiModel}`);
+                }
                 // tools are now in the cache - no need to pass them
                 const res = await geminiChatWithTools({ model: geminiModel, cacheName, userParts });
                 ({ text, model, cachedTokens, inputTokens, outputTokens } = res);

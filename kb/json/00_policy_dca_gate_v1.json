@@ -1,0 +1,39 @@
+{
+  "id": "00_policy_dca_gate_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "DCA",
+      "DICHLOROACETATE",
+      "WARBURG",
+      "METABOLIC",
+      "NEUROPATHY",
+      "EXPERIMENTAL",
+      "ONCOLOGY"
+    ],
+    "category": "Safety Gate — DCA (Experimental Protocol)",
+    "intervention_priority": "MEDIUM (Case-by-Case)",
+    "use_for": "Handling DCA (dichloroacetate) requests. NOT in standard formulary. May only be considered for advanced cancer under strict physician protocol.",
+    "coupled_systems": [
+      "25_ONCOLOGY_SUPPORT",
+      "12_onco_metabolic_priming"
+    ],
+    "red_flags": "Peripheral neuropathy (common side effect), Pregnancy (teratogenic), Unmonitored self-administration, Expectation of 'cure'.",
+    "triage_questions": "What is your cancer diagnosis and current treatment status? Have you discussed integrative options with your oncologist? Are you aware DCA is experimental with limited human evidence?",
+    "teleconsult_limits": "NO remote prescribing. Requires in-person physician evaluation, informed consent, baseline neuro exam, thiamine co-supplementation, regular monitoring."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- DCA: NOT standard formulary. EXPERIMENTAL, PHYSICIAN-ONLY, CASE-BY-CASE.\n- Mechanism: Inhibits PDK → shifts cancer cell metabolism from glycolysis to oxidative phosphorylation (reverses Warburg effect).\n- Evidence: Promising preclinical; limited Phase I/II human data; no large RCT.\n- Main risk: Peripheral neuropathy (common, dose-dependent, usually reversible).\n- Requirements: Oncologist clearance OR terminal diagnosis, informed consent, baseline neuro, thiamine (B1) co-supplementation, regular monitoring.",
+    "s1_claims_discipline_internal": "- We explain DCA has interesting science targeting cancer metabolism.\n- We do NOT claim it cures cancer or guarantees tumor response.\n- We explain it is experimental with limited human evidence.\n- We are transparent about neuropathy risk and monitoring requirements.",
+    "s2_patient_communication_public": "DCA is something we're familiar with — it targets cancer cell metabolism in an interesting way. The idea is to shift how cancer cells produce energy, potentially making them more vulnerable.\n\nThe research is promising but still early-stage. Most of the evidence comes from lab studies and small human trials. And there's a real side effect we need to discuss: nerve damage (neuropathy). It's common with DCA, though usually reversible if we catch it early.\n\nIt's not something we offer routinely, but for certain situations — especially when other options are limited — our doctor can evaluate whether it might be worth considering. Would you like to book a consultation to discuss your specific case?",
+    "s3_pharmacokinetics_adme_internal": "## MECHANISM OF ACTION\n- DCA inhibits pyruvate dehydrogenase kinase (PDK).\n- PDK normally inhibits pyruvate dehydrogenase (PDH).\n- PDH converts pyruvate → acetyl-CoA for mitochondrial oxidation.\n- Cancer cells (Warburg phenotype): High glycolysis, suppressed oxidative phosphorylation.\n- DCA effect: Reactivates PDH → forces cancer cells into oxidative metabolism → may restore apoptosis sensitivity.\n\n## EVIDENCE STATUS\n- Preclinical: Promising in vitro and animal studies across multiple tumor types.\n- Human trials: Small Phase I/II studies (Michelakis 2010 glioblastoma). Some responses observed. No large RCT.\n- Conclusion: Experimental. Not standard of care. May be considered in treatment-refractory cases.\n\n## PERIPHERAL NEUROPATHY\n- Frequency: Common (dose-dependent, cumulative).\n- Presentation: Numbness, tingling, pain in hands/feet (stocking-glove distribution).\n- Mechanism: Likely thiamine (B1) depletion; direct nerve toxicity.\n- Prevention: Co-administer thiamine 100-300mg daily.\n- Management: Dose reduction or discontinuation; usually reversible.\n\n## OTHER SIDE EFFECTS\n- Sedation/drowsiness\n- GI upset\n- Elevated liver enzymes (rare)\n- Teratogenic in animal studies — contraindicated in pregnancy.",
+    "s4_limitations_failure_modes_internal": "- False hope: Patients may expect cure from experimental therapy.\n- Self-administration: DCA available online; unmonitored use is dangerous.\n- Neuropathy monitoring: Requires patient compliance with reporting symptoms.\n- Interaction with thiamine-depleting conditions: Alcohol use, malnutrition increase neuropathy risk.",
+    "s5_clinical_decision_trees_internal": "## IF PATIENT ASKS ABOUT DCA\n1. Acknowledge interest; explain experimental status.\n2. Ask: Cancer diagnosis, current treatment, oncologist involvement.\n3. If appropriate candidate: Offer physician consultation.\n4. Not appropriate if: Existing neuropathy, pregnancy, unable to comply with monitoring.\n\n## IF WE OFFER DCA — PREREQUISITES\n1. Advanced/metastatic cancer with limited conventional options.\n2. Patient understands experimental nature (informed consent).\n3. Baseline nerve conduction study OR detailed clinical neuro exam.\n4. Thiamine (B1) supplementation started BEFORE DCA.\n5. Regular follow-up: Neuro symptoms weekly initially, LFTs monthly.\n\n## DOSING (Physician Protocol Only)\n- Typical: 10-25 mg/kg/day in divided doses.\n- Start low, titrate based on tolerance.\n- If neuropathy symptoms: Reduce dose or discontinue.\n\n## IF PATIENT ALREADY ON DCA (Self-Administering)\n1. Ask: Are you also taking thiamine (B1)? (Critical for neuropathy prevention)\n2. Ask: Any numbness or tingling in hands/feet?\n3. Recommend: Physician oversight, proper monitoring.\n4. Document discussion."
+  },
+  "display_name": "Safety Gate — DCA (Experimental)",
+  "domain": "Policy",
+  "kind": "narrow",
+  "purpose": "policy"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "00_policy_pregnancy_breastfeeding_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "PREGNANCY",
+      "BREASTFEEDING",
+      "NURSING",
+      "LACTATION",
+      "CONTRAINDICATION",
+      "SAFETY_GATE",
+      "WOMEN_HEALTH"
+    ],
+    "category": "Safety Gate — Pregnancy & Breastfeeding",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Screening all female patients for pregnancy/breastfeeding status before recommending IV protocols, supplements, or medications.",
+    "coupled_systems": [
+      "32_IV_THERAPIES",
+      "00_triage_red_flags_universal",
+      "28_PREGNANCY"
+    ],
+    "red_flags": "Pregnancy confirmed or suspected, Currently breastfeeding, Trying to conceive (TTC) with high-risk protocol requested.",
+    "triage_questions": "Are you currently pregnant or is there any chance you could be pregnant? Are you currently breastfeeding?",
+    "teleconsult_limits": "No high-risk therapies (ozone, high-dose IVC, NAD+ >250mg, chelation) without in-person physician clearance. Defer complex cases to OB/GYN."
+  },
+  "content": {
+    "s0_quick_reference_internal": "- ALWAYS screen for pregnancy/breastfeeding status before recommending IV protocols.\n- If pregnant/nursing: limit to SAFE_LIST only (Myers, B12, Mg, low-dose glutathione drip).\n- ABSOLUTE NO: Ozone, high-dose IVC (>25g), NAD+ >250mg, chelation, DCA, B17, high-dose Vitamin A.\n- Flag conversation and escalate complex cases to physician.\n- For TTC patients: treat as potentially pregnant for protocol selection.",
+    "s1_claims_discipline_internal": "- We do NOT claim any IV therapy is 'proven safe' in pregnancy without explicit evidence.\n- We position therapies as 'generally considered low-risk' or 'limited safety data available.'\n- We always recommend physician clearance for any intervention during pregnancy/nursing.",
+    "s2_patient_communication_public": "Thank you for letting me know. Some of our IV therapies aren't recommended during pregnancy or breastfeeding — we want to make sure you and your baby stay safe.\n\nLet me check which options are appropriate for you. Some therapies like our Myers Cocktail (with adjusted B6) and B12 injections are generally considered safe, but I'd like to connect you with our doctor for personalized guidance.\n\nWhat symptoms are you hoping to address? That will help me understand how we can best support you.",
+    "s3_pharmacokinetics_adme_internal": "## ABSOLUTE CONTRAINDICATIONS (Pregnancy & Breastfeeding)\n- High-dose Vitamin C IV (>25g): Theoretical oxalate load, insufficient safety data\n- Ozone therapy (all routes): No safety data, oxidative stress concern\n- HBOT >1.5 ATA: Fetal oxygen toxicity risk\n- NAD+ IV (>250mg): Insufficient human pregnancy data\n- Chelation therapy (EDTA, DMSA, DMPS): Fetal heavy metal redistribution risk\n- DCA (Dichloroacetate): Teratogenic in animal studies\n- B17/Amygdalin: Cyanide metabolite risk to fetus\n- High-dose Vitamin A (>10,000 IU): Teratogenic\n- Ivermectin: Category C; avoid unless physician-directed for documented parasites\n\n## RELATIVE CAUTIONS (May Use with Physician Clearance)\n- Myers Cocktail: Generally safe; confirm B6 dose <100mg\n- Vitamin D: Safe up to 4000 IU/day; test levels first\n- Iron infusion: Safe in 2nd/3rd trimester for documented deficiency\n- B12 injection: Safe; preferred for deficiency\n- Magnesium IV: Safe; commonly used in obstetrics\n- Low-dose Glutathione drip: Likely safe; limited data\n\n## BREASTFEEDING SPECIFIC\n- Most water-soluble vitamins pass minimally into breast milk\n- Fat-soluble vitamins and xenobiotics require more caution\n- Safe: B-complex, Vitamin C oral/low-dose IV, Magnesium, Zinc, Vitamin D (up to 6400 IU)\n- Avoid: Ozone, Chelation, DCA, B17, High-dose NAD+, Ivermectin",
+    "s4_limitations_failure_modes_internal": "- Under-reporting: Patients may not disclose pregnancy or may be unaware (early pregnancy). Always ask directly.\n- TTC patients: May become pregnant between booking and appointment; re-screen at time of service.\n- Partner pressure: Some patients may minimize concerns to proceed with therapy; maintain safety limits.\n- Emergency situations: Even 'safe' therapies require careful consideration if patient presents with complications.",
+    "s5_clinical_decision_trees_internal": "## SCREENING ALGORITHM\n- IF female of childbearing age (12-55): THEN ASK pregnancy/breastfeeding status.\n- IF pregnant OR possibly pregnant: THEN limit to SAFE_LIST only.\n- IF breastfeeding: THEN limit to SAFE_LIST only.\n- IF TTC (trying to conceive): THEN treat as potentially pregnant.\n- IF unsure of pregnancy status: THEN recommend pregnancy test before high-risk therapy.\n\n## SAFE_LIST (Pregnancy & Breastfeeding)\n- Myers Cocktail (B6 <100mg)\n- B12 injection\n- Magnesium IV\n- Iron infusion (2nd/3rd trimester, documented deficiency)\n- Low-dose Vitamin C (<10g)\n- Low-dose Glutathione drip\n\n## ABSOLUTE NO-GO LIST\n- Ozone (all routes)\n- High-dose IVC (>25g)\n- NAD+ >250mg\n- Chelation\n- DCA\n- B17/Amygdalin\n- HBOT >1.5 ATA"
+  },
+  "display_name": "Safety Gate — Pregnancy & Breastfeeding",
+  "domain": "Policy",
+  "kind": "broad",
+  "purpose": "policy"
+}

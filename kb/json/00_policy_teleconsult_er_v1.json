@@ -1,0 +1,43 @@
+{
+  "id": "00_policy_teleconsult_er_v1",
+  "version": "1.0",
+  "type": "policy",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "EMERGENCY",
+      "ER",
+      "URGENT",
+      "AMBULANCE",
+      "ESCALATION",
+      "RED_FLAG",
+      "HOSPITAL",
+      "118",
+      "BIMC",
+      "SILOAM"
+    ],
+    "category": "Core Policy — Emergency Escalation & ER Referral",
+    "intervention_priority": "CRITICAL (Safety Core)",
+    "use_for": "Recognizing life-threatening emergencies and IMMEDIATELY directing patient to call emergency services or go to nearest ER. Do NOT attempt to manage emergencies via chat.",
+    "coupled_systems": [
+      "00_triage_red_flags_universal",
+      "00_triage_bleeding",
+      "00_triage_neuro"
+    ],
+    "red_flags": "Chest pain, Severe headache (worst ever), Difficulty breathing, Stroke symptoms (FAST), Severe allergic reaction, Uncontrolled bleeding, Loss of consciousness, Seizure, Suicidal ideation with plan.",
+    "triage_questions": "Do NOT delay with questions if clear emergency. For unclear cases: Is this symptom sudden/severe? Any chest pain? Difficulty breathing? Weakness on one side? Confusion?",
+    "teleconsult_limits": "CANNOT manage emergencies via chat. Immediate ER referral only. Flag conversation for human review."
+  },
+  "content": {
+    "s0_quick_reference_internal": "## PRIORITY: PATIENT SAFETY OVERRIDES ALL OTHER CONCERNS\n- Recognize life-threatening emergencies immediately.\n- Direct patient to call 118 (ambulance) or go to nearest ER.\n- Do NOT attempt to manage, diagnose, or treat emergencies via chat.\n- Do NOT continue booking or consultation discussion during emergency.\n- Flag conversation for human review within 1 hour.\n\n## BALI EMERGENCY NUMBERS\n- Ambulance: 118 or 119\n- Police: 110",
+    "s1_claims_discipline_internal": "- We do NOT diagnose emergencies — we recognize patterns that require immediate evaluation.\n- We do NOT provide detailed medical instructions beyond 'go to ER now.'\n- We do NOT ask for payment, insurance, or booking information during emergencies.\n- We acknowledge uncertainty while erring on side of safety.",
+    "s2_patient_communication_public": "## CHEST PAIN RESPONSE\n\"This sounds like it could be serious. Please don't wait — call 118 for an ambulance or go directly to the nearest emergency room. BIMC Kuta (+62 361 761263) has 24/7 emergency care. Your heart health is the priority right now. Please go immediately.\"\n\n## STROKE SYMPTOMS RESPONSE\n\"What you're describing could be signs of a stroke. Time is critical — every minute matters. Please call 118 NOW or have someone drive you to the nearest ER immediately. BIMC or Siloam both have 24/7 emergency rooms.\"\n\n## DIFFICULTY BREATHING RESPONSE\n\"Difficulty breathing is an emergency. Please call 118 or go to the nearest ER right away. If you have an EpiPen and suspect allergic reaction, use it now. Don't wait to see if it gets better.\"\n\n## SUICIDAL IDEATION RESPONSE\n\"I'm really concerned about what you're sharing. Your safety matters. Please reach out to emergency services (118) or go to the nearest hospital ER now. You can also call the Indonesia mental health crisis line: 119 ext 8. You don't have to go through this alone.\"\n\n## GENERIC EMERGENCY RESPONSE\n\"This sounds like a medical emergency. Please call 118 for an ambulance or go to the nearest emergency room immediately. Here in Bali, BIMC Kuta (+62 361 761263) and Siloam (+62 361 779900) both have 24/7 emergency care. Please don't delay — your health comes first.\"",
+    "s3_pharmacokinetics_adme_internal": "## RED FLAG RECOGNITION (GO TO ER NOW)\n\n### CARDIAC\n- Chest pain or pressure (especially with arm/jaw pain, sweating, shortness of breath)\n- Palpitations with syncope or near-syncope\n\n### RESPIRATORY\n- Severe difficulty breathing / can't catch breath\n- Cyanosis (blue lips/fingers)\n\n### NEUROLOGICAL\n- Sudden severe headache ('worst headache of my life' / thunderclap)\n- FAST positive: Face drooping, Arm weakness, Speech difficulty\n- New seizure (especially first-time or prolonged >5 min)\n- Sudden confusion or altered mental status\n\n### BLEEDING\n- Uncontrolled bleeding from any source\n- Vomiting blood (hematemesis)\n- Black tarry stools (melena)\n\n### ALLERGIC/ANAPHYLAXIS\n- Throat swelling, difficulty swallowing\n- Widespread hives with breathing difficulty\n- Facial/tongue swelling\n\n### PSYCHIATRIC\n- Suicidal ideation with plan or intent\n- Active self-harm\n\n### OTHER\n- Loss of consciousness / unresponsive\n- High fever (>40°C) with confusion\n- Trauma / accident with significant injury\n- Pregnancy with heavy bleeding or severe pain\n- Overdose / poisoning\n\n## BALI HOSPITAL DIRECTORY\n- BIMC Hospital Kuta: Jl. Bypass Ngurah Rai No.100X, Kuta. +62 361 761263. 24/7 ER, international standard.\n- BIMC Hospital Nusa Dua: Kawasan BTDC Blok D, Nusa Dua. +62 361 3000911. 24/7 ER.\n- Siloam Hospital Bali: Jl. Sunset Road No.818, Kuta. +62 361 779900. 24/7 ER.\n- Kasih Ibu Hospital: Jl. Teuku Umar No.120, Denpasar. +62 361 223036. 24/7 ER.\n- Sanglah General Hospital: Jl. Diponegoro, Denpasar. +62 361 227911. Government referral hospital, trauma center.",
+    "s4_limitations_failure_modes_internal": "- Delayed recognition: Patient may minimize symptoms. Maintain high suspicion.\n- Language barrier: Patient may not clearly describe emergency. Ask clarifying questions quickly.\n- Connectivity issues: If patient goes silent during emergency discussion, attempt callback or note for follow-up.\n- Remote patients: May not have access to Bali hospitals. Provide generic guidance: 'Go to your nearest emergency room.'",
+    "s5_clinical_decision_trees_internal": "## IMMEDIATE ACTION PROTOCOL\n1. Acknowledge the urgency clearly.\n2. Instruct to call emergency services (118) OR go to nearest ER.\n3. Provide emergency numbers and hospital options.\n4. Do NOT continue booking or consultation discussion.\n5. Flag conversation for human review.\n\n## WHAT NOT TO DO\n- Do NOT try to diagnose the emergency.\n- Do NOT suggest IV therapy or supplements for emergencies.\n- Do NOT ask them to book an appointment first.\n- Do NOT continue normal conversation flow.\n- Do NOT give detailed medical instructions beyond 'go to ER.'\n- Do NOT ask for payment or insurance information.\n\n## POST-EMERGENCY FOLLOW-UP\n- After stabilization: 'Once you've been seen at the hospital and things are stable, please let us know how you're doing. We're here to support your recovery.'\n- All emergency escalations are flagged for human review within 1 hour."
+  },
+  "display_name": "Core Policy — Emergency Escalation (ER)",
+  "domain": "Policy",
+  "kind": "broad",
+  "purpose": "policy"
+}

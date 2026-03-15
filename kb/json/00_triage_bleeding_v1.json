@@ -1,0 +1,40 @@
+{
+  "id": "00_triage_bleeding_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "TRIAGE",
+      "BLEEDING",
+      "HEMORRHAGE",
+      "RED_FLAG",
+      "EMERGENCY",
+      "HEMATEMESIS",
+      "MELENA",
+      "HEMATURIA"
+    ],
+    "category": "Triage — Bleeding Red Flags",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Identifying bleeding presentations requiring urgent ER evaluation vs. those appropriate for outpatient IV therapy.",
+    "coupled_systems": [
+      "00_policy_teleconsult_er",
+      "00_triage_red_flags_universal"
+    ],
+    "red_flags": "Vomiting blood (hematemesis), Black tarry stools (melena), Coughing blood (hemoptysis), Uncontrolled wound bleeding, Vaginal bleeding in pregnancy, Bleeding with shock signs.",
+    "triage_questions": "Are you currently experiencing any bleeding? Blood in stool, urine, or when you cough? Bruise easily or unusual bleeding from gums/nose? Taking blood thinners (warfarin, aspirin, Plavix)? If menstruating — heavier than normal?",
+    "teleconsult_limits": "Do NOT proceed with IV therapy if active significant bleeding. ER referral for red flags. Hold therapy if INR >3.5, platelets <50k, or suspected coagulopathy."
+  },
+  "content": {
+    "s0_quick_reference_internal": "## IMMEDIATE ER REFERRAL (STOP → ER NOW)\n- Vomiting blood (hematemesis): GI hemorrhage.\n- Black tarry stools (melena): Upper GI bleed.\n- Large volume blood in stool (hematochezia): Lower GI bleed.\n- Coughing up blood (hemoptysis): Pulmonary hemorrhage.\n- Uncontrolled bleeding from wound/trauma.\n- Vaginal bleeding in pregnancy: OB emergency.\n- Bleeding with shock signs (pale, sweaty, confused, rapid pulse).\n\n## HOLD IV THERAPY IF\n- Active bleeding of any significant degree.\n- INR >3.5 or unknown in warfarin patient.\n- Platelets <50,000 (IM injections contraindicated; IV access with caution).\n- Suspected coagulopathy not yet worked up.",
+    "s1_claims_discipline_internal": "- We do NOT diagnose the cause of bleeding — we recognize patterns requiring evaluation.\n- We err on the side of safety — unclear bleeding → refer.\n- We do NOT perform procedures on actively bleeding patients.",
+    "s2_patient_communication_public": "## IF RED FLAG BLEEDING DETECTED\n\"What you're describing sounds like it needs urgent medical attention. Please go to the nearest emergency room right away — in Bali, BIMC Kuta (+62 361 761263) has 24/7 emergency care. Bleeding like this needs to be evaluated before we can safely help you with anything else. Please don't delay.\"\n\n## IF MINOR BLEEDING (e.g., hemorrhoids, minor nosebleed)\n\"Thanks for letting me know. That sounds like [hemorrhoid bleeding / minor nosebleed] which is usually not serious, but if it's happening frequently or getting worse, you should have it checked out. For today's visit, we can proceed — just let the nurse know about the bleeding when you arrive.\"",
+    "s3_pharmacokinetics_adme_internal": "## IMMEDIATE ER REFERRAL — DETAIL\n\n### Hematemesis (Vomiting Blood)\n- Concern: GI hemorrhage — variceal, ulcer, Mallory-Weiss.\n- Action: ER NOW. Do not proceed with any treatment.\n\n### Melena (Black Tarry Stools)\n- Concern: Upper GI bleed (blood digested).\n- Action: ER urgently. May be stable but needs workup.\n\n### Hematochezia (Bright Red Blood in Stool) — Large Volume\n- Concern: Lower GI bleed — diverticular, vascular, malignancy.\n- Action: ER if significant volume or hemodynamically unstable.\n\n### Hemoptysis (Coughing Blood)\n- Concern: Pulmonary hemorrhage — TB, cancer, PE, infection.\n- Action: ER. Even small hemoptysis warrants urgent evaluation.\n\n### Uncontrolled Wound/Trauma Bleeding\n- Action: Apply pressure → ER. Possible surgical emergency or coagulopathy.\n\n### Vaginal Bleeding in Pregnancy\n- Concern: Miscarriage, ectopic, placenta previa, abruption.\n- Action: ER immediately. OB emergency.\n\n### Bleeding + Shock Signs\n- Signs: Pale, sweaty, confused, rapid pulse, hypotension.\n- Concern: Hemorrhagic shock.\n- Action: Call 118. Life-threatening emergency.\n\n## URGENT EVALUATION (24-48h) — NOT ER\n- Heavy menstrual bleeding (soaking pad/hour for >2 hours): Gynecology referral; ER if symptomatic anemia.\n- Visible blood in urine (hematuria): Urology referral within days; ER if clots causing retention.\n- Easy bruising + fatigue + petechiae: Needs CBC urgently; possible thrombocytopenia, leukemia.\n- Bleeding gums + nosebleeds + bruising (triad): Coagulopathy workup; hold procedures.\n- Patient on anticoagulants with minor bleeding: Contact prescribing physician for INR check.",
+    "s4_limitations_failure_modes_internal": "- Minimization: Patients may downplay bleeding severity. Ask specific questions.\n- Hidden bleeding: Melena may not be reported if patient doesn't check stool color.\n- Anticoagulant use: Always ask about blood thinners — changes risk profile.\n- Pregnancy: Always screen women of childbearing age; vaginal bleeding may be miscarriage.",
+    "s5_clinical_decision_trees_internal": "## TRIAGE ALGORITHM\n\n### IF vomiting blood OR black tarry stools OR coughing blood\n→ IMMEDIATE ER REFERRAL. Do not schedule any therapy.\n\n### IF large volume blood in stool OR uncontrolled bleeding OR bleeding + shock signs\n→ CALL 118 or IMMEDIATE ER.\n\n### IF vaginal bleeding + pregnant (or possibly pregnant)\n→ IMMEDIATE ER (OB emergency).\n\n### IF post-procedure bleeding\n→ Return to treating facility or ER.\n\n### IF heavy menstrual bleeding OR visible hematuria OR easy bruising + petechiae\n→ Needs evaluation but not ER. Refer to appropriate specialist. HOLD IV therapy until workup.\n\n### IF patient on anticoagulants with minor bleeding\n→ Contact prescribing physician. May need INR check or dose adjustment.\n\n### IF minor nosebleeds (dry climate), hemorrhoid spotting, expected bruising on blood thinners\n→ Can proceed with IV therapy. Document and inform.\n\n## RELEVANT TO IV THERAPY\n- Vitamin K: May give if on warfarin with elevated INR (physician order).\n- Avoid: Vitamin E, fish oil, ginkgo in actively bleeding patient.\n- Iron infusion: Appropriate for chronic blood loss anemia (after GI/GYN workup)."
+  },
+  "display_name": "Triage — Bleeding Red Flags",
+  "domain": "Triage",
+  "kind": "broad",
+  "purpose": "triage"
+}

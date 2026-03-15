@@ -13,29 +13,29 @@ DEPTH 2 → evaluate ALL signals below. Load the UNION of matched files.
 
 SIGNALS (additive — each matching signal adds its files):
 
-labs_submitted            → [66_LAB_ANALYSIS_ENGINE, 65_BIOMARKER_ATLAS, 35_LAB_INTERPRETATION]
+labs_submitted            → [66_lab_analysis_engine_monograph_v1, 65_BIOMARKER_ATLAS, 35_lab_interpretation_monograph_v1]
 iron / ferritin / microcytosis / thalassemia / recurrent_infusions
-                          → [77_IRON_METABOLISM_THALASSEMIA]
-terrain_assessment_needed → [61_TERRAIN_ASSESSMENT]
+                          → [77_iron_metabolism_thalassemia_v1]
+terrain_assessment_needed → [61_terrain_assessment_monograph_v1]
 multi_system / DEPTH_2    → [78_CLINICAL_REASONING_BRIDGES]
-anomaly_>2x_upper_limit   → [62_CLINICAL_REASONING_ANOMALIES]
-calcitriol_reported       → [00_CRITICAL_REFERENCE, 78_CLINICAL_REASONING_BRIDGES]
+anomaly_>2x_upper_limit   → [62_clinical_reasoning_anomalies_monograph_v1]
+calcitriol_reported       → [00_policy_critical_reference_v1, 78_CLINICAL_REASONING_BRIDGES]
 
-male_≥45                  → [17_MALE_HORMONES]
-female_≥48                → [18_FEMALE_HORMONES]
-thyroid_signal            → [57_THYROID_COMPLETE]
-fatigue_chronic           → [09_HPA_ADRENAL, 07_MITOCHONDRIA]
-sleep_complaint           → [14_SLEEP]
-gut_signal                → [12_GUT]
-cognitive_signal          → [15_COGNITIVE]
-cardiovascular_signal     → [19_CARDIOVASCULAR]
-joint_msk_signal          → [20_JOINTS_MSK]
-weight_metabolic          → [06_METABOLIC, 29_WEIGHT_BODY_COMP]
+male_≥45                  → [17_male_hormones_monograph_v1]
+female_≥48                → [18_female_hormones_monograph_v1]
+thyroid_signal            → [57_thyroid_complete_monograph_v1]
+fatigue_chronic           → [09_hpa_adrenal_monograph_v1, 07_mitochondria_monograph_v1]
+sleep_complaint           → [14_sleep_monograph_v1]
+gut_signal                → [12_gut_monograph_v1]
+cognitive_signal          → [15_cognitive_monograph_v1]
+cardiovascular_signal     → [19_cardiovascular_monograph_v1]
+joint_msk_signal          → [20_joints_msk_monograph_v1]
+weight_metabolic          → [kb/json/06_metabolic_monograph_v1.json, 29_weight_body_comp_monograph_v1]
 
-oncology_context          → [25_ONCOLOGY_SUPPORT, 11_IMMUNE]
-peptides_mentioned        → [33_PEPTIDES]
-iv_therapy_mentioned      → [32_IV_THERAPIES]
-nad_clinical_context      → [08_LONGEVITY_NAD]
+oncology_context          → [25_oncology_support_monograph_v1, 11_immune_monograph_v1]
+peptides_mentioned        → [33_peptides_monograph_v1]
+iv_therapy_mentioned      → [32_iv_therapies_monograph_v1]
+nad_clinical_context      → [08_longevity_nad_monograph_v1]
 specific_monograph        → [exact file id from index]
 
 PRIORITY TRIAGE (only if token window becomes a concern — clinical edge cases):

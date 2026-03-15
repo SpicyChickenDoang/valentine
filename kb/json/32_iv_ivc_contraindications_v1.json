@@ -1,0 +1,39 @@
+{
+  "id": "32_iv_ivc_contraindications_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "IVC",
+      "VITAMIN_C",
+      "HIGH_DOSE",
+      "G6PD",
+      "OXALATE",
+      "CONTRAINDICATION",
+      "RENAL"
+    ],
+    "category": "Contraindications & Safety Screening — High-Dose IVC",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Pre-screening all patients for high-dose IV Vitamin C contraindications. Mandatory G6PD testing before doses >10g.",
+    "coupled_systems": [
+      "32_iv_ivc_high_dose_v3",
+      "00_policy_pro_oxidant_gate"
+    ],
+    "red_flags": "G6PD deficiency (ABSOLUTE — hemolysis), Severe renal insufficiency eGFR <30 (ABSOLUTE — oxalate), History of oxalate kidney stones, Iron overload/hemochromatosis, Active hemolysis, Pregnancy.",
+    "triage_questions": "Have you been tested for G6PD deficiency? Any kidney problems or history of kidney stones? Iron overload or hemochromatosis? Pregnant or breastfeeding? Diabetes (glucometer use)? Currently on chemotherapy (which medications)?",
+    "teleconsult_limits": "NO high-dose IVC (>10g) until G6PD result documented as normal. Require eGFR >30 (>45 preferred). Coordinate with oncology if on chemotherapy."
+  },
+  "content": {
+    "s0_quick_reference_internal": "## IVC DOSE CATEGORIES\n- Low (<15g): Antioxidant, immune support. Minimal restrictions.\n- Moderate (15-50g): Pro-oxidant threshold, oncology supportive. G6PD required.\n- High (50-100g+): Pharmacological, cancer protocols. G6PD + renal + iron panel required.\n\n## ABSOLUTE CONTRAINDICATIONS\n- G6PD deficiency: Fatal hemolysis risk. NO dose >10g.\n- Severe renal insufficiency (eGFR <30): Oxalate nephropathy risk.\n- Active hemolysis: Pro-oxidant stress worsens hemolysis.\n- Iron overload / hemochromatosis: Amplified Fenton reaction oxidative damage.\n\n## MANDATORY PRE-TREATMENT LABS\n- G6PD quantitative assay — BEFORE any dose >10g\n- CMP with creatinine/eGFR\n- CBC (baseline H&H)",
+    "s1_claims_discipline_internal": "- We explain that high-dose IVC has pro-oxidant properties requiring screening.\n- We do NOT proceed without documented G6PD clearance for doses >10g.\n- We explain that results vary and IVC is supportive, not curative.",
+    "s2_patient_communication_public": "Before we proceed with high-dose Vitamin C, I need to check a few things for your safety.\n\nHave you ever been tested for G6PD deficiency? It's a genetic condition that affects how your body handles oxidative stress. If you haven't been tested, we'll need to do a quick blood test first.\n\nI'll also need to know about your kidney function and any history of kidney stones. High-dose Vitamin C is processed through the kidneys, so we want to make sure yours are working well.\n\n[If G6PD deficient:]\nThank you for letting me know. High-dose IV Vitamin C isn't safe for people with G6PD deficiency — but don't worry, we have other great options like our Myers Cocktail or NAD+ therapy. Would you like to explore those?",
+    "s3_pharmacokinetics_adme_internal": "## ABSOLUTE CONTRAINDICATIONS — DETAIL\n\n### G6PD Deficiency\n- Reason: Pro-oxidant IVC generates H2O2; G6PD-deficient RBCs lack NADPH to regenerate glutathione → acute hemolysis.\n- Risk: Severe, rapid hemolysis; potentially fatal.\n- Required test: G6PD quantitative assay (qualitative may miss partial deficiency).\n- Rule: NO dose >10g until G6PD confirmed normal.\n\n### Severe Renal Insufficiency (eGFR <30)\n- Reason: Ascorbic acid metabolizes to oxalate; impaired clearance → oxalate crystal deposition → acute kidney injury.\n- Risk: Oxalate nephropathy, worsening renal failure.\n- Rule: Contraindicated at eGFR <30; caution at 30-45 (dose limit, aggressive hydration).\n\n### History of Oxalate Kidney Stones\n- Reason: IVC increases urinary oxalate excretion.\n- Risk: Stone recurrence.\n- Rule: Avoid high-dose. Low-dose (<10g) with aggressive hydration may be acceptable with urologist clearance.\n\n### Iron Overload / Hemochromatosis\n- Reason: Vitamin C enhances iron absorption AND catalyzes Fenton reaction (Fe2+ + H2O2 → OH•).\n- Risk: Amplified oxidative damage.\n- Rule: Contraindicated until iron normalized (ferritin <300, saturation <45%).\n\n### Active Hemolysis\n- Reason: Pro-oxidant stress exacerbates hemolysis.\n- Rule: Resolve underlying cause; retest hemolysis markers (retic, LDH, haptoglobin, bilirubin) before proceeding.\n\n### Pregnancy\n- Reason: Insufficient safety data at pharmacological doses.\n- Rule: Low-dose (<5g) may be acceptable; high-dose avoided.\n\n## RELATIVE CONTRAINDICATIONS\n- Moderate renal insufficiency (eGFR 30-60): Limit to 25g max; ensure excellent hydration; monitor creatinine.\n- Diabetes (insulin-dependent): High-dose IVC interferes with glucometer readings (false high). Warn patient; use lab glucose, not fingerstick, during/after infusion.\n- Thalassemia trait: Increased oxidative susceptibility. Start low; monitor closely.\n- Active tumor lysis syndrome risk: Hydrate aggressively; start lower dose; monitor uric acid, K+, phosphorus.",
+    "s4_limitations_failure_modes_internal": "- False negative G6PD: Qualitative tests may miss partial deficiency; use quantitative.\n- Recent hemolysis: Can falsely elevate G6PD activity (young RBCs); retest after recovery.\n- Female carriers: X-linked; heterozygous females may have intermediate levels and still be at risk.\n- Glucometer confusion: Diabetic patients may panic at falsely elevated glucose readings post-IVC; counsel in advance.",
+    "s5_clinical_decision_trees_internal": "## REQUIRED PRE-TREATMENT LABS\n\n### Before First High-Dose (>15g)\n1. G6PD quantitative assay — MANDATORY\n2. CMP (creatinine, eGFR) — eGFR >30 required, >45 preferred\n3. CBC — baseline hemoglobin, hematocrit\n\n### Recommended\n4. Iron panel (ferritin, TIBC, saturation) — rule out overload\n5. Urinalysis — baseline\n\n### For Cancer Patients\n6. Tumor markers (baseline)\n7. LDH (tumor burden indicator)\n8. Uric acid (tumor lysis risk)\n\n## DOSING SAFETY GUIDELINES\n- First session: Start with 15-25g to assess tolerance.\n- Hydration: Pre-infuse 250-500mL NS; encourage oral fluids.\n- Infusion rate: 0.5-1g per minute typical; slower for higher doses.\n- Monitoring: Vital signs q30min during infusion.\n\n## DRUG INTERACTIONS\n- Warfarin: High-dose IVC may reduce INR. Monitor closely.\n- Bortezomib (Velcade): Vitamin C may reduce efficacy. Avoid concurrent use.\n- Methotrexate: May increase toxicity. Coordinate timing with oncologist.\n\n## SIDE EFFECTS TO COUNSEL\n- Thirst/dry mouth — drink plenty of water\n- Frequent urination — normal, helps clear oxalate\n- Fatigue (some patients) — usually transient\n- Vein irritation — slow infusion minimizes this\n- Very rare: lightheadedness, nausea — tell nurse immediately"
+  },
+  "display_name": "IVC — Contraindications & Safety",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

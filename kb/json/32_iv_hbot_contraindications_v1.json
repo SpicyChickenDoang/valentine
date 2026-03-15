@@ -1,0 +1,39 @@
+{
+  "id": "32_iv_hbot_contraindications_v1",
+  "version": "1.0",
+  "type": "monograph",
+  "status": "active",
+  "metadata": {
+    "tags": [
+      "HBOT",
+      "HYPERBARIC",
+      "OXYGEN",
+      "CONTRAINDICATION",
+      "BAROTRAUMA",
+      "PNEUMOTHORAX",
+      "BLEOMYCIN"
+    ],
+    "category": "Contraindications & Safety Screening — HBOT",
+    "intervention_priority": "HIGH (Safety Core)",
+    "use_for": "Pre-screening all patients for HBOT contraindications. Mandatory before scheduling hyperbaric oxygen therapy.",
+    "coupled_systems": [
+      "32_IV_THERAPIES",
+      "32_iv_hbot_oxygen_v2"
+    ],
+    "red_flags": "Untreated pneumothorax (ABSOLUTE), Bleomycin chemotherapy (ABSOLUTE), Doxorubicin (caution), Disulfiram use, Severe claustrophobia, COPD/emphysema, Seizure disorder.",
+    "triage_questions": "Any recent colds, sinus infections, or ear problems? Any lung conditions (COPD, asthma, collapsed lung)? Currently on chemotherapy (which medications)? Pacemaker or implanted devices? Pregnant? Epilepsy/seizures? Comfortable in enclosed spaces?",
+    "teleconsult_limits": "Do NOT schedule HBOT without screening for contraindications. Absolute contraindications require physician override documentation."
+  },
+  "content": {
+    "s0_quick_reference_internal": "## HBOT OVERVIEW\n- Therapy: Breathing 100% oxygen at >1 ATA pressure increases tissue oxygenation.\n- Typical protocol: 1.5–2.4 ATA, 60–90 min sessions, 20–40 sessions depending on indication.\n\n## ABSOLUTE CONTRAINDICATIONS (DO NOT PROCEED)\n- Untreated pneumothorax: Trapped air expands → tension pneumothorax → death.\n- Bleomycin chemotherapy: Bleomycin + hyperoxia → severe pulmonary toxicity. Wait 6+ months after last dose.\n- Doxorubicin (Adriamycin): Increased cardiotoxicity risk.\n- Disulfiram (Antabuse): Blocks antioxidant defenses → oxygen toxicity. Stop 48-72h before.\n- Severe uncontrolled claustrophobia: Panic in chamber = safety risk.",
+    "s1_claims_discipline_internal": "- We explain HBOT is generally safe when properly screened.\n- We do NOT proceed without addressing contraindications.\n- We acknowledge that even with clearance, rare complications can occur (oxygen toxicity seizure <0.1%).",
+    "s2_patient_communication_public": "Before we schedule your hyperbaric oxygen session, I need to ask a few safety questions — this helps us make sure HBOT is right for you.\n\n[After screening:]\n- If cleared: \"Great, you're all set for HBOT. Just a few things to know: you might feel some ear pressure (like on an airplane) — our technicians will guide you through equalizing. And you may feel a bit tired afterward, which is normal.\"\n- If contraindication found: \"Based on what you've shared, we'll need our doctor to review your case before we can schedule HBOT. [Explain specific concern.] Would you like me to arrange a consultation?\"",
+    "s3_pharmacokinetics_adme_internal": "## ABSOLUTE CONTRAINDICATIONS — DETAIL\n\n### Untreated Pneumothorax\n- Reason: Trapped air in pleural space expands under pressure.\n- Risk: Tension pneumothorax → cardiovascular collapse → death.\n- Action: Refer to pulmonologist; HBOT only after resolution and clearance.\n\n### Bleomycin Chemotherapy\n- Reason: Bleomycin sensitizes lungs to oxygen; hyperoxia causes severe pulmonary fibrosis.\n- Risk: Acute respiratory failure, potentially fatal.\n- Action: Wait minimum 6 months after last Bleomycin dose; pulmonology clearance.\n\n### Doxorubicin (Adriamycin)\n- Reason: Hyperoxia may potentiate cardiotoxicity.\n- Action: Consult oncologist; consider alternatives.\n\n### Disulfiram (Antabuse)\n- Reason: Inhibits superoxide dismutase → impairs oxygen radical defense.\n- Risk: Oxygen toxicity.\n- Action: Discontinue 48-72 hours before HBOT.\n\n## RELATIVE CONTRAINDICATIONS — PROCEED WITH CAUTION\n- Upper respiratory infection / sinusitis: Eustachian tube dysfunction → ear barotrauma. Defer or use decongestants + slow pressure changes.\n- COPD / severe emphysema: Air trapping → pulmonary barotrauma. Lower pressure (1.5 ATA max); pulmonologist clearance.\n- Seizure disorder: Oxygen toxicity lowers seizure threshold. Ensure anticonvulsant compliance; lower pressure; shorter sessions.\n- Pregnancy: Theoretical fetal oxygen toxicity >1.5 ATA. Generally avoided; if critical, limit to 1.5 ATA with OB clearance.\n- Pacemaker / implantable device: Most modern devices compatible; verify specifications, cardiology clearance.\n- History of spontaneous pneumothorax: Higher recurrence risk. Chest CT to rule out blebs; pulmonologist clearance.\n- High fever (>38.5°C): Increases oxygen toxicity risk. Defer until afebrile.",
+    "s4_limitations_failure_modes_internal": "- Non-disclosure: Patient may not know medication names (Bleomycin, Disulfiram). Ask about 'cancer chemotherapy' and 'alcohol treatment medications.'\n- Undiagnosed pneumothorax: Rare but possible. Any recent chest trauma or spontaneous chest pain should prompt evaluation.\n- Claustrophobia emergence: May not manifest until inside chamber. Have abort protocol ready.",
+    "s5_clinical_decision_trees_internal": "## PRE-SESSION SCREENING — EVERY SESSION\n1. Any cold, congestion, or ear pressure today? → If yes, consider deferral.\n2. Any chest pain or breathing difficulty? → If yes, evaluate before proceeding.\n3. Current medications (new or changed)? → Check against contraindication list.\n4. Feeling unwell in any way? → Clinical judgment.\n5. For diabetics: Check blood glucose (hypoglycemia risk during session).\n\n## DRUG INTERACTIONS\n- Avoid during HBOT: Bleomycin, Doxorubicin, Disulfiram, Cisplatin (use caution).\n- May enhance toxicity: Aminoglycosides, Opioids (respiratory depression).\n- Generally safe: Most common medications compatible.\n\n## SIDE EFFECTS TO COUNSEL\n- Ear pressure / popping (most common) — equalize frequently.\n- Temporary myopia (near-sightedness) — resolves after treatment course.\n- Fatigue after session — normal.\n- Rare: Oxygen toxicity seizure (<0.1% at standard pressures)."
+  },
+  "display_name": "HBOT — Contraindications & Safety",
+  "domain": "IV",
+  "kind": "narrow",
+  "purpose": "protocol"
+}

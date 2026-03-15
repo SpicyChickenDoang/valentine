@@ -44,6 +44,10 @@ app.get('/status', async (req, res) => {
   }
 })
 
+// Status routes
+const statusRoutes = require('./routes/status')
+app.use('/status', statusRoutes)
+
 // Inbound message routes
 app.use('/', inboundMessageRoutes)
 

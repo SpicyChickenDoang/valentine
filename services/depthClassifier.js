@@ -57,8 +57,7 @@ const buildClassifierPrompt = (domain, history, message) => {
         ${history}
 
         Latest message:
-        ${message}
-        `.trim();
+        ${message}`.trim();
 };
 
 async function classifyDepth({ domain, history, message, geminiClient }) {
@@ -76,6 +75,8 @@ async function classifyDepth({ domain, history, message, geminiClient }) {
     ]);
 
     const raw = result.text.trim().toUpperCase();
+    console.log(`[depthClassifier] Classified as: ${raw}`);
+    
     return raw.includes('DEPTH_2') ? 'pro' : 'flash';
 }
 

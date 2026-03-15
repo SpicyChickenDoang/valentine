@@ -5,8 +5,7 @@
 const axios = require('axios');
 
 // Environment variables
-const WHA_BASE_URL = 'https://waha.aiprojectbali.com';
-// const WHA_BASE_URL = process.env.WHA_BASE_URL || 'https://waha.aiprojectbali.com';
+const WHA_BASE_URL = process.env.WHA_BASE_URL || 'https://waha.aiprojectbali.com';
 const WHA_SESSION = process.env.WHA_SESSION || 'default';
 
 // Create axios instance with defaults
