@@ -30,7 +30,16 @@ const worker = new Worker(
     async (job) => {
         // tenantId + msisdn_id from job.data — never from process.env (multi-tenant safe)
         
-        const { tenantId, msisdn_id, from, message, mediaUrl } = job.data;
+        const {
+            tenantId,
+            msisdn_id,
+            from,
+            message,
+            mediaUrl,
+            mediaBase64,
+            mediaMimeType,
+            mediaGeminiResult
+        } = job.data;
 
         // FIX P2: Input validation — prevent crash on malformed job data
         if (!tenantId || !from) {
@@ -143,13 +152,15 @@ const worker = new Worker(
             // If Gemini does not request a tool (non-clinical message), the path is identical to agentChat().
             const t0 = Date.now();
             try {
-                const mediaBase64 = mediaUrl ? await fetchMediaWithFallback(mediaUrl) : null;
+                const resolvedMediaBase64 = mediaBase64 || (mediaUrl ? await fetchMediaWithFallback(mediaUrl) : null);
+                const resolvedMediaMimeType = mediaMimeType || 'image/jpeg';
                 const userParts = [
                     ...(kbContext ? [{ text: `KB CONTEXT:\n${kbContext}` }] : []),
                     ...(dossier ? [{ text: `PATIENT DOSSIER:\n${dossier}` }] : []),
                     ...history.filter(h => h.role !== 'system').map(h => ({ text: `${h.role}: ${h.content}` })),
                     { text: `user: ${message}` },
-                    ...(mediaBase64 ? [{ inlineData: { mimeType: 'image/jpeg', data: mediaBase64 } }] : [])
+                    ...(mediaGeminiResult ? [{ text: `MEDIA ANALYSIS:\n${mediaGeminiResult}` }] : []),
+                    ...(resolvedMediaBase64 ? [{ inlineData: { mimeType: resolvedMediaMimeType, data: resolvedMediaBase64 } }] : [])
                 ];
                 // FIX: Convert tier to actual Gemini model ID
                 const geminiModel = modelTier === 'pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';

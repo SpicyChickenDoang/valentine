@@ -3,6 +3,7 @@ const router = express.Router()
 const crypto = require('crypto')
 const { addChatJob } = require('../queues/agentQueue')
 const { insertChatLog } = require('../services/patientDb')
+const { downloadAndGenerateMediaContent } = require('../controller/message-media')
 
 /**
  * WHA Webhook Handler
@@ -70,7 +71,7 @@ router.post('/inbound-message', async (req, res) => {
     }
 
     // Check for non-message events
-    if(webhookPayload.event == 'session.status') {
+    if (webhookPayload.event == 'session.status') {
       console.log(`[WEBHOOK] Ignoring non-message event: ${webhookPayload.event}`)
       return res.status(200).send('OK')
     }
@@ -82,7 +83,9 @@ router.post('/inbound-message', async (req, res) => {
 
     // Extract message text from various WHA payload formats
     let message = ''
-    if (payload.message?.conversation) {
+    if (typeof payload.body === 'string' && payload.body.trim() !== '') {
+      message = payload.body
+    } else if (payload.message?.conversation) {
       message = payload.message.conversation
     } else if (payload.message?.extendedTextMessage?.text) {
       message = payload.message.extendedTextMessage.text
@@ -92,12 +95,31 @@ router.post('/inbound-message', async (req, res) => {
       message = payload._data.message.extendedTextMessage.text
     }
 
-    // Extract media if present
+    // Extract media only from payload.media
     let mediaUrl = null
-    if (payload.message?.imageMessage?.url) {
-      mediaUrl = payload.message.imageMessage.url
-    } else if (payload._data?.message?.imageMessage?.url) {
-      mediaUrl = payload._data.message.imageMessage.url
+    let mediaBase64 = null
+    let mediaMimeType = null
+    let mediaGeminiResult = null
+
+    if (payload.media?.url) {
+      mediaUrl = payload.media.url
+      mediaMimeType = payload.media.mimeType || payload.media.mimetype || null
+    }
+
+    if (mediaUrl) {
+      try {
+        console.info(`[${new Date().toLocaleString()}] HAS MEDIA URL`);
+        const downloadedMedia = await downloadAndGenerateMediaContent(mediaUrl, mediaMimeType)
+        mediaBase64 = downloadedMedia?.mediaBase64 || null
+        mediaMimeType = downloadedMedia?.mimeType || mediaMimeType
+        mediaGeminiResult = downloadedMedia?.geminiResult || null
+      } catch (err) {
+        console.warn('[WEBHOOK] Failed to download media URL:', err.message)
+      }
+    }
+
+    if (!message && mediaGeminiResult) {
+      message = mediaGeminiResult
     }
 
     // Validate required fields
@@ -122,6 +144,33 @@ router.post('/inbound-message', async (req, res) => {
     //   mediaUrl
     // })
 
+    // console.log("PAYLOAD CHAT JOBS:", {
+    //   // Tenant & session
+    //   tenantId,
+    //   session: webhookPayload.session,
+    //   // Who we are
+    //   me: webhookPayload.me.id,
+    //   // Message identity
+    //   messageId: webhookPayload.payload.id,
+    //   timestamp: webhookPayload.payload.timestamp,
+    //   // Sender info
+    //   msisdn_id: phone,
+    //   from: fromPhone,
+    //   fromMe: webhookPayload.payload.fromMe,
+    //   pushName: webhookPayload.payload._data.pushName,
+    //   // Message content
+    //   message,
+    //   mediaUrl,
+    //   mediaBase64,
+    //   mediaMimeType,
+    //   mediaGeminiResult,
+    //   hasMedia: webhookPayload.payload.hasMedia,
+    //   // Key (for reply/ack targeting)
+    //   key: webhookPayload.payload._data.key,
+    //   // Source
+    //   source: webhookPayload.payload.source,
+    // })
+
     const job = await addChatJob({
       // Tenant & session
       tenantId,
@@ -139,6 +188,9 @@ router.post('/inbound-message', async (req, res) => {
       // Message content
       message,
       mediaUrl,
+      mediaBase64,
+      mediaMimeType,
+      mediaGeminiResult,
       hasMedia: webhookPayload.payload.hasMedia,
       // Key (for reply/ack targeting)
       key: webhookPayload.payload._data.key,
