@@ -63,7 +63,6 @@ const buildClassifierPrompt = (domain, history, message) => {
 async function classifyDepth({ domain, history, message, geminiClient }) {
     const prompt = buildClassifierPrompt(domain, history, message);
 
-    console.log(`[depthClassifier] Classified as what`);
     // FIX: 3s timeout — classifier must never block worker indefinitely
     const result = await Promise.race([
         geminiClient.models.generateContent({

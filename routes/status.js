@@ -136,6 +136,78 @@ router.get('/caches', async (_req, res) => {
 });
 
 /**
+ * GET /status/queue/failed
+ * Lists all failed jobs with their details
+ */
+router.get('/queue/failed', async (_req, res) => {
+  try {
+    const failedJobs = await agentQueue.getFailed(0, 100);
+
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      count: failedJobs.length,
+      jobs: failedJobs.map(job => ({
+        id: job.id,
+        name: job.name,
+        failedReason: job.failedReason,
+        stacktrace: job.stacktrace,
+        attemptsMade: job.attemptsMade,
+        processedOn: job.processedOn,
+        finishedOn: job.finishedOn,
+        data: job.data,
+      })),
+    });
+  } catch (error) {
+    console.error('[STATUS] Failed jobs list failed:', error);
+    res.status(500).json({
+      status: 'error',
+      error: error.message,
+    });
+  }
+});
+
+/**
+ * POST /status/queue/retry/:jobId
+ * Retries a failed job by moving it back to the waiting queue
+ */
+router.post('/queue/retry/:jobId', async (req, res) => {
+  try {
+    const { jobId } = req.params;
+
+    if (!jobId) {
+      return res.status(400).json({
+        status: 'error',
+        error: 'Job ID is required',
+      });
+    }
+
+    const job = await agentQueue.getJob(jobId);
+    if (!job) {
+      return res.status(404).json({
+        status: 'error',
+        error: `Job ${jobId} not found`,
+      });
+    }
+
+    await job.retry();
+    console.log(`[STATUS] Job ${jobId} has been moved back to the waiting queue.`);
+
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      message: `Job ${jobId} has been moved back to the waiting queue.`,
+    });
+  } catch (error) {
+    console.error('[STATUS] Job retry failed:', error);
+    res.status(500).json({
+      status: 'error',
+      error: error.message,
+    });
+  }
+});
+
+/**
  * DELETE /status/caches/:name
  * Deletes a Gemini cache by name
  */
