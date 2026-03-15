@@ -70,12 +70,13 @@ async function agentChat({ modelTier, cacheName, kbContext, dossier, history, me
 
     // C7 — wrap axios: detect CACHE_EXPIRED (404), rate limit (429), server errors (5xx)
     // Without this, a Gemini cache expiry causes 100% job crashes for ~400s (gap between Gemini TTL and Redis TTL)
+    const timeout = model === 'gemini-2.5-pro' ? 40000 : 15000; // 40s for pro, 15s for flash
     let data;
     try {
         ({ data } = await axios.post(
             `${GEMINI_API}/${model}:generateContent?key=${KEY}`,
             payload,
-            { timeout: 15000 }  // BUG-G8 FIX: 15s inference timeout
+            { timeout }
         ));
     } catch (e) {
         const status = e.response?.status;
@@ -118,13 +119,14 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
     console.log('  cacheName:', cacheName);
     console.log('  userParts length:', userParts.length);
 
+    const timeout = model === 'gemini-2.5-pro' ? 40000 : 15000; // 40s for pro, 15s for flash
     let data;
     try {
-        ({ data } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, payload, { timeout: 15000 }));
+        ({ data } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, payload, { timeout }));
     } catch (e) {
         console.error('[geminiChatWithTools] Gemini API error:');
-        console.error('  Status:', e.response?.status);
-        console.error('  Error:', JSON.stringify(e.response?.data, null, 2));
+        console.error('  Status:', e);
+        console.error('  Error:', JSON.stringify(e, null, 2));
         throw e;
     }
     const candidate = data.candidates[0];
@@ -150,10 +152,10 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
             ],
             generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }  // M5: deterministic for clinical math follow-up
         };
-        // BUG-G8 FIX: timeout added on followUp call
+        // BUG-G8 FIX: timeout added on followUp call (uses same model-based timeout)
         let d2;
         try {
-            ({ data: d2 } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, followUp, { timeout: 15000 }));
+            ({ data: d2 } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, followUp, { timeout }));
         } catch (e) {
             console.error('[geminiChatWithTools] Follow-up API error:');
             console.error('  Status:', e.response?.status);

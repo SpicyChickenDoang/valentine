@@ -13,6 +13,7 @@ async function notifyAlert(tenantId, payload) {
     *Tenant:* ${tenantId}
     *Type:* ${payload.type}
     *Job ID:* ${payload.job_id || 'N/A'}
+    *Payload:* ${JSON.stringify(payload)}
     *Time:* ${new Date().toISOString()}`;
 
   // Send to all configured numbers (parallel, non-blocking)

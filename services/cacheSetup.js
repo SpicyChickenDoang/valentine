@@ -117,6 +117,7 @@ async function ensurePlatformCache(redis) {
         config: {
           systemInstruction: staticContent,
           tools: [{ functionDeclarations: [calculateLabRatiosTool] }],
+          ttl: '10800s'
         },
       });
       cacheNames[model] = cache.name;
