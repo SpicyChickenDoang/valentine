@@ -9,12 +9,13 @@ async function notifyAlert(tenantId, payload) {
   }
 
   // Format alert message for WhatsApp
+  const jakartaTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" });
   const body = `🚨 *ALERT* 🚨
     *Tenant:* ${tenantId}
     *Type:* ${payload.type}
     *Job ID:* ${payload.job_id || 'N/A'}
     *Payload:* ${JSON.stringify(payload)}
-    *Time:* ${new Date().toISOString()}`;
+    *Time:* ${jakartaTime}`;
 
   // Send to all configured numbers (parallel, non-blocking)
   await Promise.allSettled(alertPhones.map(async (phone) => {

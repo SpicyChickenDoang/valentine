@@ -6,6 +6,11 @@
  * Schema for profile updates (matches patient_profiles table)
  */
 const PROFILE_KEYS = [
+  'first_name',      // string
+  'age',             // number
+  'sex',             // string
+  'location',        // string
+  'language',        // string
   'allergies',       // string[]
   'conditions',      // string[]
   'medications',     // {name, dose, prescriber}[]
@@ -42,41 +47,87 @@ function extractProfileUpdate(responseText) {
   const jsonStr = jsonBlockMatch?.[1] || inlineMatch?.[0];
   
   if (!jsonStr) {
-    return null;  // No profile update in this response
+    return extractFromPlainText(responseText);
   }
 
   try {
     const parsed = JSON.parse(jsonStr);
-    
-    // Validate: must have at least one known profile key
-    const hasValidKey = PROFILE_KEYS.some(key => key in parsed);
-    if (!hasValidKey) {
-      console.warn('[jsonExtractor] JSON found but no valid profile keys');
-      return null;
-    }
-
-    // Sanitize: only return known keys (prevent injection of arbitrary fields)
-    const sanitized = {};
-    for (const key of PROFILE_KEYS) {
-      if (parsed[key] !== undefined) {
-        sanitized[key] = parsed[key];
-      }
-    }
-
-    // Type validation for critical arrays
-    if (sanitized.allergies && !Array.isArray(sanitized.allergies)) {
-      sanitized.allergies = [sanitized.allergies];  // Wrap single value
-    }
-    if (sanitized.conditions && !Array.isArray(sanitized.conditions)) {
-      sanitized.conditions = [sanitized.conditions];
-    }
-
-    return sanitized;
+    return sanitizeProfileUpdate(parsed);
     
   } catch (err) {
     console.warn('[jsonExtractor] JSON parse failed:', err.message);
-    return null;  // Malformed JSON — skip update, don't crash
+    return extractFromPlainText(responseText);
   }
+}
+
+function sanitizeProfileUpdate(parsed) {
+  if (!parsed || typeof parsed !== 'object') {
+    return null;
+  }
+
+  // Validate: must have at least one known profile key
+  const hasValidKey = PROFILE_KEYS.some(key => key in parsed);
+  if (!hasValidKey) {
+    console.warn('[jsonExtractor] JSON found but no valid profile keys');
+    return null;
+  }
+
+  // Sanitize: only return known keys (prevent injection of arbitrary fields)
+  const sanitized = {};
+  for (const key of PROFILE_KEYS) {
+    if (parsed[key] !== undefined) {
+      sanitized[key] = parsed[key];
+    }
+  }
+
+  // Type validation for critical arrays
+  if (sanitized.allergies && !Array.isArray(sanitized.allergies)) {
+    sanitized.allergies = [sanitized.allergies];
+  }
+  if (sanitized.conditions && !Array.isArray(sanitized.conditions)) {
+    sanitized.conditions = [sanitized.conditions];
+  }
+
+  if (Array.isArray(sanitized.allergies)) {
+    sanitized.allergies = sanitized.allergies
+      .map(item => String(item).trim())
+      .filter(Boolean);
+  }
+  if (Array.isArray(sanitized.conditions)) {
+    sanitized.conditions = sanitized.conditions
+      .map(item => String(item).trim())
+      .filter(Boolean);
+  }
+
+  return Object.keys(sanitized).length ? sanitized : null;
+}
+
+function extractFromPlainText(responseText) {
+  const inferred = {};
+  const text = String(responseText || '');
+
+  // Example: "Thanks Erwin."
+  const firstNameMatch = text.match(/\b(?:thanks|thank you|hi|hello|hey)\s+([A-Z][a-zA-Z'-]{1,49})\b/i);
+  if (firstNameMatch?.[1]) {
+    const name = firstNameMatch[1];
+    if (!/^(you|for|the|there|and|but)$/i.test(name)) {
+      inferred.first_name = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+  }
+
+  // Specific extraction first: "allergic to X" / "allergies: X, Y"
+  const allergyPhrase = text.match(/\b(?:allergic to|allergy to|allergies?\s*:\s*)([^.?!\n]+)/i);
+  if (allergyPhrase?.[1]) {
+    inferred.allergies = allergyPhrase[1]
+      .split(/,|\/| and /i)
+      .map(item => item.trim())
+      .filter(Boolean);
+  } else if (/\ballerg(?:y|ies)\b/i.test(text)) {
+    // Fallback for generic mention, e.g. "Allergies can be disruptive"
+    inferred.allergies = ['Allergies'];
+  }
+
+  return sanitizeProfileUpdate(inferred);
 }
 
 /**

@@ -31,6 +31,7 @@ const worker = new Worker(
         // tenantId + msisdn_id from job.data — never from process.env (multi-tenant safe)
         
         const {
+            messageId,
             tenantId,
             msisdn_id,
             from,
@@ -38,8 +39,11 @@ const worker = new Worker(
             mediaUrl,
             mediaBase64,
             mediaMimeType,
-            mediaGeminiResult
+            mediaGeminiResult,
+            key
         } = job.data;
+
+        console.log("LOG:", key)
 
         // FIX P2: Input validation — prevent crash on malformed job data
         if (!tenantId || !from) {
@@ -251,7 +255,9 @@ const worker = new Worker(
         // → medical traceability violation (HIPAA/GDPR audit trail).
         // Rule: only use a Redis gate if the underlying SQL mutation
         // n'est PAS structurellement idempotente. Ici elle l'est → gate inutile et dangereuse.
+        console.log("THIS TEXT", text);
         const profileUpdate = extractProfileUpdate(text);
+        console.log("PROFILE UPDATE", profileUpdate);
         if (profileUpdate) {
             // Upsert patient profile - creates new or updates existing with merged arrays
             await upsertPatientProfile(tenantId, msisdnHash, profileUpdate);
@@ -271,7 +277,8 @@ const worker = new Worker(
             retrievedIds,
             citedIds,
             citationMatch,
-            jobId: job.id
+            jobId: job.id,
+            waMessageId: key.id
         });
     },
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
