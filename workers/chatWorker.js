@@ -15,6 +15,7 @@ const { fetchMediaWithFallback } = require('../utils/fetchMedia');         // C2
 const { sendChunked } = require('../services/whatsappFormatter');
 const waClient = require('../services/whatsappClient');
 const redis = require('../config/redis2');
+const { getDomain } = require('../config/domains');
 
 function getDomainSafeMode(domainConfig) {
     // Return domain-specific safe-mode message (non-technical, human-sounding)
