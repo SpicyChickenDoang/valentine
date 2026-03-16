@@ -21,9 +21,9 @@ const DOMAINS = {
 
         safeMode: {
             message: `I apologize, but I'm unable to provide the detailed clinical analysis your question requires. For your safety:
-• Contact our clinic: +62 XXX
-• Or visit during hours: Mon-Sat 9AM-6PM
-A healthcare professional will assist you.`,
+                        • Contact our clinic: +62 XXX
+                        • Or visit during hours: Mon-Sat 9AM-6PM
+                        A healthcare professional will assist you.`,
             alertType: 'clinical_escalation'
         },
 
@@ -50,9 +50,9 @@ A healthcare professional will assist you.`,
 
         safeMode: {
             message: `I'm having trouble with your request. Please:
-• WhatsApp our team: +62 XXX
-• Or call the villa manager directly
-We'll sort this out for you!`,
+                        • WhatsApp our team: +62 XXX
+                        • Or call the villa manager directly
+                        We'll sort this out for you!`,
             alertType: 'concierge_escalation'
         },
 
@@ -79,9 +79,9 @@ We'll sort this out for you!`,
 
         safeMode: {
             message: `I'm having trouble processing your request. Please:
-• WhatsApp us: +62 XXX
-• Or try again in a few minutes
-Cheers! 🍷`,
+                        • WhatsApp us: +62 XXX
+                        • Or try again in a few minutes
+                        Cheers! 🍷`,
             alertType: 'order_escalation'
         },
 
@@ -112,9 +112,9 @@ Cheers! 🍷`,
 
         safeMode: {
             message: `I'm unable to process your request right now. Please:
-• WhatsApp us: +62 XXX
-• Or visit our shop in Canggu
-We'll get you riding! 🚴`,
+                        • WhatsApp us: +62 XXX
+                        • Or visit our shop in Canggu
+                        We'll get you riding! 🚴`,
             alertType: 'booking_escalation'
         },
 

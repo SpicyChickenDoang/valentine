@@ -4,14 +4,16 @@ const app = require('./app');
 const port = 3000;
 
 const { ensurePlatformCache } = require('./services/cacheSetup');
+const { validateStartup } = require('./services/startupValidator');
 const redis = require('./config/redis2');
 
 async function startServer() {
+  await validateStartup(redis);
+
   // Hash gate + distributed lock handled inside ensurePlatformCache
   const cacheName = await ensurePlatformCache(redis);
   process.env.AGENT_CACHE_NAME = cacheName;
   console.log(`[SERVER] Using cache: ${cacheName}`);
-  
 
   app.listen(port, () => {
     console.log(`[SERVER] USE Engine Agent listening on port ${port}`);

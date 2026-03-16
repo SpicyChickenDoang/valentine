@@ -16,20 +16,19 @@ const { sendChunked } = require('../services/whatsappFormatter');
 const waClient = require('../services/whatsappClient');
 const redis = require('../config/redis2');
 
-// C2 — single geminiClient instance at module level (not per-job)
-// FIX P1: Guard against missing GEMINI_API_KEY
-if (!process.env.GEMINI_API_KEY) {
-    throw new Error('[chatWorker] GEMINI_API_KEY env var missing');
+function getDomainSafeMode(domainConfig) {
+    // Return domain-specific safe-mode message (non-technical, human-sounding)
+    return domainConfig?.safeMode?.message ||
+        `I apologize, but I'm currently unable to assist with this request. Our team will follow up with you shortly.`;
 }
-const geminiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const SAFE_MODE_MESSAGE = 'Our AI assistant is momentarily unavailable. Please try again in a few minutes.';
+const geminiClient = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const worker = new Worker(
     'agent-chat-jobs',
     async (job) => {
         // tenantId + msisdn_id from job.data — never from process.env (multi-tenant safe)
-        
+
         const {
             messageId,
             tenantId,
@@ -90,6 +89,7 @@ const worker = new Worker(
         // 2. Classify depth — C2: geminiClient passed, C3: history serialized as strings
         // FIX P1: tenantId (ex: reviv_bali) ≠ domain (ex: valentine). Use TENANT_DOMAIN env.
         const tenantDomain = process.env.TENANT_DOMAIN;
+        const domainConfig = getDomain(tenantDomain);
         const modelTier = await classifyDepth({
             domain: tenantDomain,
             history: history
@@ -110,7 +110,8 @@ const worker = new Worker(
             // FIX: reassign cacheJson, not new variable
             cacheJson = await redis.get(`${tenantId}:agent:cache_name`);
             if (!cacheJson) {
-                await sendChunked(waClient, from, SAFE_MODE_MESSAGE);
+                const safeModeMessage = getDomainSafeMode(domainConfig);
+                await sendChunked(waClient, from, safeModeMessage);
                 await notifyAlert(tenantId, { type: 'cache_missing', job_id: job.id });
                 throw new Error('CACHE_NOT_READY');  // M2: throw not return — BullMQ retries, message not lost
             }
@@ -181,8 +182,14 @@ const worker = new Worker(
                 ({ text, model, cachedTokens, inputTokens, outputTokens } = res);
             } catch (err) {
                 console.error('[chatWorker] geminiChatWithTools failed:', err.message);
-                await sendChunked(waClient, from, SAFE_MODE_MESSAGE);
+                const safeModeMessage = getDomainSafeMode(domainConfig);
+                await sendChunked(waClient, from, safeModeMessage);
                 await notifyAlert(tenantId, { type: 'gemini_unavailable', code: err.code, job_id: job.id });
+                await db.query('INSERT INTO escalations (tenant_id, msisdn_hash, reason, job_id, created_at) VALUES ($1, $2, $3, $4, NOW()) ON CONFLICT DO NOTHING',
+                    [tenantId, msisdnHash, 'llm_unavailable', job.id]);
+                await db.query('INSERT INTO chat_logs (tenant_id, msisdn_hash, model, safe_mode, job_id) VALUES ($1, $2, $3, TRUE, $4) ON CONFLICT DO NOTHING',
+                    [tenantId, msisdnHash, 'safe_mode', job.id]);
+
                 return;
             }
             latencyMs = Date.now() - t0;
@@ -284,5 +291,23 @@ const worker = new Worker(
     { connection: redis, concurrency: 10, limiter: { max: 50, duration: 60000 } }
 );
 
-worker.on('failed', (job, err) => console.error(`[WORKER] Job ${job.id} failed:`, err.message));
+worker.on('failed', async (job, err) => {
+    console.error(`[WORKER] Job ${job.id} failed definitively:`, err.message);
+
+    // v8.1: Send safe-mode message when all retries exhausted — user must never be left hanging
+    try {
+        const { tenantId, from } = job.data;
+        const msisdnHash = crypto.createHash('sha256').update(from).digest('hex');
+        const domainConfig = getDomain(process.env.TENANT_DOMAIN);
+        const safeMsg = getDomainSafeMode(domainConfig);
+
+        await sendChunked(waClient, from, safeMsg);
+        await db.query('INSERT INTO escalations (tenant_id, msisdn_hash, reason, job_id, created_at) VALUES ($1, $2, $3, $4, NOW()) ON CONFLICT DO NOTHING',
+            [tenantId, msisdnHash, 'job_failed_definitive', job.id]);
+        await notifyAlert(tenantId, { type: 'job_failed', reason: err.message, job_id: job.id });
+    } catch (failedErr) {
+        console.error('[WORKER] Failed to send safe-mode message:', failedErr.message);
+    }
+});
+
 module.exports = worker;
