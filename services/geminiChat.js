@@ -5,6 +5,7 @@ const { ai, flash } = require('./geminiClient');
 const GEMINI_API = 'https://generativelanguage.googleapis.com/v1beta/models';
 const KEY = process.env.GEMINI_API_KEY;
 
+const MAX_OUTPUT_TOKENS = 8192;
 
 // services/geminiChat.js — add tools to payload
 
@@ -65,12 +66,12 @@ async function agentChat({ modelTier, cacheName, kbContext, dossier, history, me
                 ]
             }
         ],
-        generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
+        generationConfig: { temperature: 0.3, maxOutputTokens: MAX_OUTPUT_TOKENS }
     };
 
     // C7 — wrap axios: detect CACHE_EXPIRED (404), rate limit (429), server errors (5xx)
     // Without this, a Gemini cache expiry causes 100% job crashes for ~400s (gap between Gemini TTL and Redis TTL)
-    const timeout = model === 'gemini-2.5-pro' ? 40000 : 15000; // 40s for pro, 15s for flash
+    const timeout = model === 'gemini-2.5-pro' ? 60000 : 30000; // 40s for pro, 15s for flash
     let data;
     try {
         ({ data } = await axios.post(
@@ -110,7 +111,7 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
         cachedContent: cacheName,
         contents: [{ role: 'user', parts: userParts }],
         // tools are now in the cache - do NOT pass them here or Gemini will return 400
-        generationConfig: { temperature: 0.3, maxOutputTokens: 4096 }
+        generationConfig: { temperature: 0.3, maxOutputTokens: MAX_OUTPUT_TOKENS }
     };
 
     // DEBUG: Log request details (remove sensitive data in production)
@@ -119,7 +120,7 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
     console.log('  cacheName:', cacheName);
     console.log('  userParts length:', userParts.length);
 
-    const timeout = model === 'gemini-2.5-pro' ? 40000 : 15000; // 40s for pro, 15s for flash
+    const timeout = model === 'gemini-2.5-pro' ? 60000 : 30000; // 40s for pro, 15s for flash
     let data;
     try {
         ({ data } = await axios.post(`${GEMINI_API}/${model}:generateContent?key=${KEY}`, payload, { timeout }));
@@ -129,6 +130,14 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
         console.error('  Error:', JSON.stringify(e, null, 2));
         throw e;
     }
+
+    // Validate response structure
+    if (!data?.candidates || !data.candidates[0]) {
+        console.error('[geminiChatWithTools] Invalid response structure from Gemini:');
+        console.error('  Response:', JSON.stringify(data, null, 2));
+        throw new Error('[geminiChatWithTools] Gemini returned invalid response (missing candidates)');
+    }
+
     const candidate = data.candidates[0];
 
     // 1. Check if Gemini is requesting a tool call instead of returning text
@@ -150,7 +159,7 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
                 { role: 'model', parts: [{ functionCall: { name, args: args } }] },
                 { role: 'user', parts: [{ functionResponse: { name, response: { result: toolResult } } }] }
             ],
-            generationConfig: { temperature: 0.1, maxOutputTokens: 4096 }  // M5: deterministic for clinical math follow-up
+            generationConfig: { temperature: 0.1, maxOutputTokens: MAX_OUTPUT_TOKENS }  // M5: deterministic for clinical math follow-up
         };
         // BUG-G8 FIX: timeout added on followUp call (uses same model-based timeout)
         let d2;
@@ -162,6 +171,14 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
             console.error('  Error:', JSON.stringify(e.response?.data, null, 2));
             throw e;
         }
+
+        // Validate follow-up response structure
+        if (!d2?.candidates || !d2.candidates[0] || !d2.candidates[0].content?.parts?.[0]?.text) {
+            console.error('[geminiChatWithTools] Invalid follow-up response structure from Gemini:');
+            console.error('  Response:', JSON.stringify(d2, null, 2));
+            throw new Error('[geminiChatWithTools] Gemini returned invalid follow-up response');
+        }
+
         // FIX: Normalize return shape to match chatWorker destructuring
         const usage2 = d2.usageMetadata || {};
         return {
@@ -171,6 +188,13 @@ async function geminiChatWithTools({ model, cacheName, userParts }) {
             inputTokens: usage2.promptTokenCount || 0,
             outputTokens: usage2.candidatesTokenCount || 0
         };
+    }
+
+    // Validate candidate structure before accessing
+    if (!candidate?.content?.parts?.[0]?.text) {
+        console.error('[geminiChatWithTools] Invalid candidate structure:');
+        console.error('  Candidate:', JSON.stringify(candidate, null, 2));
+        throw new Error('[geminiChatWithTools] Candidate missing content text');
     }
 
     // FIX: Normalize return shape to match chatWorker destructuring

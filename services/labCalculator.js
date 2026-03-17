@@ -1,5 +1,8 @@
 // services/labCalculator.js
 function calculateLabRatios(markers, context = {}) {
+  console.log(`[LabCalculator] Calculating ratios for markers:`, markers);
+  console.log(`[LabCalculator] Context:`, context);
+
   const results = {};
 
   // HOMA-IR = (fasting glucose mmol/L × fasting insulin µIU/mL) / 22.5

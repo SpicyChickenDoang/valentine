@@ -9,7 +9,11 @@ app.use(express.json())
 
 // Log ALL incoming requests
 app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
+  // Format time in WIB (UTC+7)
+  const now = new Date()
+  const wibTime = new Date(now.getTime() + (7 * 60 * 60 * 1000))
+  const timeStr = wibTime.toISOString().replace('T', ' ').replace('Z', ' WIB')
+  console.log(`[${timeStr}] ${req.method} ${req.url}`)
   // console.log('Headers:', JSON.stringify(req.headers, null, 2))
   next()
 })

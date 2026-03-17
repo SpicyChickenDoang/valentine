@@ -9,7 +9,7 @@ const { loadKBFiles, formatKBContext } = require('../services/kbRetriever');
 const { parseCitedObjects, checkCitationMatch } = require('../services/citationParser');
 const { extractProfileUpdate } = require('../services/jsonExtractor');    // FIX-1: was missing → ReferenceError on every turn with new patient facts
 const { loadPatientContext, formatPatientContext } = require('../services/patientMemory'); // C5 — unified session init
-const { upsertPatientProfile, insertChatLog } = require('../services/patientDb'); // Database operations for patients and chat logs
+const { upsertPatientProfile, insertChatLog, insertEscalation, insertSafeModeChatLog } = require('../services/patientDb'); // Database operations for patients and chat logs
 const { notifyAlert } = require('../utils/notifyAlert');
 const { fetchMediaWithFallback } = require('../utils/fetchMedia');         // C2 — was missing → ReferenceError on any media message
 const { sendChunked } = require('../services/whatsappFormatter');
@@ -186,10 +186,8 @@ const worker = new Worker(
                 const safeModeMessage = getDomainSafeMode(domainConfig);
                 await sendChunked(waClient, from, safeModeMessage);
                 await notifyAlert(tenantId, { type: 'gemini_unavailable', code: err.code, job_id: job.id });
-                await db.query('INSERT INTO escalations (tenant_id, msisdn_hash, reason, job_id, created_at) VALUES ($1, $2, $3, $4, NOW()) ON CONFLICT DO NOTHING',
-                    [tenantId, msisdnHash, 'llm_unavailable', job.id]);
-                await db.query('INSERT INTO chat_logs (tenant_id, msisdn_hash, model, safe_mode, job_id) VALUES ($1, $2, $3, TRUE, $4) ON CONFLICT DO NOTHING',
-                    [tenantId, msisdnHash, 'safe_mode', job.id]);
+                await insertEscalation(tenantId, msisdnHash, 'llm_unavailable', job.id);
+                await insertSafeModeChatLog(tenantId, msisdnHash, 'safe_mode', job.id);
 
                 return;
             }
@@ -303,8 +301,7 @@ worker.on('failed', async (job, err) => {
         const safeMsg = getDomainSafeMode(domainConfig);
 
         await sendChunked(waClient, from, safeMsg);
-        await db.query('INSERT INTO escalations (tenant_id, msisdn_hash, reason, job_id, created_at) VALUES ($1, $2, $3, $4, NOW()) ON CONFLICT DO NOTHING',
-            [tenantId, msisdnHash, 'job_failed_definitive', job.id]);
+        await insertEscalation(tenantId, msisdnHash, 'job_failed_definitive', job.id);
         await notifyAlert(tenantId, { type: 'job_failed', reason: err.message, job_id: job.id });
     } catch (failedErr) {
         console.error('[WORKER] Failed to send safe-mode message:', failedErr.message);

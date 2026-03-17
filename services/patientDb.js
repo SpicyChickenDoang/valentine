@@ -184,10 +184,56 @@ async function insertChatLog(logData) {
   return result.rows[0];
 }
 
+/**
+ * Insert an escalation record for follow-up
+ * @param {string} tenantId
+ * @param {string} msisdnHash
+ * @param {string} reason - Reason for escalation (e.g., 'llm_unavailable', 'job_failed_definitive')
+ * @param {string} jobId - BullMQ job ID
+ * @returns {Promise<Object>}
+ */
+async function insertEscalation(tenantId, msisdnHash, reason, jobId) {
+  const result = await query(
+    `INSERT INTO escalations (tenant_id, msisdn_hash, reason, job_id, created_at)
+     VALUES ($1, $2, $3, $4, NOW())
+     ON CONFLICT DO NOTHING
+     RETURNING *`,
+    [tenantId, msisdnHash, reason, String(jobId)]
+  );
+  return result.rows[0];
+}
+
+/**
+ * Insert a chat log entry for safe-mode scenarios
+ * @param {string} tenantId
+ * @param {string} msisdnHash
+ * @param {string} model - Model identifier (e.g., 'safe_mode')
+ * @param {string} jobId - BullMQ job ID
+ * @returns {Promise<Object>}
+ */
+async function insertSafeModeChatLog(tenantId, msisdnHash, model, jobId) {
+  const result = await query(
+    `INSERT INTO chat_logs (
+      tenant_id,
+      msisdn_hash,
+      model,
+      safe_mode,
+      job_id,
+      created_at
+    ) VALUES ($1, $2, $3, TRUE, $4, NOW())
+    ON CONFLICT DO NOTHING
+    RETURNING *`,
+    [tenantId, msisdnHash, model, String(jobId)]
+  );
+  return result.rows[0];
+}
+
 module.exports = {
   getPatientProfile,
   createPatientProfile,
   updatePatientProfile,
   upsertPatientProfile,
   insertChatLog,
+  insertEscalation,
+  insertSafeModeChatLog,
 };
